@@ -4,138 +4,55 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="theme-color" content="#b91c1c" />
-<title>HanziFlow — HSK 1–3 Mandarin Mastery</title>
+<title>HanziFlow — HSK 1–3 Complete (600 Words)</title>
 <style>
-:root {
-  --primary: #b91c1c;
-  --primary-dark: #991b1b;
-  --primary-light: #fef2f2;
-  --bg: #f8fafc;
-  --card: #ffffff;
-  --text: #0f172a;
-  --muted: #64748b;
-  --border: #e2e8f0;
-  --success: #15803d;
-  --warning: #b45309;
-}
+:root { --primary: #b91c1c; --primary-dark: #991b1b; --primary-light: #fef2f2; --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --muted: #64748b; --border: #e2e8f0; --success: #15803d; --warning: #b45309; }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  padding-bottom: 84px;
-}
-header {
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: white;
-  padding: 16px;
-  position: sticky; top: 0; z-index: 20;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.12);
-}
-.header-top { display: flex; justify-content: space-between; align-items: center; max-width: 820px; margin: 0 auto; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); padding-bottom: 84px; }
+header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 16px; position: sticky; top: 0; z-index: 20; box-shadow: 0 2px 10px rgba(0,0,0,0.12); }
+.header-top { display: flex; justify-content: space-between; align-items: center; max-width: 820px; margin: 0 auto; flex-wrap: wrap; gap: 8px; }
 .brand { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; }
-.stats-bar {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
-  max-width: 820px; margin: 12px auto 0;
-  background: rgba(255,255,255,0.14); padding: 10px; border-radius: 12px; text-align: center;
-}
+.stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; max-width: 820px; margin: 12px auto 0; background: rgba(255,255,255,0.14); padding: 10px; border-radius: 12px; text-align: center; }
 .stat-val { font-size: 1.05rem; font-weight: 700; }
 .stat-lbl { font-size: 0.7rem; opacity: 0.9; text-transform: uppercase; }
 main { max-width: 820px; margin: 16px auto; padding: 0 14px; }
-.card {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 16px; padding: 18px; margin-bottom: 14px;
-  box-shadow: 0 2px 6px rgba(15,23,42,0.03);
-}
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px; margin-bottom: 14px; box-shadow: 0 2px 6px rgba(15,23,42,0.03); }
 .controls-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
-select, button {
-  font-family: inherit; font-size: 0.9rem; border-radius: 10px;
-  border: 1px solid var(--border); padding: 8px 12px; background: white;
-  color: var(--text); cursor: pointer;
-}
+select, button { font-family: inherit; font-size: 0.9rem; border-radius: 10px; border: 1px solid var(--border); padding: 8px 12px; background: white; color: var(--text); cursor: pointer; }
 button.primary { background: var(--primary); color: white; border-color: var(--primary); font-weight: 600; }
 button.primary:active { transform: scale(0.98); }
-button.audio-btn {
-  background: var(--primary-light); color: var(--primary);
-  border-color: #fecaca; font-weight: 600;
-  display: inline-flex; align-items: center; gap: 6px;
-}
-.flashcard {
-  min-height: 270px; display: flex; flex-direction: column;
-  justify-content: center; align-items: center; text-align: center;
-  cursor: pointer; position: relative; transition: transform 0.15s;
-}
+button.audio-btn { background: var(--primary-light); color: var(--primary); border-color: #fecaca; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+.flashcard { min-height: 270px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; cursor: pointer; position: relative; }
 .hanzi-big { font-size: 3.6rem; font-weight: 700; line-height: 1.2; margin: 10px 0; }
 .pinyin { font-size: 1.25rem; color: var(--primary); font-weight: 600; }
 .meaning { font-size: 1.15rem; font-weight: 600; margin: 6px 0; }
-.badge {
-  display: inline-block; font-size: 0.72rem; font-weight: 700;
-  padding: 3px 8px; border-radius: 999px; background: #f1f5f9; color: var(--muted);
-}
+.badge { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 999px; background: #f1f5f9; color: var(--muted); }
 .badge.leech { background: #fef3c7; color: var(--warning); }
 .badge.hsk1 { background: #dbeafe; color: #1e40af; }
 .badge.hsk2 { background: #fef3c7; color: #92400e; }
 .badge.hsk3 { background: #fce7f3; color: #9f1239; }
-.radical-box {
-  background: #f8fafc; border: 1px dashed #cbd5e1;
-  border-radius: 10px; padding: 10px; margin-top: 10px;
-  font-size: 0.88rem; width: 100%;
-}
+.radical-box { background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 10px; padding: 10px; margin-top: 10px; font-size: 0.88rem; width: 100%; }
 .srs-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
 .btn-again { background: #fee2e2; color: #b91c1c; border-color: #fecaca; font-weight: 700; }
 .btn-hard { background: #fef3c7; color: #b45309; border-color: #fde68a; font-weight: 700; }
 .btn-good { background: #dcfce7; color: #15803d; border-color: #bbf7d0; font-weight: 700; }
-.quiz-option {
-  width: 100%; text-align: left; padding: 12px 14px; margin-bottom: 8px;
-  font-size: 1rem; font-weight: 500;
-}
+.quiz-option { width: 100%; text-align: left; padding: 12px 14px; margin-bottom: 8px; font-size: 1rem; font-weight: 500; }
 .quiz-option.correct { background: #dcfce7; border-color: #16a34a; color: #14532d; }
 .quiz-option.wrong { background: #fee2e2; border-color: #dc2626; color: #7f1d1d; }
 .reader-text { font-size: 1.45rem; line-height: 2.2; letter-spacing: 0.04em; }
-.word-token {
-  display: inline-block; padding: 2px 4px; margin: 0 2px;
-  border-radius: 6px; cursor: pointer; border-bottom: 1.5px dotted #94a3b8;
-}
-.word-token:hover, .word-token.active {
-  background: #fef2f2; color: var(--primary); border-bottom-color: var(--primary);
-}
-.inspector-drawer {
-  background: #0f172a; color: white; border-radius: 14px;
-  padding: 14px; margin-top: 14px;
-}
-nav {
-  position: fixed; bottom: 0; left: 0; right: 0;
-  background: white; border-top: 1px solid var(--border);
-  display: grid; grid-template-columns: repeat(5, 1fr);
-  padding: 6px 4px; z-index: 30;
-}
-nav button {
-  border: none; background: none;
-  display: flex; flex-direction: column; align-items: center; gap: 3px;
-  font-size: 0.72rem; color: var(--muted); padding: 6px 2px;
-}
+.word-token { display: inline-block; padding: 2px 4px; margin: 0 2px; border-radius: 6px; cursor: pointer; border-bottom: 1.5px dotted #94a3b8; }
+.word-token:hover, .word-token.active { background: #fef2f2; color: var(--primary); border-bottom-color: var(--primary); }
+.inspector-drawer { background: #0f172a; color: white; border-radius: 14px; padding: 14px; margin-top: 14px; }
+nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid var(--border); display: grid; grid-template-columns: repeat(5, 1fr); padding: 6px 4px; z-index: 30; }
+nav button { border: none; background: none; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 0.72rem; color: var(--muted); padding: 6px 2px; }
 nav button.active { color: var(--primary); font-weight: 700; }
 .nav-icon { font-size: 1.25rem; }
 .hidden { display: none !important; }
 .twin-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-.twin-card {
-  border: 1px solid var(--border); border-radius: 10px;
-  padding: 10px; text-align: center; background: #fffbeb;
-}
-.search-box {
-  width: 100%; padding: 10px 12px; border: 1px solid var(--border);
-  border-radius: 10px; font-size: 0.95rem; margin-bottom: 10px;
-}
-.vocab-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 8px;
-}
-.vocab-tile {
-  border: 1px solid var(--border); border-radius: 10px;
-  padding: 10px; text-align: center; background: white;
-  cursor: pointer; transition: all 0.15s;
-}
+.twin-card { border: 1px solid var(--border); border-radius: 10px; padding: 10px; text-align: center; background: #fffbeb; }
+.search-box { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font-size: 0.95rem; margin-bottom: 10px; }
+.vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+.vocab-tile { border: 1px solid var(--border); border-radius: 10px; padding: 10px; text-align: center; background: white; cursor: pointer; transition: all 0.15s; }
 .vocab-tile:hover { border-color: var(--primary); background: var(--primary-light); }
 .vocab-tile .hz { font-size: 1.4rem; font-weight: 700; }
 .vocab-tile .py { font-size: 0.78rem; color: var(--primary); }
@@ -145,8 +62,13 @@ nav button.active { color: var(--primary); font-weight: 700; }
 <body>
 <header>
   <div class="header-top">
-    <div class="brand">汉 HanziFlow <span style="font-weight:400;font-size:0.85rem;opacity:0.85;">HSK 1–3</span></div>
-    <button onclick="resetProgress()" style="background:rgba(255,255,255,0.18);color:white;border:none;font-size:0.75rem;">Reset Data</button>
+    <div class="brand">汉 HanziFlow <span style="font-weight:400;font-size:0.85rem;opacity:0.85;">HSK 1–3 (600 words)</span></div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="exportProgress()" style="background:rgba(255,255,255,0.18);color:white;border:none;font-size:0.75rem;">📤 Backup</button>
+      <button onclick="document.getElementById('import-file').click()" style="background:rgba(255,255,255,0.18);color:white;border:none;font-size:0.75rem;">📥 Restore</button>
+      <button onclick="resetProgress()" style="background:rgba(255,255,255,0.18);color:white;border:none;font-size:0.75rem;">Reset</button>
+      <input type="file" id="import-file" accept=".json" style="display:none;" onchange="importProgress(event)">
+    </div>
   </div>
   <div class="stats-bar">
     <div><div class="stat-val" id="stat-streak">1d</div><div class="stat-lbl">Streak</div></div>
@@ -159,10 +81,10 @@ nav button.active { color: var(--primary); font-weight: 700; }
 <main>
   <div class="controls-row">
     <select id="phase-filter" onchange="applyFilter()">
-      <option value="all">All HSK Levels (1–3)</option>
-      <option value="1">HSK 1 — Survival (~150 words)</option>
-      <option value="2">HSK 2 — Daily Life (~150 words)</option>
-      <option value="3">HSK 3 — Fluency (~300 words)</option>
+      <option value="all">All HSK Levels (600 words)</option>
+      <option value="1">HSK 1 — Survival (150 words)</option>
+      <option value="2">HSK 2 — Daily Life (150 words)</option>
+      <option value="3">HSK 3 — Fluency (300 words)</option>
     </select>
     <select id="deck-mode" onchange="applyFilter()">
       <option value="due">Due & New Cards</option>
@@ -171,7 +93,6 @@ nav button.active { color: var(--primary); font-weight: 700; }
     </select>
   </div>
 
-  <!-- TAB 1: SRS FLASHCARDS -->
   <section id="tab-srs">
     <div class="controls-row" style="justify-content:space-between;">
       <span class="badge" id="card-counter">Card 1 of 10</span>
@@ -188,7 +109,6 @@ nav button.active { color: var(--primary); font-weight: 700; }
     </div>
   </section>
 
-  <!-- TAB 2: TONE & LISTENING DRILLS -->
   <section id="tab-tones" class="hidden">
     <div class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -202,7 +122,6 @@ nav button.active { color: var(--primary); font-weight: 700; }
     </div>
   </section>
 
-  <!-- TAB 3: CLOZE CONTEXT RECALL -->
   <section id="tab-cloze" class="hidden">
     <div class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -217,7 +136,6 @@ nav button.active { color: var(--primary); font-weight: 700; }
     </div>
   </section>
 
-  <!-- TAB 4: INTERACTIVE GRADED READER -->
   <section id="tab-reader" class="hidden">
     <div class="card">
       <div class="controls-row" style="justify-content:space-between;">
@@ -245,19 +163,9 @@ nav button.active { color: var(--primary); font-weight: 700; }
     </div>
   </section>
 
-  <!-- TAB 5: LEECH / TROUBLE WORDS -->
-  <section id="tab-leeches" class="hidden">
-    <div class="card">
-      <h3 style="margin-top:0;">Trouble Words</h3>
-      <p style="color:var(--muted);font-size:0.88rem;">Cards missed 2+ times appear here with look-alike comparisons.</p>
-      <div id="leech-list"></div>
-    </div>
-  </section>
-
-  <!-- TAB 6: VOCAB BROWSER (NEW) -->
   <section id="tab-browse" class="hidden">
     <div class="card">
-      <h3 style="margin-top:0;">Vocabulary Browser</h3>
+      <h3 style="margin-top:0;">Vocabulary Browser (600 words)</h3>
       <input type="text" class="search-box" id="vocab-search" placeholder="Search by hanzi, pinyin, or English..." oninput="renderVocabBrowser()">
       <div style="font-size:0.82rem;color:var(--muted);margin-bottom:10px;" id="vocab-count"></div>
       <div class="vocab-grid" id="vocab-grid"></div>
@@ -275,292 +183,675 @@ nav button.active { color: var(--primary); font-weight: 700; }
 
 <script>
 /* ============================================================
-   HSK VOCABULARY DATABASE
-   Structure: { id, hsk (1|2|3), topic, hanzi, pinyin, meaning,
-                radical, sentence, sentenceEn, twin }
+   COMPLETE HSK VOCABULARY — 600 WORDS
+   HSK 1: 150 words | HSK 2: 150 words | HSK 3: 300 words
    ============================================================ */
 const VOCAB = [
-  // ====== HSK 1 — GREETINGS & PRONOUNS ======
-  { id:"h1_001", hsk:1, topic:"greetings", hanzi:"你好", pinyin:"nǐ hǎo", meaning:"hello", radical:"亻+ 尔 | 女 + 子", sentence:"你好！你叫什么名字？", sentenceEn:"Hello! What's your name?", twin:"您好" },
-  { id:"h1_002", hsk:1, topic:"greetings", hanzi:"谢谢", pinyin:"xièxie", meaning:"thank you", radical:"讠+ 射 | 心 (heart)", sentence:"谢谢你的帮助。", sentenceEn:"Thank you for your help.", twin:"不" },
-  { id:"h1_003", hsk:1, topic:"greetings", hanzi:"再见", pinyin:"zàijiàn", meaning:"goodbye", radical:"一 + 冉 + 见", sentence:"明天再见！", sentenceEn:"See you tomorrow!", twin:"再" },
-  { id:"h1_004", hsk:1, topic:"pronouns", hanzi:"我", pinyin:"wǒ", meaning:"I / me", radical:"手 (hand)", sentence:"我是学生。", sentenceEn:"I am a student.", twin:"找" },
-  { id:"h1_005", hsk:1, topic:"pronouns", hanzi:"你", pinyin:"nǐ", meaning:"you", radical:"亻( person) + 尔", sentence:"你是老师吗？", sentenceEn:"Are you a teacher?", twin:"您" },
-  { id:"h1_006", hsk:1, topic:"pronouns", hanzi:"他", pinyin:"tā", meaning:"he / him", radical:"亻+ 也", sentence:"他是我的朋友。", sentenceEn:"He is my friend.", twin:"她" },
-  { id:"h1_007", hsk:1, topic:"pronouns", hanzi:"她", pinyin:"tā", meaning:"she / her", radical:"女 (woman) + 也", sentence:"她是医生。", sentenceEn:"She is a doctor.", twin:"他" },
-  { id:"h1_008", hsk:1, topic:"pronouns", hanzi:"们", pinyin:"men", meaning:"plural marker", radical:"亻+ 门", sentence:"我们是中国人。", sentenceEn:"We are Chinese.", twin:"门" },
+// ===== HSK 1 (150 words) =====
+{id:"h1_001",hsk:1,hanzi:"你好",pinyin:"nǐ hǎo",meaning:"hello",radical:"亻+ 尔 | 女 + 子",sentence:"你好！你叫什么名字？",sentenceEn:"Hello! What's your name?",twin:"您好"},
+{id:"h1_002",hsk:1,hanzi:"谢谢",pinyin:"xièxie",meaning:"thank you",radical:"讠+ 射",sentence:"谢谢你的帮助。",sentenceEn:"Thank you for your help.",twin:"不"},
+{id:"h1_003",hsk:1,hanzi:"再见",pinyin:"zàijiàn",meaning:"goodbye",radical:"一 + 冉 + 见",sentence:"明天再见！",sentenceEn:"See you tomorrow!",twin:"再"},
+{id:"h1_004",hsk:1,hanzi:"我",pinyin:"wǒ",meaning:"I / me",radical:"手",sentence:"我是学生。",sentenceEn:"I am a student.",twin:"找"},
+{id:"h1_005",hsk:1,hanzi:"你",pinyin:"nǐ",meaning:"you",radical:"亻+ 尔",sentence:"你是老师吗？",sentenceEn:"Are you a teacher?",twin:"您"},
+{id:"h1_006",hsk:1,hanzi:"他",pinyin:"tā",meaning:"he / him",radical:"亻+ 也",sentence:"他是我的朋友。",sentenceEn:"He is my friend.",twin:"她"},
+{id:"h1_007",hsk:1,hanzi:"她",pinyin:"tā",meaning:"she / her",radical:"女 + 也",sentence:"她是医生。",sentenceEn:"She is a doctor.",twin:"他"},
+{id:"h1_008",hsk:1,hanzi:"们",pinyin:"men",meaning:"plural marker",radical:"亻+ 门",sentence:"我们是中国人。",sentenceEn:"We are Chinese.",twin:"门"},
+{id:"h1_009",hsk:1,hanzi:"一",pinyin:"yī",meaning:"one",radical:"一",sentence:"我有一个苹果。",sentenceEn:"I have one apple.",twin:"二"},
+{id:"h1_010",hsk:1,hanzi:"二",pinyin:"èr",meaning:"two",radical:"二",sentence:"我有二本书。",sentenceEn:"I have two books.",twin:"一"},
+{id:"h1_011",hsk:1,hanzi:"三",pinyin:"sān",meaning:"three",radical:"三",sentence:"三个人来了。",sentenceEn:"Three people came.",twin:"王"},
+{id:"h1_012",hsk:1,hanzi:"四",pinyin:"sì",meaning:"four",radical:"囗 + 儿",sentence:"今天星期四。",sentenceEn:"Today is Thursday.",twin:"西"},
+{id:"h1_013",hsk:1,hanzi:"五",pinyin:"wǔ",meaning:"five",radical:"五",sentence:"我五点钟起床。",sentenceEn:"I get up at 5.",twin:"午"},
+{id:"h1_014",hsk:1,hanzi:"六",pinyin:"liù",meaning:"six",radical:"亠 + 八",sentence:"星期六我很忙。",sentenceEn:"I'm busy on Saturday.",twin:"大"},
+{id:"h1_015",hsk:1,hanzi:"七",pinyin:"qī",meaning:"seven",radical:"七",sentence:"七月很热。",sentenceEn:"July is hot.",twin:"匕"},
+{id:"h1_016",hsk:1,hanzi:"八",pinyin:"bā",meaning:"eight",radical:"八",sentence:"八点上课。",sentenceEn:"Class starts at 8.",twin:"人"},
+{id:"h1_017",hsk:1,hanzi:"九",pinyin:"jiǔ",meaning:"nine",radical:"丿 + 乙",sentence:"九月是秋天。",sentenceEn:"September is autumn.",twin:"久"},
+{id:"h1_018",hsk:1,hanzi:"十",pinyin:"shí",meaning:"ten",radical:"十",sentence:"我十岁。",sentenceEn:"I am 10 years old.",twin:"人"},
+{id:"h1_019",hsk:1,hanzi:"零",pinyin:"líng",meaning:"zero",radical:"雨 + 令",sentence:"现在零下五度。",sentenceEn:"It's minus 5 now.",twin:"今"},
+{id:"h1_020",hsk:1,hanzi:"爸爸",pinyin:"bàba",meaning:"father",radical:"父 + 巴",sentence:"我爸爸是老师。",sentenceEn:"My dad is a teacher.",twin:"爸"},
+{id:"h1_021",hsk:1,hanzi:"妈妈",pinyin:"māma",meaning:"mother",radical:"女 + 马",sentence:"妈妈在做饭。",sentenceEn:"Mom is cooking.",twin:"妈"},
+{id:"h1_022",hsk:1,hanzi:"儿子",pinyin:"érzi",meaning:"son",radical:"儿 + 子",sentence:"他是我的儿子。",sentenceEn:"He is my son.",twin:"女儿"},
+{id:"h1_023",hsk:1,hanzi:"女儿",pinyin:"nǚ'ér",meaning:"daughter",radical:"女 + 儿",sentence:"她有一个女儿。",sentenceEn:"She has a daughter.",twin:"儿子"},
+{id:"h1_024",hsk:1,hanzi:"朋友",pinyin:"péngyou",meaning:"friend",radical:"月 + 月 | 又 + 又",sentence:"他是我最好的朋友。",sentenceEn:"He is my best friend.",twin:"有"},
+{id:"h1_025",hsk:1,hanzi:"今天",pinyin:"jīntiān",meaning:"today",radical:"人 + 大",sentence:"今天很冷。",sentenceEn:"Today is cold.",twin:"明天"},
+{id:"h1_026",hsk:1,hanzi:"明天",pinyin:"míngtiān",meaning:"tomorrow",radical:"日 + 月",sentence:"明天见！",sentenceEn:"See you tomorrow!",twin:"今天"},
+{id:"h1_027",hsk:1,hanzi:"昨天",pinyin:"zuótiān",meaning:"yesterday",radical:"日 + 乍",sentence:"昨天下雨了。",sentenceEn:"It rained yesterday.",twin:"今天"},
+{id:"h1_028",hsk:1,hanzi:"现在",pinyin:"xiànzài",meaning:"now",radical:"王 + 见 | 土",sentence:"现在几点？",sentenceEn:"What time is it now?",twin:"再见"},
+{id:"h1_029",hsk:1,hanzi:"时候",pinyin:"shíhou",meaning:"time / moment",radical:"日 + 寸 | 亻+ 侯",sentence:"你什么时候来？",sentenceEn:"When are you coming?",twin:"时"},
+{id:"h1_030",hsk:1,hanzi:"点",pinyin:"diǎn",meaning:"o'clock / dot",radical:"灬 + 占",sentence:"现在三点半。",sentenceEn:"It's 3:30 now.",twin:"店"},
+{id:"h1_031",hsk:1,hanzi:"吃",pinyin:"chī",meaning:"to eat",radical:"口 + 乞",sentence:"我想吃米饭。",sentenceEn:"I want to eat rice.",twin:"喝"},
+{id:"h1_032",hsk:1,hanzi:"喝",pinyin:"hē",meaning:"to drink",radical:"口 + 曷",sentence:"你喝茶吗？",sentenceEn:"Do you drink tea?",twin:"吃"},
+{id:"h1_033",hsk:1,hanzi:"水",pinyin:"shuǐ",meaning:"water",radical:"水",sentence:"请给我一杯水。",sentenceEn:"Please give me water.",twin:"冰"},
+{id:"h1_034",hsk:1,hanzi:"茶",pinyin:"chá",meaning:"tea",radical:"艹 + 人 + 木",sentence:"中国茶很好喝。",sentenceEn:"Chinese tea is good.",twin:"菜"},
+{id:"h1_035",hsk:1,hanzi:"米饭",pinyin:"mǐfàn",meaning:"cooked rice",radical:"米 + 反",sentence:"我喜欢吃米饭。",sentenceEn:"I like eating rice.",twin:"面"},
+{id:"h1_036",hsk:1,hanzi:"菜",pinyin:"cài",meaning:"dish / vegetable",radical:"艹 + 采",sentence:"这个菜很好吃。",sentenceEn:"This dish is delicious.",twin:"茶"},
+{id:"h1_037",hsk:1,hanzi:"水果",pinyin:"shuǐguǒ",meaning:"fruit",radical:"水 + 果",sentence:"多吃水果对身体好。",sentenceEn:"Fruit is good for you.",twin:"水"},
+{id:"h1_038",hsk:1,hanzi:"苹果",pinyin:"píngguǒ",meaning:"apple",radical:"艹 + 平 + 果",sentence:"苹果又红又甜。",sentenceEn:"The apple is red and sweet.",twin:"果"},
+{id:"h1_039",hsk:1,hanzi:"是",pinyin:"shì",meaning:"to be",radical:"日",sentence:"我是学生。",sentenceEn:"I am a student.",twin:"事"},
+{id:"h1_040",hsk:1,hanzi:"有",pinyin:"yǒu",meaning:"to have",radical:"月 + 又",sentence:"我有一个妹妹。",sentenceEn:"I have a sister.",twin:"友"},
+{id:"h1_041",hsk:1,hanzi:"看",pinyin:"kàn",meaning:"to look / watch",radical:"手 + 目",sentence:"我在看书。",sentenceEn:"I'm reading a book.",twin:"着"},
+{id:"h1_042",hsk:1,hanzi:"听",pinyin:"tīng",meaning:"to listen",radical:"口 + 斤",sentence:"我喜欢听音乐。",sentenceEn:"I like listening to music.",twin:"说"},
+{id:"h1_043",hsk:1,hanzi:"说",pinyin:"shuō",meaning:"to speak",radical:"讠+ 兑",sentence:"他说汉语。",sentenceEn:"He speaks Chinese.",twin:"读"},
+{id:"h1_044",hsk:1,hanzi:"读",pinyin:"dú",meaning:"to read",radical:"讠+ 卖",sentence:"我每天读汉语书。",sentenceEn:"I read Chinese daily.",twin:"卖"},
+{id:"h1_045",hsk:1,hanzi:"写",pinyin:"xiě",meaning:"to write",radical:"宀 + 与",sentence:"请写你的名字。",sentenceEn:"Please write your name.",twin:"与"},
+{id:"h1_046",hsk:1,hanzi:"叫",pinyin:"jiào",meaning:"to be called",radical:"口 + 丩",sentence:"我叫大卫。",sentenceEn:"My name is David.",twin:"吃"},
+{id:"h1_047",hsk:1,hanzi:"来",pinyin:"lái",meaning:"to come",radical:"木 + 二人",sentence:"请来我家。",sentenceEn:"Please come to my home.",twin:"去"},
+{id:"h1_048",hsk:1,hanzi:"去",pinyin:"qù",meaning:"to go",radical:"土 + 厶",sentence:"我去学校。",sentenceEn:"I go to school.",twin:"来"},
+{id:"h1_049",hsk:1,hanzi:"做",pinyin:"zuò",meaning:"to do / make",radical:"亻+ 故",sentence:"你在做什么？",sentenceEn:"What are you doing?",twin:"作"},
+{id:"h1_050",hsk:1,hanzi:"买",pinyin:"mǎi",meaning:"to buy",radical:"乛 + 头",sentence:"我去买东西。",sentenceEn:"I go shopping.",twin:"卖"},
+{id:"h1_051",hsk:1,hanzi:"开",pinyin:"kāi",meaning:"to open / drive",radical:"一 + 廾",sentence:"他开车去上班。",sentenceEn:"He drives to work.",twin:"关"},
+{id:"h1_052",hsk:1,hanzi:"住",pinyin:"zhù",meaning:"to live",radical:"亻+ 主",sentence:"我住在北京。",sentenceEn:"I live in Beijing.",twin:"主"},
+{id:"h1_053",hsk:1,hanzi:"学",pinyin:"xué",meaning:"to study",radical:"子 + 冖 + 爻",sentence:"我学汉语。",sentenceEn:"I study Chinese.",twin:"字"},
+{id:"h1_054",hsk:1,hanzi:"工作",pinyin:"gōngzuò",meaning:"to work / work",radical:"工 + 乍",sentence:"他每天工作八小时。",sentenceEn:"He works 8 hours daily.",twin:"做"},
+{id:"h1_055",hsk:1,hanzi:"中国",pinyin:"Zhōngguó",meaning:"China",radical:"囗 + 玉",sentence:"中国很大。",sentenceEn:"China is big.",twin:"中"},
+{id:"h1_056",hsk:1,hanzi:"北京",pinyin:"Běijīng",meaning:"Beijing",radical:"北 + 京",sentence:"北京是中国的首都。",sentenceEn:"Beijing is China's capital.",twin:"南京"},
+{id:"h1_057",hsk:1,hanzi:"学校",pinyin:"xuéxiào",meaning:"school",radical:"子 + 交",sentence:"我在学校学习。",sentenceEn:"I study at school.",twin:"学"},
+{id:"h1_058",hsk:1,hanzi:"家",pinyin:"jiā",meaning:"home / family",radical:"宀 + 豕",sentence:"我回家了。",sentenceEn:"I went home.",twin:"住"},
+{id:"h1_059",hsk:1,hanzi:"饭店",pinyin:"fàndiàn",meaning:"restaurant / hotel",radical:"饣+ 反 + 广 + 占",sentence:"我们去饭店吃饭。",sentenceEn:"Let's eat at the restaurant.",twin:"店"},
+{id:"h1_060",hsk:1,hanzi:"商店",pinyin:"shāngdiàn",meaning:"shop",radical:"亠+ 八 + 口 + 广 + 占",sentence:"商店里有苹果。",sentenceEn:"The shop has apples.",twin:"店"},
+{id:"h1_061",hsk:1,hanzi:"医院",pinyin:"yīyuàn",meaning:"hospital",radical:"匚 + 矢 + 阝",sentence:"妈妈在医院工作。",sentenceEn:"Mom works at the hospital.",twin:"医"},
+{id:"h1_062",hsk:1,hanzi:"好",pinyin:"hǎo",meaning:"good",radical:"女 + 子",sentence:"今天天气很好。",sentenceEn:"The weather is good.",twin:"女"},
+{id:"h1_063",hsk:1,hanzi:"大",pinyin:"dà",meaning:"big",radical:"大",sentence:"这个苹果很大。",sentenceEn:"This apple is big.",twin:"太"},
+{id:"h1_064",hsk:1,hanzi:"小",pinyin:"xiǎo",meaning:"small",radical:"小",sentence:"我有一只小猫。",sentenceEn:"I have a small cat.",twin:"少"},
+{id:"h1_065",hsk:1,hanzi:"多",pinyin:"duō",meaning:"many",radical:"夕 + 夕",sentence:"这里人很多。",sentenceEn:"Many people here.",twin:"少"},
+{id:"h1_066",hsk:1,hanzi:"少",pinyin:"shǎo",meaning:"few",radical:"小 + 丿",sentence:"今天人很少。",sentenceEn:"Few people today.",twin:"小"},
+{id:"h1_067",hsk:1,hanzi:"冷",pinyin:"lěng",meaning:"cold",radical:"冫+ 令",sentence:"今天很冷。",sentenceEn:"It's cold today.",twin:"热"},
+{id:"h1_068",hsk:1,hanzi:"热",pinyin:"rè",meaning:"hot",radical:"灬 + 执",sentence:"夏天很热。",sentenceEn:"Summer is hot.",twin:"冷"},
+{id:"h1_069",hsk:1,hanzi:"高兴",pinyin:"gāoxìng",meaning:"happy",radical:"高 + 八",sentence:"见到你我很高兴。",sentenceEn:"Happy to meet you.",twin:"兴"},
+{id:"h1_070",hsk:1,hanzi:"什么",pinyin:"shénme",meaning:"what",radical:"礻+ 申 + 人",sentence:"这是什么？",sentenceEn:"What is this?",twin:"么"},
+{id:"h1_071",hsk:1,hanzi:"哪",pinyin:"nǎ",meaning:"which",radical:"口 + 那",sentence:"你是哪国人？",sentenceEn:"Which country are you from?",twin:"那"},
+{id:"h1_072",hsk:1,hanzi:"怎么",pinyin:"zěnme",meaning:"how",radical:"心 + 乍 + 人",sentence:"你怎么去学校？",sentenceEn:"How do you go to school?",twin:"怎"},
+{id:"h1_073",hsk:1,hanzi:"谁",pinyin:"shéi",meaning:"who",radical:"讠+ 隹",sentence:"他是谁？",sentenceEn:"Who is he?",twin:"推"},
+{id:"h1_074",hsk:1,hanzi:"的",pinyin:"de",meaning:"possessive",radical:"白 + 勺",sentence:"这是我的书。",sentenceEn:"This is my book.",twin:"得"},
+{id:"h1_075",hsk:1,hanzi:"了",pinyin:"le",meaning:"completed action",radical:"乙",sentence:"我吃饭了。",sentenceEn:"I ate.",twin:"子"},
+{id:"h1_076",hsk:1,hanzi:"在",pinyin:"zài",meaning:"at / in",radical:"土 + 才",sentence:"我在家。",sentenceEn:"I'm at home.",twin:"再"},
+{id:"h1_077",hsk:1,hanzi:"不",pinyin:"bù",meaning:"not",radical:"一 + 小",sentence:"我不忙。",sentenceEn:"I'm not busy.",twin:"布"},
+{id:"h1_078",hsk:1,hanzi:"很",pinyin:"hěn",meaning:"very",radical:"彳+ 艮",sentence:"我很高兴。",sentenceEn:"I'm very happy.",twin:"跟"},
+{id:"h1_079",hsk:1,hanzi:"吗",pinyin:"ma",meaning:"question particle",radical:"口 + 马",sentence:"你是学生吗？",sentenceEn:"Are you a student?",twin:"妈"},
+{id:"h1_080",hsk:1,hanzi:"和",pinyin:"hé",meaning:"and",radical:"禾 + 口",sentence:"我和他是朋友。",sentenceEn:"He and I are friends.",twin:"合"},
+{id:"h1_081",hsk:1,hanzi:"老师",pinyin:"lǎoshī",meaning:"teacher",radical:"老 + 巾",sentence:"她是我的老师。",sentenceEn:"She is my teacher.",twin:"老"},
+{id:"h1_082",hsk:1,hanzi:"学生",pinyin:"xuésheng",meaning:"student",radical:"子 + 生",sentence:"我是学生。",sentenceEn:"I am a student.",twin:"学"},
+{id:"h1_083",hsk:1,hanzi:"同学",pinyin:"tóngxué",meaning:"classmate",radical:"同 + 学",sentence:"他是我同学。",sentenceEn:"He is my classmate.",twin:"学"},
+{id:"h1_084",hsk:1,hanzi:"书",pinyin:"shū",meaning:"book",radical:"丨 + 曰 + 丨",sentence:"这本书很好。",sentenceEn:"This book is good.",twin:"读"},
+{id:"h1_085",hsk:1,hanzi:"电脑",pinyin:"diànnǎo",meaning:"computer",radical:"电 + 脑",sentence:"我用电脑工作。",sentenceEn:"I use a computer.",twin:"电"},
+{id:"h1_086",hsk:1,hanzi:"电视",pinyin:"diànshì",meaning:"television",radical:"电 + 见",sentence:"我在看电视。",sentenceEn:"I'm watching TV.",twin:"电"},
+{id:"h1_087",hsk:1,hanzi:"电影",pinyin:"diànyǐng",meaning:"movie",radical:"电 + 景",sentence:"我们去看电影吧。",sentenceEn:"Let's watch a movie.",twin:"电"},
+{id:"h1_088",hsk:1,hanzi:"天气",pinyin:"tiānqì",meaning:"weather",radical:"大 + 气",sentence:"今天天气很好。",sentenceEn:"The weather is nice.",twin:"汽"},
+{id:"h1_089",hsk:1,hanzi:"下雨",pinyin:"xiàyǔ",meaning:"to rain",radical:"下 + 雨",sentence:"今天下雨了。",sentenceEn:"It rained today.",twin:"雪"},
+{id:"h1_090",hsk:1,hanzi:"先生",pinyin:"xiānsheng",meaning:"Mr. / sir",radical:"先 + 生",sentence:"王先生你好。",sentenceEn:"Hello Mr. Wang.",twin:"先"},
+{id:"h1_091",hsk:1,hanzi:"小姐",pinyin:"xiǎojiě",meaning:"Miss",radical:"小 + 女",sentence:"李小姐你好。",sentenceEn:"Hello Miss Li.",twin:"姐"},
+{id:"h1_092",hsk:1,hanzi:"医生",pinyin:"yīshēng",meaning:"doctor",radical:"匚 + 矢 + 生",sentence:"他是医生。",sentenceEn:"He is a doctor.",twin:"医"},
+{id:"h1_093",hsk:1,hanzi:"飞机",pinyin:"fēijī",meaning:"airplane",radical:"飞 + 几",sentence:"我坐飞机去北京。",sentenceEn:"I fly to Beijing.",twin:"飞"},
+{id:"h1_094",hsk:1,hanzi:"出租车",pinyin:"chūzūchē",meaning:"taxi",radical:"出 + 租 + 车",sentence:"我坐出租车回家。",sentenceEn:"I take a taxi home.",twin:"车"},
+{id:"h1_095",hsk:1,hanzi:"东西",pinyin:"dōngxi",meaning:"thing / stuff",radical:"东 + 西",sentence:"这是什么东西？",sentenceEn:"What is this thing?",twin:"东"},
+{id:"h1_096",hsk:1,hanzi:"名字",pinyin:"míngzi",meaning:"name",radical:"名 + 子",sentence:"你叫什么名字？",sentenceEn:"What's your name?",twin:"名"},
+{id:"h1_097",hsk:1,hanzi:"电话",pinyin:"diànhuà",meaning:"telephone",radical:"电 + 讠+ 舌",sentence:"请给我打电话。",sentenceEn:"Please call me.",twin:"电"},
+{id:"h1_098",hsk:1,hanzi:"岁",pinyin:"suì",meaning:"years old",radical:"山 + 夕 + 丿",sentence:"我二十岁。",sentenceEn:"I'm 20 years old.",twin:"山"},
+{id:"h1_099",hsk:1,hanzi:"块",pinyin:"kuài",meaning:"yuan (currency)",radical:"土 + 夬",sentence:"这个十块钱。",sentenceEn:"This is 10 yuan.",twin:"快"},
+{id:"h1_100",hsk:1,hanzi:"钱",pinyin:"qián",meaning:"money",radical:"钅+ 戋",sentence:"我没有钱。",sentenceEn:"I have no money.",twin:"前"},
+{id:"h1_101",hsk:1,hanzi:"个",pinyin:"gè",meaning:"measure word",radical:"人 + 丨",sentence:"我有一个朋友。",sentenceEn:"I have a friend.",twin:"介"},
+{id:"h1_102",hsk:1,hanzi:"本",pinyin:"běn",meaning:"measure word (books)",radical:"木 + 一",sentence:"我有三本书。",sentenceEn:"I have 3 books.",twin:"木"},
+{id:"h1_103",hsk:1,hanzi:"些",pinyin:"xiē",meaning:"some",radical:"此 + 丿",sentence:"我买了一些水果。",sentenceEn:"I bought some fruit.",twin:"此"},
+{id:"h1_104",hsk:1,hanzi:"点",pinyin:"diǎn",meaning:"a little / o'clock",radical:"灬 + 占",sentence:"请慢一点。",sentenceEn:"A bit slower please.",twin:"店"},
+{id:"h1_105",hsk:1,hanzi:"岁",pinyin:"suì",meaning:"years (old)",radical:"止 + 人 + 丿",sentence:"他二十五岁。",sentenceEn:"He is 25.",twin:"山"},
+{id:"h1_106",hsk:1,hanzi:"上午",pinyin:"shàngwǔ",meaning:"morning (AM)",radical:"上 + 午",sentence:"我上午上课。",sentenceEn:"I have class in the morning.",twin:"下午"},
+{id:"h1_107",hsk:1,hanzi:"中午",pinyin:"zhōngwǔ",meaning:"noon",radical:"中 + 午",sentence:"中午我吃饭。",sentenceEn:"I eat at noon.",twin:"中"},
+{id:"h1_108",hsk:1,hanzi:"下午",pinyin:"xiàwǔ",meaning:"afternoon",radical:"下 + 午",sentence:"下午我去商店。",sentenceEn:"I go to the shop in the afternoon.",twin:"上午"},
+{id:"h1_109",hsk:1,hanzi:"时候",pinyin:"shíhou",meaning:"time / when",radical:"日 + 寸 | 亻+ 侯",sentence:"你什么时候来？",sentenceEn:"When will you come?",twin:"时"},
+{id:"h1_110",hsk:1,hanzi:"小时",pinyin:"xiǎoshí",meaning:"hour",radical:"小 + 时",sentence:"我每天学习两小时。",sentenceEn:"I study 2 hours daily.",twin:"时"},
+{id:"h1_111",hsk:1,hanzi:"星期一",pinyin:"xīngqīyī",meaning:"Monday",radical:"星 + 期 + 一",sentence:"星期一我上课。",sentenceEn:"I have class Monday.",twin:"星期二"},
+{id:"h1_112",hsk:1,hanzi:"钱",pinyin:"qián",meaning:"money",radical:"钅+ 戋",sentence:"多少钱？",sentenceEn:"How much?",twin:"前"},
+{id:"h1_113",hsk:1,hanzi:"能",pinyin:"néng",meaning:"can / able to",radical:"厶 + 月 + 匕匕",sentence:"我能帮你吗？",sentenceEn:"Can I help you?",twin:"会"},
+{id:"h1_114",hsk:1,hanzi:"会",pinyin:"huì",meaning:"can (skill)",radical:"人 + 云",sentence:"你会说汉语吗？",sentenceEn:"Can you speak Chinese?",twin:"能"},
+{id:"h1_115",hsk:1,hanzi:"想",pinyin:"xiǎng",meaning:"to want / think",radical:"木 + 目 + 心",sentence:"我想喝水。",sentenceEn:"I want water.",twin:"相"},
+{id:"h1_116",hsk:1,hanzi:"喜欢",pinyin:"xǐhuan",meaning:"to like",radical:"口 + 丷 + 一 + 又",sentence:"我喜欢中国菜。",sentenceEn:"I like Chinese food.",twin:"欢"},
+{id:":"h1_117",hsk:1,hanzi:"爱",pinyin:"ài",meaning:"to love",radical:"爫 + 冖 + 友",sentence:"我爱我的家人。",sentenceEn:"I love my family.",twin:"受"},
+{id:"h1_118",hsk:1,hanzi:"请",pinyin:"qǐng",meaning:"please",radical:"讠+ 青",sentence:"请坐。",sentenceEn:"Please sit.",twin:"清"},
+{id:"h1_119",hsk:1,hanzi:"对不起",pinyin:"duìbuqǐ",meaning:"sorry",radical:"又 + 寸 + 不 + 起",sentence:"对不起，我迟到了。",sentenceEn:"Sorry, I'm late.",twin:"对"},
+{id:"h1_120",hsk:1,hanzi:"没关系",pinyin:"méi guānxi",meaning:"it's OK",radical:"氵+ 没 + 关 + 系",sentence:"没关系。",sentenceEn:"It's OK.",twin:"关"},
+{id:"h1_121",hsk:1,hanzi:"太",pinyin:"tài",meaning:"too (excessive)",radical:"大 + 丶",sentence:"太贵了。",sentenceEn:"Too expensive.",twin:"大"},
+{id:"h1_122",hsk:1,hanzi:"贵",pinyin:"guì",meaning:"expensive",radical:"贝 + 中 + 一",sentence:"这个太贵了。",sentenceEn:"This is too expensive.",twin:"贱"},
+{id:"h1_123",hsk:1,hanzi:"便宜",pinyin:"piányi",meaning:"cheap",radical:"亻+ 更 + 宜",sentence:"这个很便宜。",sentenceEn:"This is cheap.",twin:"便"},
+{id:"h1_124",hsk:1,hanzi:"远",pinyin:"yuǎn",meaning:"far",radical:"辶 + 元",sentence:"学校很远。",sentenceEn:"School is far.",twin:"近"},
+{id:"h1_125",hsk:1,hanzi:"近",pinyin:"jìn",meaning:"near",radical:"辶 + 斤",sentence:"我家很近。",sentenceEn:"My home is near.",twin:"远"},
+{id:"h1_126",hsk:1,hanzi:"忙",pinyin:"máng",meaning:"busy",radical:"忄+ 亡",sentence:"我今天很忙。",sentenceEn:"I'm busy today.",twin:"忘"},
+{id:"h1_127",hsk:1,hanzi:"累",pinyin:"lèi",meaning:"tired",radical:"田 + 系",sentence:"我很累。",sentenceEn:"I'm tired.",twin:"类"},
+{id:"h1_128",hsk:1,hanzi:"难",pinyin:"nán",meaning:"difficult",radical:"又 + 隹",sentence:"汉语很难。",sentenceEn:"Chinese is hard.",twin:"谁"},
+{id:"h1_129",hsk:1,hanzi:"容易",pinyin:"róngyì",meaning:"easy",radical:"宀 + 谷 + 日",sentence:"这个问题很容易。",sentenceEn:"This is easy.",twin:"易"},
+{id:"h1_130",hsk:1,hanzi:"重要",pinyin:"zhòngyào",meaning:"important",radical:"千 + 里 + 女",sentence:"健康很重要。",sentenceEn:"Health is important.",twin:"要"},
+{id:"h1_131",hsk:1,hanzi:"漂亮",pinyin:"piàoliang",meaning:"pretty",radical:"氵+ 票 + 亮",sentence:"她很漂亮。",sentenceEn:"She is pretty.",twin:"票"},
+{id:"h1_132",hsk:1,hanzi:"高兴",pinyin:"gāoxìng",meaning:"happy",radical:"高 + 八",sentence:"我很高兴。",sentenceEn:"I'm happy.",twin:"兴"},
+{id:"h1_133",hsk:1,hanzi:"喜欢",pinyin:"xǐhuan",meaning:"to like",radical:"口 + 丷 + 又",sentence:"我喜欢喝茶。",sentenceEn:"I like tea.",twin:"欢"},
+{id:"h1_134",hsk:1,hanzi:"睡觉",pinyin:"shuìjiào",meaning:"to sleep",radical:"目 + 垂 + 觉",sentence:"我去睡觉了。",sentenceEn:"I'm going to sleep.",twin:"睡"},
+{id:"h1_135",hsk:1,hanzi:"起床",pinyin:"qǐchuáng",meaning:"to get up",radical:"起 + 床",sentence:"我六点起床。",sentenceEn:"I get up at 6.",twin:"起"},
+{id:"h1_136",hsk:1,hanzi:"早上",pinyin:"zǎoshang",meaning:"morning",radical:"日 + 十 + 上",sentence:"早上好！",sentenceEn:"Good morning!",twin:"早"},
+{id:"h1_137",hsk:1,hanzi:"晚上",pinyin:"wǎnshang",meaning:"evening",radical:"日 + 免 + 上",sentence:"晚上我在家。",sentenceEn:"I'm home at night.",twin:"晚"},
+{id:"h1_138",hsk:1,hanzi:"衣服",pinyin:"yīfu",meaning:"clothes",radical:"衤+ 服",sentence:"这件衣服很漂亮。",sentenceEn:"These clothes are pretty.",twin:"衣"},
+{id:"h1_139",hsk:1,hanzi:"猫",pinyin:"māo",meaning:"cat",radical:"犭+ 苗",sentence:"我有一只猫。",sentenceEn:"I have a cat.",twin:"狗"},
+{id:"h1_140",hsk:1,hanzi:"狗",pinyin:"gǒu",meaning:"dog",radical:"犭+ 句",sentence:"他喜欢狗。",sentenceEn:"He likes dogs.",twin:"猫"},
+{id:"h1_141",hsk:1,hanzi:"桌子",pinyin:"zhuōzi",meaning:"table",radical:"木 + 卜 + 子",sentence:"书在桌子上。",sentenceEn:"The book is on the table.",twin:"桌"},
+{id:"h1_142",hsk:1,hanzi:"椅子",pinyin:"yǐzi",meaning:"chair",radical:"木 + 奇",sentence:"请坐这把椅子。",sentenceEn:"Please sit in this chair.",twin:"椅"},
+{id:"h1_143",hsk:1,hanzi:"车",pinyin:"chē",meaning:"car / vehicle",radical:"车",sentence:"我开车去上班。",sentenceEn:"I drive to work.",twin:"东"},
+{id:"h1_144",hsk:1,hanzi:"路",pinyin:"lù",meaning:"road",radical:"足 + 各",sentence:"这条路很长。",sentenceEn:"This road is long.",twin:"各"},
+{id:"h1_145",hsk:1,hanzi:"人",pinyin:"rén",meaning:"person",radical:"人",sentence:"这里有很多人。",sentenceEn:"Many people here.",twin:"入"},
+{id:"h1_146",hsk:1,hanzi:"字",pinyin:"zì",meaning:"character / word",radical:"宀 + 子",sentence:"这个字怎么写？",sentenceEn:"How do you write this character?",twin:"学"},
+{id:"h1_147",hsk:1,hanzi:"汉语",pinyin:"Hànyǔ",meaning:"Chinese language",radical:"汉 + 讠+ 吾",sentence:"我学汉语。",sentenceEn:"I study Chinese.",twin:"汉"},
+{id:"h1_148",hsk:1,hanzi:"时间",pinyin:"shíjiān",meaning:"time",radical:"日 + 寸 + 门 + 日",sentence:"我没有时间。",sentenceEn:"I don't have time.",twin:"时"},
+{id:"h1_149",hsk:1,hanzi:"事",pinyin:"shì",meaning:"matter / thing",radical:"一 + 口 + 彐 + 刂",sentence:"我有很多事。",sentenceEn:"I have many things.",twin:"是"},
+{id:"h1_150",hsk:1,hanzi:"问题",pinyin:"wèntí",meaning:"question / problem",radical:"门 + 口 | 是 + 页",sentence:"我有一个问题。",sentenceEn:"I have a question.",twin:"问"},
 
-  // ====== HSK 1 — NUMBERS ======
-  { id:"h1_009", hsk:1, topic:"numbers", hanzi:"一", pinyin:"yī", meaning:"one", radical:"一", sentence:"我有一个苹果。", sentenceEn:"I have one apple.", twin:"二" },
-  { id:"h1_010", hsk:1, topic:"numbers", hanzi:"二", pinyin:"èr", meaning:"two", radical:"二", sentence:"我有二本书。", sentenceEn:"I have two books.", twin:"一" },
-  { id:"h1_011", hsk:1, topic:"numbers", hanzi:"三", pinyin:"sān", meaning:"three", radical:"三", sentence:"三个人来了。", sentenceEn:"Three people came.", twin:"王" },
-  { id:"h1_012", hsk:1, topic:"numbers", hanzi:"四", pinyin:"sì", meaning:"four", radical:"囗 + 儿", sentence:"今天星期四。", sentenceEn:"Today is Thursday.", twin:"西" },
-  { id:"h1_013", hsk:1, topic:"numbers", hanzi:"五", pinyin:"wǔ", meaning:"five", radical:"五", sentence:"我五点钟起床。", sentenceEn:"I get up at 5 o'clock.", twin:"午" },
-  { id:"h1_014", hsk:1, topic:"numbers", hanzi:"六", pinyin:"liù", meaning:"six", radical:"亠 + 八", sentence:"星期六我很忙。", sentenceEn:"I'm busy on Saturday.", twin:"大" },
-  { id:"h1_015", hsk:1, topic:"numbers", hanzi:"七", pinyin:"qī", meaning:"seven", radical:"七", sentence:"七月很热。", sentenceEn:"July is hot.", twin:"匕" },
-  { id:"h1_016", hsk:1, topic:"numbers", hanzi:"八", pinyin:"bā", meaning:"eight", radical:"八", sentence:"八点上课。", sentenceEn:"Class starts at 8.", twin:"人" },
-  { id:"h1_017", hsk:1, topic:"numbers", hanzi:"九", pinyin:"jiǔ", meaning:"nine", radical:"丿 + 乙", sentence:"九月是秋天。", sentenceEn:"September is autumn.", twin:"久" },
-  { id:"h1_018", hsk:1, topic:"numbers", hanzi:"十", pinyin:"shí", meaning:"ten", radical:"十", sentence:"我十岁。", sentenceEn:"I am ten years old.", twin:"人" },
-  { id:"h1_019", hsk:1, topic:"numbers", hanzi:"零", pinyin:"líng", meaning:"zero", radical:"雨 + 令", sentence:"现在零下五度。", sentenceEn:"It's minus five now.", twin:"今" },
+// ===== HSK 2 (150 words) =====
+{id:"h2_001",hsk:2,hanzi:"觉得",pinyin:"juéde",meaning:"to feel / think",radical:"见 + 角",sentence:"我觉得汉语很有意思。",sentenceEn:"I think Chinese is interesting.",twin:"决"},
+{id:"h2_002",hsk:2,hanzi:"知道",pinyin:"zhīdào",meaning:"to know",radical:"矢 + 口 + 辶",sentence:"我不知道他的名字。",sentenceEn:"I don't know his name.",twin:"到"},
+{id:"h2_003",hsk:2,hanzi:"认识",pinyin:"rènshi",meaning:"to know (a person)",radical:"讠+ 刃 + 戈 + 言",sentence:"我认识他。",sentenceEn:"I know him.",twin:"认"},
+{id:"h2_004",hsk:2,hanzi:"希望",pinyin:"xīwàng",meaning:"to hope",radical:"乂 + 月 + 王",sentence:"我希望去中国。",sentenceEn:"I hope to go to China.",twin:"忘"},
+{id:"h2_005",hsk:2,hanzi:"准备",pinyin:"zhǔnbèi",meaning:"to prepare",radical:"冫+ 隼 | 夂 + 田",sentence:"我在准备考试。",sentenceEn:"I'm preparing for the exam.",twin:"准"},
+{id:"h2_006",hsk:2,hanzi:"开始",pinyin:"kāishǐ",meaning:"to begin",radical:"开 + 女 + 口",sentence:"我们开始上课吧。",sentenceEn:"Let's start class.",twin:"开"},
+{id:"h2_007",hsk:2,hanzi:"帮助",pinyin:"bāngzhù",meaning:"to help",radical:"邦 + 且",sentence:"谢谢你帮助我。",sentenceEn:"Thanks for helping me.",twin:"帮"},
+{id:"h2_008",hsk:2,hanzi:"运动",pinyin:"yùndòng",meaning:"exercise / sports",radical:"辶 + 云 + 力",sentence:"我每天运动。",sentenceEn:"I exercise daily.",twin:"运"},
+{id:"h2_009",hsk:2,hanzi:"快",pinyin:"kuài",meaning:"fast",radical:"忄+ 夬",sentence:"他跑得很快。",sentenceEn:"He runs fast.",twin:"慢"},
+{id:"h2_010",hsk:2,hanzi:"慢",pinyin:"màn",meaning:"slow",radical:"忄+ 曼",sentence:"请说慢一点。",sentenceEn:"Please speak slower.",twin:"快"},
+{id:"h2_011",hsk:2,hanzi:"新",pinyin:"xīn",meaning:"new",radical:"斤 + 木",sentence:"我买了一件新衣服。",sentenceEn:"I bought new clothes.",twin:"心"},
+{id:"h2_012",hsk:2,hanzi:"旧",pinyin:"jiù",meaning:"old (things)",radical:"丨 + 日",sentence:"这本书很旧。",sentenceEn:"This book is old.",twin:"就"},
+{id:"h2_013",hsk:2,hanzi:"已经",pinyin:"yǐjīng",meaning:"already",radical:"乛 + 人 | 纟+ 巠",sentence:"我已经吃饭了。",sentenceEn:"I already ate.",twin:"已"},
+{id:"h2_014",hsk:2,hanzi:"刚才",pinyin:"gāngcái",meaning:"just now",radical:"冈 + 才",sentence:"刚才谁来了？",sentenceEn:"Who came just now?",twin:"刚"},
+{id:"h2_015",hsk:2,hanzi:"眼睛",pinyin:"yǎnjing",meaning:"eye",radical:"目 + 艮 + 青",sentence:"她的眼睛很大。",sentenceEn:"Her eyes are big.",twin:"眼"},
+{id:"h2_016",hsk:2,hanzi:"手机",pinyin:"shǒujī",meaning:"mobile phone",radical:"手 + 几",sentence:"我的手机坏了。",sentenceEn:"My phone is broken.",twin:"手"},
+{id:"h2_017",hsk:2,hanzi:"黑",pinyin:"hēi",meaning:"black",radical:"黑",sentence:"他穿黑色的衣服。",sentenceEn:"He wears black clothes.",twin:"白"},
+{id:"h2_018",hsk:2,hanzi:"白",pinyin:"bái",meaning:"white",radical:"白",sentence:"她喜欢白色。",sentenceEn:"She likes white.",twin:"黑"},
+{id:"h2_019",hsk:2,hanzi:"红",pinyin:"hóng",meaning:"red",radical:"纟+ 工",sentence:"中国国旗是红色的。",sentenceEn:"China's flag is red.",twin:"江"},
+{id:"h2_020",hsk:2,hanzi:"黄",pinyin:"huáng",meaning:"yellow",radical:"艹 + 一 + 由 + 八",sentence:"香蕉是黄色的。",sentenceEn:"Bananas are yellow.",twin:"共"},
+{id:"h2_021",hsk:2,hanzi:"绿",pinyin:"lǜ",meaning:"green",radical:"纟+ 录",sentence:"树叶是绿色的。",sentenceEn:"Leaves are green.",twin:"录"},
+{id:"h2_022",hsk:2,hanzi:"蓝",pinyin:"lán",meaning:"blue",radical:"艹 + 监",sentence:"天空是蓝色的。",sentenceEn:"The sky is blue.",twin:"篮"},
+{id:"h2_023",hsk:2,hanzi:"长",pinyin:"cháng",meaning:"long",radical:"长",sentence:"这条路很长。",sentenceEn:"This road is long.",twin:"短"},
+{id:"h2_024",hsk:2,hanzi:"短",pinyin:"duǎn",meaning:"short",radical:"矢 + 豆",sentence:"这条裤子太短了。",sentenceEn:"These pants are too short.",twin:"长"},
+{id:"h2_025",hsk:2,hanzi:"高",pinyin:"gāo",meaning:"tall / high",radical:"高",sentence:"他很高。",sentenceEn:"He is tall.",twin:"矮"},
+{id:"h2_026",hsk:2,hanzi:"矮",pinyin:"ǎi",meaning:"short (height)",radical:"矢 + 女",sentence:"她很矮。",sentenceEn:"She is short.",twin:"高"},
+{id:"h2_027",hsk:2,hanzi:"胖",pinyin:"pàng",meaning:"fat",radical:"月 + 半",sentence:"他有点胖。",sentenceEn:"He's a bit fat.",twin:"瘦"},
+{id:"h2_028",hsk:2,hanzi:"瘦",pinyin:"shòu",meaning:"thin",radical:"疒 + 叟",sentence:"她很瘦。",sentenceEn:"She's thin.",twin:"胖"},
+{id:"h2_029",hsk:2,hanzi:"甜",pinyin:"tián",meaning:"sweet",radical:"舌 + 甘",sentence:"这个苹果很甜。",sentenceEn:"This apple is sweet.",twin:"苦"},
+{id:"h2_030",hsk:2,hanzi:"咸",pinyin:"xián",meaning:"salty",radical:"戊 + 口",sentence:"这个菜太咸了。",sentenceEn:"This dish is too salty.",twin:"减"},
+{id:"h2_031",hsk:2,hanzi:"酸",pinyin:"suān",meaning:"sour",radical:"酉 + 夋",sentence:"柠檬很酸。",sentenceEn:"Lemons are sour.",twin:"俊"},
+{id:"h2_032",hsk:2,hanzi:"辣",pinyin:"là",meaning:"spicy",radical:"辛 + 束",sentence:"四川菜很辣。",sentenceEn:"Sichuan food is spicy.",twin:"束"},
+{id:"h2_033",hsk:2,hanzi:"春",pinyin:"chūn",meaning:"spring",radical:"三 + 人 + 日",sentence:"春天很暖和。",sentenceEn:"Spring is warm.",twin:"秋"},
+{id:"h2_034",hsk:2,hanzi:"夏",pinyin:"xià",meaning:"summer",radical:"页 + 夂",sentence:"夏天很热。",sentenceEn:"Summer is hot.",twin:"春"},
+{id:"h2_035",hsk:2,hanzi:"秋",pinyin:"qiū",meaning:"autumn",radical:"禾 + 火",sentence:"秋天很舒服。",sentenceEn:"Autumn is comfortable.",twin:"春"},
+{id:"h2_036",hsk:2,hanzi:"冬",pinyin:"dōng",meaning:"winter",radical:"冬",sentence:"冬天很冷。",sentenceEn:"Winter is cold.",twin:"东"},
+{id:"h2_037",hsk:2,hanzi:"生病",pinyin:"shēngbìng",meaning:"to get sick",radical:"生 + 疒+ 丙",sentence:"我生病了。",sentenceEn:"I'm sick.",twin:"生"},
+{id:"h2_038",hsk:2,hanzi:"药",pinyin:"yào",meaning:"medicine",radical:"艹 + 约",sentence:"请吃药。",sentenceEn:"Please take medicine.",twin:"要"},
+{id:"h2_039",hsk:2,hanzi:"身体",pinyin:"shēntǐ",meaning:"body / health",radical:"身 + 本",sentence:"你身体好吗？",sentenceEn:"How's your health?",twin:"身"},
+{id:"h2_040",hsk:2,hanzi:"休息",pinyin:"xiūxi",meaning:"to rest",radical:"亻+ 木 + 目",sentence:"我需要休息。",sentenceEn:"I need to rest.",twin:"体"},
+{id:"h2_041",hsk:2,hanzi:"丈夫",pinyin:"zhàngfu",meaning:"husband",radical:"丈 + 夫",sentence:"她丈夫是医生。",sentenceEn:"Her husband is a doctor.",twin:"妻"},
+{id:"h2_042",hsk:2,hanzi:"妻子",pinyin:"qīzi",meaning:"wife",radical:"女 + 帀",sentence:"他妻子很漂亮。",sentenceEn:"His wife is pretty.",twin:"夫"},
+{id:"h2_043",hsk:2,hanzi:"哥哥",pinyin:"gēge",meaning:"older brother",radical:"可 + 可",sentence:"我哥哥在北京。",sentenceEn:"My older brother is in Beijing.",twin:"弟"},
+{id:"h2_044",hsk:2,hanzi:"弟弟",pinyin:"dìdi",meaning:"younger brother",radical:"弓 + 弓",sentence:"我弟弟是学生。",sentenceEn:"My younger brother is a student.",twin:"哥"},
+{id:"h2_045",hsk:2,hanzi:"姐姐",pinyin:"jiějie",meaning:"older sister",radical:"女 + 女",sentence:"我姐姐是老师。",sentenceEn:"My older sister is a teacher.",twin:"妹"},
+{id:"h2_046",hsk:2,hanzi:"妹妹",pinyin:"mèimei",meaning:"younger sister",radical:"女 + 未 + 女",sentence:"我妹妹很可爱。",sentenceEn:"My younger sister is cute.",twin:"姐"},
+{id:"h2_047",hsk:2,hanzi:"孩子",pinyin:"háizi",meaning:"child",radical:"子 + 子",sentence:"她有三个孩子。",sentenceEn:"She has 3 children.",twin:"孩"},
+{id:"h2_048",hsk:2,hanzi:"男人",pinyin:"nánrén",meaning:"man",radical:"男 + 人",sentence:"那个男人很高。",sentenceEn:"That man is tall.",twin:"女"},
+{id:"h2_049",hsk:2,hanzi:"女人",pinyin:"nǚrén",meaning:"woman",radical:"女 + 人",sentence:"那个女人很漂亮。",sentenceEn:"That woman is pretty.",twin:"男"},
+{id:"h2_050",hsk:2,hanzi:"生日",pinyin:"shēngrì",meaning:"birthday",radical:"生 + 日",sentence:"祝你生日快乐！",sentenceEn:"Happy birthday!",twin:"生"},
+{id:"h2_051",hsk:2,hanzi:"礼物",pinyin:"lǐwù",meaning:"gift",radical:"礻+ 乙 + 勿",sentence:"这是给你的礼物。",sentenceEn:"This is a gift for you.",twin:"物"},
+{id:"h2_052",hsk:2,hanzi:"跳舞",pinyin:"tiàowǔ",meaning:"to dance",radical:"足 + 兆 + 舛",sentence:"她喜欢跳舞。",sentenceEn:"She likes to dance.",twin:"跳"},
+{id:"h2_053",hsk:2,hanzi:"唱歌",pinyin:"chànggē",meaning:"to sing",radical:"口 + 昌 + 哥",sentence:"他在唱歌。",sentenceEn:"He's singing.",twin:"唱"},
+{id:"h2_054",hsk:2,hanzi:"游戏",pinyin:"yóuxì",meaning:"game",radical:"氵+ 斿 + 戈",sentence:"我们一起玩游戏吧。",sentenceEn:"Let's play a game.",twin:"游"},
+{id:"h2_055",hsk:2,hanzi:"旅游",pinyin:"lǚyóu",meaning:"to travel",radical:"方 + 丿 + 氵+ 斿",sentence:"我喜欢旅游。",sentenceEn:"I like to travel.",twin:"游"},
+{id:"h2_056",hsk:2,hanzi:"游泳",pinyin:"yóuyǒng",meaning:"to swim",radical:"氵+ 斿 + 永",sentence:"我会游泳。",sentenceEn:"I can swim.",twin:"游"},
+{id:"h2_057",hsk:2,hanzi:"打篮球",pinyin:"dǎ lánqiú",meaning:"to play basketball",radical:"扌+ 丁 + 监 + 求",sentence:"他喜欢打篮球。",sentenceEn:"He likes basketball.",twin:"篮"},
+{id:"h2_058",hsk:2,hanzi:"踢足球",pinyin:"tī zúqiú",meaning:"to play soccer",radical:"足 + 是 + 求",sentence:"我们踢足球吧。",sentenceEn:"Let's play soccer.",twin:"足"},
+{id:"h2_059",hsk:2,hanzi:"跑步",pinyin:"pǎobù",meaning:"to run",radical:"足 + 包 + 止 + 少",sentence:"我每天跑步。",sentenceEn:"I run daily.",twin:"跑"},
+{id:"h2_060",hsk:2,hanzi:"自行车",pinyin:"zìxíngchē",meaning:"bicycle",radical:"自 + 行 + 车",sentence:"我骑自行车去上班。",sentenceEn:"I bike to work.",twin:"车"},
+{id:"h2_061",hsk:2,hanzi:"公共汽车",pinyin:"gōnggòng qìchē",meaning:"bus",radical:"公 + 共 + 气 + 车",sentence:"我坐公共汽车。",sentenceEn:"I take the bus.",twin:"汽"},
+{id:"h2_062",hsk:2,hanzi:"火车",pinyin:"huǒchē",meaning:"train",radical:"火 + 车",sentence:"我坐火车去上海。",sentenceEn:"I take the train to Shanghai.",twin:"火"},
+{id:"h2_063",hsk:2,hanzi:"船",pinyin:"chuán",meaning:"boat",radical:"舟 + 㕣",sentence:"我们坐船去。",sentenceEn:"Let's take a boat.",twin:"般"},
+{id:"h2_064",hsk:2,hanzi:"教室",pinyin:"jiàoshì",meaning:"classroom",radical:"孝 + 文 + 至",sentence:"我们在教室学习。",sentenceEn:"We study in the classroom.",twin:"室"},
+{id:"h2_065",hsk:2,hanzi:"图书馆",pinyin:"túshūguǎn",meaning:"library",radical:"图 + 书 + 馆",sentence:"我在图书馆看书。",sentenceEn:"I read at the library.",twin:"馆"},
+{id:"h2_066",hsk:2,hanzi:"公司",pinyin:"gōngsī",meaning:"company",radical:"公 + 司",sentence:"他在公司工作。",sentenceEn:"He works at a company.",twin:"司"},
+{id:"h2_067",hsk:2,hanzi:"银行",pinyin:"yínháng",meaning:"bank",radical:"钅+ 艮 + 行",sentence:"我去银行取钱。",sentenceEn:"I go to the bank.",twin:"行"},
+{id:"h2_068",hsk:2,hanzi:"超市",pinyin:"chāoshì",meaning:"supermarket",radical:"超 + 市",sentence:"我去超市买东西。",sentenceEn:"I go to the supermarket.",twin:"超"},
+{id:"h2_069",hsk:2,hanzi:"机场",pinyin:"jīchǎng",meaning:"airport",radical:"机 + 场",sentence:"我去机场接朋友。",sentenceEn:"I go to the airport.",twin:"场"},
+{id:"h2_070",hsk:2,hanzi:"宾馆",pinyin:"bīnguǎn",meaning:"hotel",radical:"宾 + 馆",sentence:"我住在宾馆。",sentenceEn:"I stay at a hotel.",twin:"馆"},
+{id:"h2_071",hsk:2,hanzi:"房间",pinyin:"fángjiān",meaning:"room",radical:"户 + 方 + 间",sentence:"我的房间很大。",sentenceEn:"My room is big.",twin:"间"},
+{id:"h2_072",hsk:2,hanzi:"厨房",pinyin:"chúfáng",meaning:"kitchen",radical:"厨 + 房",sentence:"妈妈在厨房做饭。",sentenceEn:"Mom is in the kitchen.",twin:"房"},
+{id:"h2_073",hsk:2,hanzi:"卫生间",pinyin:"wèishēngjiān",meaning:"bathroom",radical:"卫 + 生 + 间",sentence:"卫生间在哪里？",sentenceEn:"Where's the bathroom?",twin:"间"},
+{id:"h2_074",hsk:2,hanzi:"卧室",pinyin:"wòshì",meaning:"bedroom",radical:"卧 + 室",sentence:"我的卧室很小。",sentenceEn:"My bedroom is small.",twin:"室"},
+{id:"h2_075",hsk:2,hanzi:"客厅",pinyin:"kètīng",meaning:"living room",radical:"客 + 听",sentence:"我们在客厅看电视。",sentenceEn:"We watch TV in the living room.",twin:"厅"},
+{id:"h2_076",hsk:2,hanzi:"鸡蛋",pinyin:"jīdàn",meaning:"egg",radical:"鸡 + 蛋",sentence:"我吃两个鸡蛋。",sentenceEn:"I eat two eggs.",twin:"鸡"},
+{id:"h2_077",hsk:2,hanzi:"牛奶",pinyin:"niúnǎi",meaning:"milk",radical:"牛 + 奶",sentence:"我每天早上喝牛奶。",sentenceEn:"I drink milk every morning.",twin:"奶"},
+{id:"h2_078",hsk:2,hanzi:"面包",pinyin:"miànbāo",meaning:"bread",radical:"面 + 包",sentence:"我买了一些面包。",sentenceEn:"I bought some bread.",twin:"包"},
+{id:"h2_079",hsk:2,hanzi:"面条",pinyin:"miàntiáo",meaning:"noodles",radical:"面 + 条",sentence:"我喜欢吃面条。",sentenceEn:"I like noodles.",twin:"面"},
+{id:"h2_080",hsk:2,hanzi:"鱼",pinyin:"yú",meaning:"fish",radical:"鱼",sentence:"我喜欢吃鱼。",sentenceEn:"I like eating fish.",twin:"渔"},
+{id:"h2_081",hsk:2,hanzi:"羊肉",pinyin:"yángròu",meaning:"mutton",radical:"羊 + 肉",sentence:"我不吃羊肉。",sentenceEn:"I don't eat mutton.",twin:"羊"},
+{id:"h2_082",hsk:2,hanzi:"啤酒",pinyin:"píjiǔ",meaning:"beer",radical:"啤 + 酒",sentence:"他喜欢喝啤酒。",sentenceEn:"He likes beer.",twin:"酒"},
+{id:"h2_083",hsk:2,hanzi:"咖啡",pinyin:"kāfēi",meaning:"coffee",radical:"咖 + 啡",sentence:"我想喝咖啡。",sentenceEn:"I want coffee.",twin:"咖"},
+{id:"h2_084",hsk:2,hanzi:"杯子",pinyin:"bēizi",meaning:"cup",radical:"杯 + 子",sentence:"请给我一杯水。",sentenceEn:"Please give me a cup of water.",twin:"杯"},
+{id:"h2_085",hsk:2,hanzi:"筷子",pinyin:"kuàizi",meaning:"chopsticks",radical:"竹 + 快",sentence:"我用筷子吃饭。",sentenceEn:"I eat with chopsticks.",twin:"快"},
+{id:"h2_086",hsk:2,hanzi:"刀",pinyin:"dāo",meaning:"knife",radical:"刀",sentence:"请给我一把刀。",sentenceEn:"Please give me a knife.",twin:"力"},
+{id:"h2_087",hsk:2,hanzi:"手表",pinyin:"shǒubiǎo",meaning:"watch",radical:"手 + 表",sentence:"我的手表坏了。",sentenceEn:"My watch is broken.",twin:"表"},
+{id:"h2_088",hsk:2,hanzi:"照片",pinyin:"zhàopiàn",meaning:"photo",radical:"照 + 片",sentence:"这是我的照片。",sentenceEn:"This is my photo.",twin:"照"},
+{id:"h2_089",hsk:2,hanzi:"电脑",pinyin:"diànnǎo",meaning:"computer",radical:"电 + 脑",sentence:"我用电脑工作。",sentenceEn:"I use a computer.",twin:"电"},
+{id:"h2_090",hsk:2,hanzi:"网络",pinyin:"wǎngluò",meaning:"internet",radical:"网 + 各",sentence:"我上网查资料。",sentenceEn:"I go online.",twin:"网"},
+{id:"h2_091",hsk:2,hanzi:"网站",pinyin:"wǎngzhàn",meaning:"website",radical:"网 + 占",sentence:"这个网站很好。",sentenceEn:"This website is good.",twin:"站"},
+{id:"h2_092",hsk:2,hanzi:"密码",pinyin:"mìmǎ",meaning:"password",radical:"宓 + 马",sentence:"我忘了密码。",sentenceEn:"I forgot the password.",twin:"密"},
+{id:"h2_093",hsk:2,hanzi:"邮件",pinyin:"yóujiàn",meaning:"email",radical:"邮 + 件",sentence:"我给你发邮件。",sentenceEn:"I'll email you.",twin:"邮"},
+{id:"h2_094",hsk:2,hanzi:"新闻",pinyin:"xīnwén",meaning:"news",radical:"新 + 闻",sentence:"我在看新闻。",sentenceEn:"I'm reading the news.",twin:"闻"},
+{id:"h2_095",hsk:2,hanzi:"故事",pinyin:"gùshi",meaning:"story",radical:"故 + 事",sentence:"这是一个有趣的故事。",sentenceEn:"This is an interesting story.",twin:"故"},
+{id:"h2_096",hsk:2,hanzi:"音乐",pinyin:"yīnyuè",meaning:"music",radical:"音 + 木",sentence:"我喜欢听音乐。",sentenceEn:"I like music.",twin:"音"},
+{id:"h2_097",hsk:2,hanzi:"颜色",pinyin:"yánsè",meaning:"color",radical:"颜 + 色",sentence:"你最喜欢什么颜色？",sentenceEn:"What's your favorite color?",twin:"色"},
+{id:"h2_098",hsk:2,hanzi:"形状",pinyin:"xíngzhuàng",meaning:"shape",radical:"形 + 状",sentence:"这个形状很奇怪。",sentenceEn:"This shape is strange.",twin:"形"},
+{id:"h2_099",hsk:2,hanzi:"左边",pinyin:"zuǒbiān",meaning:"left side",radical:"左 + 边",sentence:"银行在左边。",sentenceEn:"The bank is on the left.",twin:"右"},
+{id:"h2_100",hsk:2,hanzi:"右边",pinyin:"yòubiān",meaning:"right side",radical:"右 + 边",sentence:"学校在右边。",sentenceEn:"School is on the right.",twin:"左"},
+{id:"h2_101",hsk:2,hanzi:"前面",pinyin:"qiánmiàn",meaning:"in front",radical:"前 + 面",sentence:"他在我前面。",sentenceEn:"He's in front of me.",twin:"后"},
+{id:"h2_102",hsk:2,hanzi:"后面",pinyin:"hòumiàn",meaning:"behind",radical:"后 + 面",sentence:"猫在桌子后面。",sentenceEn:"The cat is behind the table.",twin:"前"},
+{id:"h2_103",hsk:2,hanzi:"里面",pinyin:"lǐmiàn",meaning:"inside",radical:"里 + 面",sentence:"书在包里面。",sentenceEn:"The book is inside the bag.",twin:"外"},
+{id:"h2_104",hsk:2,hanzi:"外面",pinyin:"wàimiàn",meaning:"outside",radical:"外 + 面",sentence:"外面很冷。",sentenceEn:"It's cold outside.",twin:"里"},
+{id:"h2_105",hsk:2,hanzi:"上边",pinyin:"shàngbiān",meaning:"above",radical:"上 + 边",sentence:"猫在桌子上边。",sentenceEn:"The cat is on the table.",twin:"下"},
+{id:"h2_106",hsk:2,hanzi:"下边",pinyin:"xiàbiān",meaning:"below",radical:"下 + 边",sentence:"狗在桌子下边。",sentenceEn:"The dog is under the table.",twin:"上"},
+{id:"h2_107",hsk:2,hanzi:"中间",pinyin:"zhōngjiān",meaning:"middle",radical:"中 + 间",sentence:"我在中间。",sentenceEn:"I'm in the middle.",twin:"中"},
+{id:"h2_108",hsk:2,hanzi:"旁边",pinyin:"pángbiān",meaning:"beside",radical:"旁 + 边",sentence:"他坐在我旁边。",sentenceEn:"He sits beside me.",twin:"旁"},
+{id:"h2_109",hsk:2,hanzi:"对",pinyin:"duì",meaning:"correct / toward",radical:"又 + 寸",sentence:"你说得对。",sentenceEn:"You're right.",twin:"队"},
+{id:"h2_110",hsk:2,hanzi:"错",pinyin:"cuò",meaning:"wrong",radical:"钅+ 昔",sentence:"你说错了。",sentenceEn:"You're wrong.",twin:"措"},
+{id:"h2_111",hsk:2,hanzi:"相信",pinyin:"xiāngxìn",meaning:"to believe",radical:"相 + 信",sentence:"我相信你。",sentenceEn:"I believe you.",twin:"信"},
+{id:"h2_112",hsk:2,hanzi:"担心",pinyin:"dānxīn",meaning:"to worry",radical:"旦 + 心",sentence:"妈妈担心我。",sentenceEn:"Mom worries about me.",twin:"但"},
+{id:"h2_113",hsk:2,hanzi:"生气",pinyin:"shēngqì",meaning:"angry",radical:"生 + 气",sentence:"他生气了。",sentenceEn:"He's angry.",twin:"气"},
+{id:"h2_114",hsk:2,hanzi:"害怕",pinyin:"hàipà",meaning:"to be afraid",radical:"害 + 怕",sentence:"我害怕狗。",sentenceEn:"I'm afraid of dogs.",twin:"怕"},
+{id:"h2_115",hsk:2,hanzi:"奇怪",pinyin:"qíguài",meaning:"strange",radical:"奇 + 怪",sentence:"这件事很奇怪。",sentenceEn:"This is strange.",twin:"奇"},
+{id:"h2_116",hsk:2,hanzi:"清楚",pinyin:"qīngchu",meaning:"clear",radical:"氵+ 青 + 楚",sentence:"请说清楚一点。",sentenceEn:"Please speak clearly.",twin:"清"},
+{id:"h2_117",hsk:2,hanzi:"可能",pinyin:"kěnéng",meaning:"maybe / possible",radical:"可 + 能",sentence:"明天可能下雨。",sentenceEn:"It might rain tomorrow.",twin:"可"},
+{id:"h2_118",hsk:2,hanzi:"一定",pinyin:"yīdìng",meaning:"definitely",radical:"一 + 定",sentence:"我一定来。",sentenceEn:"I'll definitely come.",twin:"定"},
+{id:"h2_119",hsk:2,hanzi:"必须",pinyin:"bìxū",meaning:"must",radical:"必 + 须",sentence:"我必须走了。",sentenceEn:"I must go.",twin:"必"},
+{id:"h2_120",hsk:2,hanzi:"应该",pinyin:"yīnggāi",meaning:"should",radical:"广 + 应 + 刂",sentence:"你应该休息。",sentenceEn:"You should rest.",twin:"应"},
+{id:"h2_121",hsk:2,hanzi:"需要",pinyin:"xūyào",meaning:"to need",radical:"雨 + 而 + 要",sentence:"我需要帮助。",sentenceEn:"I need help.",twin:"要"},
+{id:"h2_122",hsk:2,hanzi:"比较",pinyin:"bǐjiào",meaning:"relatively",radical:"比 + 较",sentence:"今天比较冷。",sentenceEn:"It's relatively cold today.",twin:"比"},
+{id:"h2_123",hsk:2,hanzi:"最",pinyin:"zuì",meaning:"most",radical:"曰 + 取",sentence:"这是最好的。",sentenceEn:"This is the best.",twin:"取"},
+{id:"h2_124",hsk:2,hanzi:"更",pinyin:"gèng",meaning:"more",radical:"一 + 曰 + 人",sentence:"我想更大一点。",sentenceEn:"I want it bigger.",twin:"便"},
+{id:"h2_125",hsk:2,hanzi:"非常",pinyin:"fēicháng",meaning:"very",radical:"非 + 常",sentence:"我非常高兴。",sentenceEn:"I'm very happy.",twin:"非"},
+{id:"h2_126",hsk:2,hanzi:"真",pinyin:"zhēn",meaning:"really",radical:"十 + 具",sentence:"真的吗？",sentenceEn:"Really?",twin:"直"},
+{id:"h2_127",hsk:2,hanzi:"太",pinyin:"tài",meaning:"too (excessive)",radical:"大 + 丶",sentence:"太贵了。",sentenceEn:"Too expensive.",twin:"大"},
+{id:"h2_128",hsk:2,hanzi:"极",pinyin:"jí",meaning:"extremely",radical:"木 + 及",sentence:"好极了！",sentenceEn:"Extremely good!",twin:"及"},
+{id:"h2_129",hsk:2,hanzi:"刚",pinyin:"gāng",meaning:"just (now)",radical:"冈 + 刂",sentence:"我刚到。",sentenceEn:"I just arrived.",twin:"钢"},
+{id:"h2_130",hsk:2,hanzi:"才",pinyin:"cái",meaning:"only then",radical:"才",sentence:"他才来。",sentenceEn:"He just came.",twin:"材"},
+{id:"h2_131",hsk:2,hanzi:"还",pinyin:"hái",meaning:"still / also",radical:"辶 + 不",sentence:"我还在工作。",sentenceEn:"I'm still working.",twin:"孩"},
+{id:"h2_132",hsk:2,hanzi:"又",pinyin:"yòu",meaning:"again / also",radical:"又",sentence:"他又来了。",sentenceEn:"He came again.",twin:"右"},
+{id:"h2_133",hsk:2,hanzi:"再",pinyin:"zài",meaning:"again",radical:"一 + 冉 + 土",sentence:"再见！",sentenceEn:"Goodbye!",twin:"在"},
+{id:"h2_134",hsk:2,hanzi:"也",pinyin:"yě",meaning:"also",radical:"乙 + 丿",sentence:"我也去。",sentenceEn:"I'm going too.",twin:"他"},
+{id:"h2_135",hsk:2,hanzi:"都",pinyin:"dōu",meaning:"all / both",radical:"者 + 阝",sentence:"我们都去。",sentenceEn:"We're all going.",twin:"部"},
+{id:"h2_136",hsk:2,hanzi:"只",pinyin:"zhǐ",meaning:"only",radical:"口 + 八",sentence:"我只有一个。",sentenceEn:"I only have one.",twin:"支"},
+{id:"h2_137",hsk:2,hanzi:"每",pinyin:"měi",meaning:"every",radical:"𠂉 + 母",sentence:"我每天学习。",sentenceEn:"I study every day.",twin:"美"},
+{id:"h2_138",hsk:2,hanzi:"其他",pinyin:"qítā",meaning:"other",radical:"其 + 他",sentence:"还有其他问题吗？",sentenceEn:"Any other questions?",twin:"其"},
+{id:"h2_139",hsk:2,hanzi:"别人",pinyin:"biérén",meaning:"others",radical:"别 + 人",sentence:"不要管别人的事。",sentenceEn:"Don't mind others.",twin:"别"},
+{id:"h2_140",hsk:2,hanzi:"自己",pinyin:"zìjǐ",meaning:"self",radical:"自 + 己",sentence:"我自己做。",sentenceEn:"I'll do it myself.",twin:"己"},
+{id:"h2_141",hsk:2,hanzi:"一起",pinyin:"yīqǐ",meaning:"together",radical:"一 + 起",sentence:"我们一起去吧。",sentenceEn:"Let's go together.",twin:"起"},
+{id:"h2_142",hsk:2,hanzi:"一边",pinyin:"yībiān",meaning:"while (doing)",radical:"一 + 边",sentence:"我一边喝茶一边看书。",sentenceEn:"I read while drinking tea.",twin:"边"},
+{id:"h2_143",hsk:2,hanzi:"或者",pinyin:"huòzhě",meaning:"or",radical:"或 + 者",sentence:"茶或者咖啡？",sentenceEn:"Tea or coffee?",twin:"或"},
+{id:"h2_144",hsk:2,hanzi:"虽然",pinyin:"suīrán",meaning:"although",radical:"虫 + 肰",sentence:"虽然下雨，我还是去了。",sentenceEn:"Although it rained, I went.",twin:"然"},
+{id:"h2_145",hsk:2,hanzi:"但是",pinyin:"dànshì",meaning:"but",radical:"旦 + 是",sentence:"我想去，但是没时间。",sentenceEn:"I want to go, but no time.",twin:"但"},
+{id:"h2_146",hsk:2,hanzi:"如果",pinyin:"rúguǒ",meaning:"if",radical:"女 + 口 + 果",sentence:"如果明天下雨...",sentenceEn:"If it rains tomorrow...",twin:"如"},
+{id:"h2_147",hsk:2,hanzi:"因为",pinyin:"yīnwèi",meaning:"because",radical:"囗 + 大 + 女",sentence:"因为下雨，我没去。",sentenceEn:"Because of rain, I didn't go.",twin:"因"},
+{id:"h2_148",hsk:2,hanzi:"所以",pinyin:"suǒyǐ",meaning:"therefore",radical:"户 + 斤 + 人",sentence:"下雨了，所以我不去。",sentenceEn:"It rained, so I won't go.",twin:"以"},
+{id:"h2_149",hsk:2,hanzi:"而且",pinyin:"érqiě",meaning:"and also",radical:"而 + 且",sentence:"他聪明而且努力。",sentenceEn:"He's smart and hardworking.",twin:"而"},
+{id:"h2_150",hsk:2,hanzi:"或者",pinyin:"huòzhě",meaning:"or",radical:"或 + 者",sentence:"你或者他都可以。",sentenceEn:"You or he can.",twin:"或"},
 
-  // ====== HSK 1 — FAMILY ======
-  { id:"h1_020", hsk:1, topic:"family", hanzi:"爸爸", pinyin:"bàba", meaning:"father", radical:"父 + 巴", sentence:"我爸爸是老师。", sentenceEn:"My dad is a teacher.", twin:"爸" },
-  { id:"h1_021", hsk:1, topic:"family", hanzi:"妈妈", pinyin:"māma", meaning:"mother", radical:"女 + 马", sentence:"妈妈在做饭。", sentenceEn:"Mom is cooking.", twin:"妈" },
-  { id:"h1_022", hsk:1, topic:"family", hanzi:"儿子", pinyin:"érzi", meaning:"son", radical:"儿 + 子", sentence:"他是我的儿子。", sentenceEn:"He is my son.", twin:"女儿" },
-  { id:"h1_023", hsk:1, topic:"family", hanzi:"女儿", pinyin:"nǚ'ér", meaning:"daughter", radical:"女 + 儿", sentence:"她有一个女儿。", sentenceEn:"She has a daughter.", twin:"儿子" },
-  { id:"h1_024", hsk:1, topic:"family", hanzi:"朋友", pinyin:"péngyou", meaning:"friend", radical:"月 + 月 | 又 + 又", sentence:"他是我最好的朋友。", sentenceEn:"He is my best friend.", twin:"有" },
-
-  // ====== HSK 1 — TIME ======
-  { id:"h1_025", hsk:1, topic:"time", hanzi:"今天", pinyin:"jīntiān", meaning:"today", radical:"人 + 大", sentence:"今天很冷。", sentenceEn:"Today is cold.", twin:"明天" },
-  { id:"h1_026", hsk:1, topic:"time", hanzi:"明天", pinyin:"míngtiān", meaning:"tomorrow", radical:"日 + 月", sentence:"明天见！", sentenceEn:"See you tomorrow!", twin:"今天" },
-  { id:"h1_027", hsk:1, topic:"time", hanzi:"昨天", pinyin:"zuótiān", meaning:"yesterday", radical:"日 + 乍", sentence:"昨天下雨了。", sentenceEn:"It rained yesterday.", twin:"今天" },
-  { id:"h1_028", hsk:1, topic:"time", hanzi:"现在", pinyin:"xiànzài", meaning:"now", radical:"王 + 见 | 土", sentence:"现在几点？", sentenceEn:"What time is it now?", twin:"再见" },
-  { id:"h1_029", hsk:1, topic:"time", hanzi:"时候", pinyin:"shíhou", meaning:"time / moment", radical:"日 + 寸 | 亻+ 侯", sentence:"你什么时候来？", sentenceEn:"When are you coming?", twin:"时" },
-  { id:"h1_030", hsk:1, topic:"time", hanzi:"点", pinyin:"diǎn", meaning:"o'clock / dot", radical:"灬 (fire) + 占", sentence:"现在三点半。", sentenceEn:"It's 3:30 now.", twin:"店" },
-
-  // ====== HSK 1 — FOOD & DRINK ======
-  { id:"h1_031", hsk:1, topic:"food", hanzi:"吃", pinyin:"chī", meaning:"to eat", radical:"口 + 乞", sentence:"我想吃米饭。", sentenceEn:"I want to eat rice.", twin:"喝" },
-  { id:"h1_032", hsk:1, topic:"food", hanzi:"喝", pinyin:"hē", meaning:"to drink", radical:"口 + 曷", sentence:"你喝茶吗？", sentenceEn:"Do you drink tea?", twin:"吃" },
-  { id:"h1_033", hsk:1, topic:"food", hanzi:"水", pinyin:"shuǐ", meaning:"water", radical:"水", sentence:"请给我一杯水。", sentenceEn:"Please give me a glass of water.", twin:"冰" },
-  { id:"h1_034", hsk:1, topic:"food", hanzi:"茶", pinyin:"chá", meaning:"tea", radical:"艹 + 人 + 木", sentence:"中国茶很好喝。", sentenceEn:"Chinese tea is delicious.", twin:"菜" },
-  { id:"h1_035", hsk:1, topic:"food", hanzi:"米饭", pinyin:"mǐfàn", meaning:"cooked rice", radical:"米 + 反", sentence:"我喜欢吃米饭。", sentenceEn:"I like eating rice.", twin:"面" },
-  { id:"h1_036", hsk:1, topic:"food", hanzi:"菜", pinyin:"cài", meaning:"dish / vegetable", radical:"艹 + 采", sentence:"这个菜很好吃。", sentenceEn:"This dish is delicious.", twin:"茶" },
-  { id:"h1_037", hsk:1, topic:"food", hanzi:"水果", pinyin:"shuǐguǒ", meaning:"fruit", radical:"水 + 果", sentence:"多吃水果对身体好。", sentenceEn:"Eating fruit is good for you.", twin:"水" },
-  { id:"h1_038", hsk:1, topic:"food", hanzi:"苹果", pinyin:"píngguǒ", meaning:"apple", radical:"艹 + 平 + 果", sentence:"苹果又红又甜。", sentenceEn:"The apple is red and sweet.", twin:"果" },
-
-  // ====== HSK 1 — BASIC VERBS ======
-  { id:"h1_039", hsk:1, topic:"verbs", hanzi:"是", pinyin:"shì", meaning:"to be (am/is/are)", radical:"日 (sun)", sentence:"我是学生。", sentenceEn:"I am a student.", twin:"事" },
-  { id:"h1_040", hsk:1, topic:"verbs", hanzi:"有", pinyin:"yǒu", meaning:"to have", radical:"月 + 又 (hand)", sentence:"我有一个妹妹。", sentenceEn:"I have a younger sister.", twin:"友" },
-  { id:"h1_041", hsk:1, topic:"verbs", hanzi:"看", pinyin:"kàn", meaning:"to look / watch / read", radical:"手 (hand) + 目 (eye)", sentence:"我在看书。", sentenceEn:"I'm reading a book.", twin:"着" },
-  { id:"h1_042", hsk:1, topic:"verbs", hanzi:"听", pinyin:"tīng", meaning:"to listen", radical:"口 + 斤", sentence:"我喜欢听音乐。", sentenceEn:"I like listening to music.", twin:"说" },
-  { id:"h1_043", hsk:1, topic:"verbs", hanzi:"说", pinyin:"shuō", meaning:"to speak", radical:"讠+ 兑", sentence:"他说汉语。", sentenceEn:"He speaks Chinese.", twin:"说" },
-  { id:"h1_044", hsk:1, topic:"verbs", hanzi:"读", pinyin:"dú", meaning:"to read", radical:"讠+ 卖", sentence:"我每天读汉语书。", sentenceEn:"I read Chinese books every day.", twin:"卖" },
-  { id:"h1_045", hsk:1, topic:"verbs", hanzi:"写", pinyin:"xiě", meaning:"to write", radical:"宀 + 与", sentence:"请写你的名字。", sentenceEn:"Please write your name.", twin:"与" },
-  { id:"h1_046", hsk:1, topic:"verbs", hanzi:"叫", pinyin:"jiào", meaning:"to be called", radical:"口 + 丩", sentence:"我叫大卫。", sentenceEn:"My name is David.", twin:"吃" },
-  { id:"h1_047", hsk:1, topic:"verbs", hanzi:"来", pinyin:"lái", meaning:"to come", radical:"木 + 二人", sentence:"请来我家。", sentenceEn:"Please come to my home.", twin:"去" },
-  { id:"h1_048", hsk:1, topic:"verbs", hanzi:"去", pinyin:"qù", meaning:"to go", radical:"土 + 厶", sentence:"我去学校。", sentenceEn:"I go to school.", twin:"来" },
-  { id:"h1_049", hsk:1, topic:"verbs", hanzi:"做", pinyin:"zuò", meaning:"to do / make", radical:"亻+ 故", sentence:"你在做什么？", sentenceEn:"What are you doing?", twin:"作" },
-  { id:"h1_050", hsk:1, topic:"verbs", hanzi:"买", pinyin:"mǎi", meaning:"to buy", radical:"乛 + 头", sentence:"我去买东西。", sentenceEn:"I go shopping.", twin:"卖" },
-  { id:"h1_051", hsk:1, topic:"verbs", hanzi:"开", pinyin:"kāi", meaning:"to open / drive", radical:"一 + 廾", sentence:"他开车去上班。", sentenceEn:"He drives to work.", twin:"关" },
-  { id:"h1_052", hsk:1, topic:"verbs", hanzi:"住", pinyin:"zhù", meaning:"to live", radical:"亻+ 主", sentence:"我住在北京。", sentenceEn:"I live in Beijing.", twin:"主" },
-  { id:"h1_053", hsk:1, topic:"verbs", hanzi:"学", pinyin:"xué", meaning:"to study / learn", radical:"子 + 冖 + 爻", sentence:"我学汉语。", sentenceEn:"I study Chinese.", twin:"字" },
-  { id:"h1_054", hsk:1, topic:"verbs", hanzi:"工作", pinyin:"gōngzuò", meaning:"to work / work", radical:"工 + 乍", sentence:"他每天工作八小时。", sentenceEn:"He works 8 hours a day.", twin:"做" },
-
-  // ====== HSK 1 — PLACES ======
-  { id:"h1_055", hsk:1, topic:"places", hanzi:"中国", pinyin:"Zhōngguó", meaning:"China", radical:"囗 + 玉", sentence:"中国很大。", sentenceEn:"China is very big.", twin:"中" },
-  { id:"h1_056", hsk:1, topic:"places", hanzi:"北京", pinyin:"Běijīng", meaning:"Beijing", radical:"北 + 京", sentence:"北京是中国的首都。", sentenceEn:"Beijing is China's capital.", twin:"南京" },
-  { id:"h1_057", hsk:1, topic:"places", hanzi:"学校", pinyin:"xuéxiào", meaning:"school", radical:"子 + 交", sentence:"我在学校学习。", sentenceEn:"I study at school.", twin:"学" },
-  { id:"h1_058", hsk:1, topic:"places", hanzi:"家", pinyin:"jiā", meaning:"home / family", radical:"宀 + 豕", sentence:"我回家了。", sentenceEn:"I went home.", twin:"住" },
-  { id:"h1_059", hsk:1, topic:"places", hanzi:"饭店", pinyin:"fàndiàn", meaning:"restaurant / hotel", radical:"饣+ 反 + 广 + 占", sentence:"我们去饭店吃饭。", sentenceEn:"Let's go eat at the restaurant.", twin:"店" },
-  { id:"h1_060", hsk:1, topic:"places", hanzi:"商店", pinyin:"shāngdiàn", meaning:"shop", radical:"亠+ 八 + 口 + 广 + 占", sentence:"商店里有苹果。", sentenceEn:"The shop has apples.", twin:"店" },
-  { id:"h1_061", hsk:1, topic:"places", hanzi:"医院", pinyin:"yīyuàn", meaning:"hospital", radical:"匚 + 矢 + 阝", sentence:"妈妈在医院工作。", sentenceEn:"Mom works at the hospital.", twin:"医" },
-
-  // ====== HSK 1 — ADJECTIVES ======
-  { id:"h1_062", hsk:1, topic:"adjectives", hanzi:"好", pinyin:"hǎo", meaning:"good", radical:"女 + 子", sentence:"今天天气很好。", sentenceEn:"The weather is good today.", twin:"女" },
-  { id:"h1_063", hsk:1, topic:"adjectives", hanzi:"大", pinyin:"dà", meaning:"big", radical:"大", sentence:"这个苹果很大。", sentenceEn:"This apple is big.", twin:"太" },
-  { id:"h1_064", hsk:1, topic:"adjectives", hanzi:"小", pinyin:"xiǎo", meaning:"small", radical:"小", sentence:"我有一只小猫。", sentenceEn:"I have a small cat.", twin:"少" },
-  { id:"h1_065", hsk:1, topic:"adjectives", hanzi:"多", pinyin:"duō", meaning:"many / much", radical:"夕 + 夕", sentence:"这里人很多。", sentenceEn:"There are many people here.", twin:"少" },
-  { id:"h1_066", hsk:1, topic:"adjectives", hanzi:"少", pinyin:"shǎo", meaning:"few / little", radical:"小 + 丿", sentence:"今天人很少。", sentenceEn:"Few people today.", twin:"小" },
-  { id:"h1_067", hsk:1, topic:"adjectives", hanzi:"冷", pinyin:"lěng", meaning:"cold", radical:"冫+ 令", sentence:"今天很冷。", sentenceEn:"It's cold today.", twin:"热" },
-  { id:"h1_068", hsk:1, topic:"adjectives", hanzi:"热", pinyin:"rè", meaning:"hot", radical:"灬 + 执", sentence:"夏天很热。", sentenceEn:"Summer is hot.", twin:"冷" },
-  { id:"h1_069", hsk:1, topic:"adjectives", hanzi:"高兴", pinyin:"gāoxìng", meaning:"happy", radical:"高 + 八", sentence:"见到你我很高兴。", sentenceEn:"I'm happy to meet you.", twin:"兴" },
-
-  // ====== HSK 1 — QUESTION WORDS & PARTICLES ======
-  { id:"h1_070", hsk:1, topic:"questions", hanzi:"什么", pinyin:"shénme", meaning:"what", radical:"礻+ 申 + 人", sentence:"这是什么？", sentenceEn:"What is this?", twin:"么" },
-  { id:"h1_071", hsk:1, topic:"questions", hanzi:"哪", pinyin:"nǎ", meaning:"which", radical:"口 + 那", sentence:"你是哪国人？", sentenceEn:"Which country are you from?", twin:"那" },
-  { id:"h1_072", hsk:1, topic:"questions", hanzi:"怎么", pinyin:"zěnme", meaning:"how", radical:"心 + 乍 + 人", sentence:"你怎么去学校？", sentenceEn:"How do you go to school?", twin:"怎" },
-  { id:"h1_073", hsk:1, topic:"questions", hanzi:"谁", pinyin:"shéi", meaning:"who", radical:"讠+ 隹", sentence:"他是谁？", sentenceEn:"Who is he?", twin:"推" },
-  { id:"h1_074", hsk:1, topic:"particles", hanzi:"的", pinyin:"de", meaning:"possessive particle", radical:"白 + 勺", sentence:"这是我的书。", sentenceEn:"This is my book.", twin:"得" },
-  { id:"h1_075", hsk:1, topic:"particles", hanzi:"了", pinyin:"le", meaning:"completed action", radical:"乙", sentence:"我吃饭了。", sentenceEn:"I ate.", twin:"子" },
-  { id:"h1_076", hsk:1, topic:"particles", hanzi:"在", pinyin:"zài", meaning:"at / in", radical:"土 + 才", sentence:"我在家。", sentenceEn:"I'm at home.", twin:"再" },
-  { id:"h1_077", hsk:1, topic:"particles", hanzi:"不", pinyin:"bù", meaning:"not", radical:"一 + 小", sentence:"我不忙。", sentenceEn:"I'm not busy.", twin:"布" },
-  { id:"h1_078", hsk:1, topic:"particles", hanzi:"很", pinyin:"hěn", meaning:"very", radical:"彳+ 艮", sentence:"我很高兴。", sentenceEn:"I'm very happy.", twin:"跟" },
-  { id:"h1_079", hsk:1, topic:"particles", hanzi:"吗", pinyin:"ma", meaning:"question particle", radical:"口 + 马", sentence:"你是学生吗？", sentenceEn:"Are you a student?", twin:"妈" },
-  { id:"h1_080", hsk:1, topic:"particles", hanzi:"和", pinyin:"hé", meaning:"and", radical:"禾 + 口", sentence:"我和他是朋友。", sentenceEn:"He and I are friends.", twin:"合" },
-
-  // ====== HSK 2 — SAMPLE (key words) ======
-  { id:"h2_001", hsk:2, topic:"verbs", hanzi:"觉得", pinyin:"juéde", meaning:"to feel / think", radical:"见 + 角", sentence:"我觉得汉语很有意思。", sentenceEn:"I think Chinese is interesting.", twin:"决" },
-  { id:"h2_002", hsk:2, topic:"verbs", hanzi:"知道", pinyin:"zhīdào", meaning:"to know", radical:"矢 + 口 + 辶", sentence:"我不知道他的名字。", sentenceEn:"I don't know his name.", twin:"到" },
-  { id:"h2_003", hsk:2, topic:"verbs", hanzi:"认识", pinyin:"rènshi", meaning:"to know (a person)", radical:"讠+ 刃 + 戈 + 言", sentence:"我认识他。", sentenceEn:"I know him.", twin:"认" },
-  { id:"h2_004", hsk:2, topic:"verbs", hanzi:"希望", pinyin:"xīwàng", meaning:"to hope", radical:"乂 + 月 + 王", sentence:"我希望去中国。", sentenceEn:"I hope to go to China.", twin:"忘" },
-  { id:"h2_005", hsk:2, topic:"verbs", hanzi:"准备", pinyin:"zhǔnbèi", meaning:"to prepare", radical:"冫+ 隼 | 夂 + 田", sentence:"我在准备考试。", sentenceEn:"I'm preparing for the exam.", twin:"准" },
-  { id:"h2_006", hsk:2, topic:"verbs", hanzi:"开始", pinyin:"kāishǐ", meaning:"to begin", radical:"开 + 女 + 口", sentence:"我们开始上课吧。", sentenceEn:"Let's start class.", twin:"开" },
-  { id:"h2_007", hsk:2, topic:"verbs", hanzi:"帮助", pinyin:"bāngzhù", meaning:"to help", radical:"邦 + 且", sentence:"谢谢你帮助我。", sentenceEn:"Thanks for helping me.", twin:"帮" },
-  { id:"h2_008", hsk:2, topic:"verbs", hanzi:"运动", pinyin:"yùndòng", meaning:"exercise / sports", radical:"辶 + 云 + 力", sentence:"我每天运动。", sentenceEn:"I exercise every day.", twin:"运" },
-  { id:"h2_009", hsk:2, topic:"adjectives", hanzi:"漂亮", pinyin:"piàoliang", meaning:"pretty", radical:"氵+ 票 + 亮", sentence:"她很漂亮。", sentenceEn:"She is pretty.", twin:"票" },
-  { id:"h2_010", hsk:2, topic:"adjectives", hanzi:"快", pinyin:"kuài", meaning:"fast", radical:"忄+ 夬", sentence:"他跑得很快。", sentenceEn:"He runs fast.", twin:"慢" },
-  { id:"h2_011", hsk:2, topic:"adjectives", hanzi:"慢", pinyin:"màn", meaning:"slow", radical:"忄+ 曼", sentence:"请说慢一点。", sentenceEn:"Please speak slower.", twin:"快" },
-  { id:"h2_012", hsk:2, topic:"adjectives", hanzi:"新", pinyin:"xīn", meaning:"new", radical:"斤 + 木", sentence:"我买了一件新衣服。", sentenceEn:"I bought new clothes.", twin:"心" },
-  { id:"h2_013", hsk:2, topic:"adjectives", hanzi:"旧", pinyin:"jiù", meaning:"old (things)", radical:"丨 + 日", sentence:"这本书很旧。", sentenceEn:"This book is old.", twin:"就" },
-  { id:"h2_014", hsk:2, topic:"time", hanzi:"已经", pinyin:"yǐjīng", meaning:"already", radical:"乛 + 人 | 纟+ 巠", sentence:"我已经吃饭了。", sentenceEn:"I already ate.", twin:"已" },
-  { id:"h2_015", hsk:2, topic:"time", hanzi:"刚才", pinyin:"gāngcái", meaning:"just now", radical:"冈 + 才", sentence:"刚才谁来了？", sentenceEn:"Who came just now?", twin:"刚" },
-  { id:"h2_016", hsk:2, topic:"nouns", hanzi:"眼睛", pinyin:"yǎnjing", meaning:"eye", radical:"目 + 艮 + 青", sentence:"她的眼睛很大。", sentenceEn:"Her eyes are big.", twin:"眼" },
-  { id:"h2_017", hsk:2, topic:"nouns", hanzi:"衣服", pinyin:"yīfu", meaning:"clothing", radical:"衤+ 服", sentence:"这件衣服很漂亮。", sentenceEn:"This clothing is pretty.", twin:"衣" },
-  { id:"h2_018", hsk:2, topic:"nouns", hanzi:"手机", pinyin:"shǒujī", meaning:"mobile phone", radical:"手 + 几", sentence:"我的手机坏了。", sentenceEn:"My phone is broken.", twin:"手" },
-  { id:"h2_019", hsk:2, topic:"nouns", hanzi:"电脑", pinyin:"diànnǎo", meaning:"computer", radical:"电 + 脑", sentence:"我用电脑工作。", sentenceEn:"I use a computer to work.", twin:"电" },
-  { id:"h2_020", hsk:2, topic:"nouns", hanzi:"天气", pinyin:"tiānqì", meaning:"weather", radical:"大 + 气", sentence:"今天天气很好。", sentenceEn:"The weather is good today.", twin:"汽" },
-
-  // ====== HSK 3 — SAMPLE (key words) ======
-  { id:"h3_001", hsk:3, topic:"verbs", hanzi:"担心", pinyin:"dānxīn", meaning:"to worry", radical:"旦 + 心", sentence:"妈妈担心我的健康。", sentenceEn:"Mom worries about my health.", twin:"但" },
-  { id:"h3_002", hsk:3, topic:"verbs", hanzi:"决定", pinyin:"juédìng", meaning:"to decide", radical:"冫+ 夬 + 宀 + 一", sentence:"我决定学汉语。", sentenceEn:"I decided to study Chinese.", twin:"决" },
-  { id:"h3_003", hsk:3, topic:"verbs", hanzi:"发现", pinyin:"fāxiàn", meaning:"to discover", radical:"发 + 见", sentence:"我发现了一个问题。", sentenceEn:"I discovered a problem.", twin:"现" },
-  { id:"h3_004", hsk:3, topic:"verbs", hanzi:"影响", pinyin:"yǐngxiǎng", meaning:"to influence", radical:"景 + 向", sentence:"天气影响我的心情。", sentenceEn:"Weather affects my mood.", twin:"应" },
-  { id:"h3_005", hsk:3, topic:"verbs", hanzi:"讨论", pinyin:"tǎolùn", meaning:"to discuss", radical:"讠+ 寿 + 仑", sentence:"我们讨论一下这个问题。", sentenceEn:"Let's discuss this problem.", twin:"论" },
-  { id:"h3_006", hsk:3, topic:"adjectives", hanzi:"简单", pinyin:"jiǎndān", meaning:"simple", radical:"简 + 单", sentence:"这个问题很简单。", sentenceEn:"This problem is simple.", twin:"简" },
-  { id:"h3_007", hsk:3, topic:"adjectives", hanzi:"复杂", pinyin:"fùzá", meaning:"complicated", radical:"复 + 杂", sentence:"这个问题很复杂。", sentenceEn:"This problem is complicated.", twin:"复" },
-  { id:"h3_008", hsk:3, topic:"adjectives", hanzi:"重要", pinyin:"zhòngyào", meaning:"important", radical:"千 + 里 + 女", sentence:"健康很重要。", sentenceEn:"Health is important.", twin:"要" },
-  { id:"h3_009", hsk:3, topic:"nouns", hanzi:"经验", pinyin:"jīngyàn", meaning:"experience", radical:"纟+ 巠 + 马", sentence:"他有教学经验。", sentenceEn:"He has teaching experience.", twin:"经" },
-  { id:"h3_010", hsk:3, topic:"nouns", hanzi:"机会", pinyin:"jīhuì", meaning:"opportunity", radical:"木 + 几 + 云", sentence:"这是一个好机会。", sentenceEn:"This is a good opportunity.", twin:"会" },
-  { id:"h3_011", hsk:3, topic:"grammar", hanzi:"虽然", pinyin:"suīrán", meaning:"although", radical:"虫 + 肰", sentence:"虽然下雨，我还是去了。", sentenceEn:"Although it rained, I still went.", twin:"然" },
-  { id:"h3_012", hsk:3, topic:"grammar", hanzi:"但是", pinyin:"dànshì", meaning:"but / however", radical:"旦 + 是", sentence:"我想去，但是没时间。", sentenceEn:"I want to go, but I have no time.", twin:"但" },
-  { id:"h3_013", hsk:3, topic:"grammar", hanzi:"因为", pinyin:"yīnwèi", meaning:"because", radical:"囗 + 大 + 女", sentence:"因为下雨，我没出去。", sentenceEn:"Because of rain, I didn't go out.", twin:"因" },
-  { id:"h3_014", hsk:3, topic:"grammar", hanzi:"所以", pinyin:"suǒyǐ", meaning:"therefore", radical:"户 + 斤 + 人", sentence:"下雨了，所以我没去。", sentenceEn:"It rained, so I didn't go.", twin:"以" },
-  { id:"h3_015", hsk:3, topic:"grammar", hanzi:"如果", pinyin:"rúguǒ", meaning:"if", radical:"女 + 口 + 果", sentence:"如果明天下雨，我就不去。", sentenceEn:"If it rains tomorrow, I won't go.", twin:"如" },
+// ===== HSK 3 (300 words) =====
+{id:"h3_001",hsk:3,hanzi:"决定",pinyin:"juédìng",meaning:"to decide",radical:"冫+ 夬 + 宀",sentence:"我决定学汉语。",sentenceEn:"I decided to study Chinese.",twin:"决"},
+{id:"h3_002",hsk:3,hanzi:"发现",pinyin:"fāxiàn",meaning:"to discover",radical:"发 + 见",sentence:"我发现了一个问题。",sentenceEn:"I discovered a problem.",twin:"现"},
+{id:"h3_003",hsk:3,hanzi:"影响",pinyin:"yǐngxiǎng",meaning:"to influence",radical:"景 + 向",sentence:"天气影响我的心情。",sentenceEn:"Weather affects my mood.",twin:"应"},
+{id:"h3_004",hsk:3,hanzi:"讨论",pinyin:"tǎolùn",meaning:"to discuss",radical:"讠+ 寿 + 仑",sentence:"我们讨论一下。",sentenceEn:"Let's discuss.",twin:"论"},
+{id:"h3_005",hsk:3,hanzi:"简单",pinyin:"jiǎndān",meaning:"simple",radical:"简 + 单",sentence:"这个问题很简单。",sentenceEn:"This is simple.",twin:"简"},
+{id:"h3_006",hsk:3,hanzi:"复杂",pinyin:"fùzá",meaning:"complicated",radical:"复 + 杂",sentence:"这个问题很复杂。",sentenceEn:"This is complicated.",twin:"复"},
+{id:"h3_007",hsk:3,hanzi:"经验",pinyin:"jīngyàn",meaning:"experience",radical:"纟+ 巠 + 马",sentence:"他有教学经验。",sentenceEn:"He has teaching experience.",twin:"经"},
+{id:"h3_008",hsk:3,hanzi:"机会",pinyin:"jīhuì",meaning:"opportunity",radical:"木 + 几 + 云",sentence:"这是一个好机会。",sentenceEn:"This is a good chance.",twin:"会"},
+{id:"h3_009",hsk:3,hanzi:"选择",pinyin:"xuǎnzé",meaning:"to choose",radical:"辶 + 先 + 又 + 干",sentence:"我选择这个。",sentenceEn:"I choose this.",twin:"选"},
+{id:"h3_010",hsk:3,hanzi:"改变",pinyin:"gǎibiàn",meaning:"to change",radical:"改 + 变",sentence:"我想改变生活。",sentenceEn:"I want to change my life.",twin:"变"},
+{id:"h3_011",hsk:3,hanzi:"提高",pinyin:"tígāo",meaning:"to improve",radical:"扌+ 是 + 高",sentence:"我想提高汉语水平。",sentenceEn:"I want to improve my Chinese.",twin:"高"},
+{id:"h3_012",hsk:3,hanzi:"发展",pinyin:"fāzhǎn",meaning:"to develop",radical:"发 + 展",sentence:"中国经济发展很快。",sentenceEn:"China's economy develops fast.",twin:"展"},
+{id:"h3_013",hsk:3,hanzi:"解决",pinyin:"jiějué",meaning:"to solve",radical:"角 + 刀 + 牛 + 夬",sentence:"我们解决了问题。",sentenceEn:"We solved the problem.",twin:"决"},
+{id:"h3_014",hsk:3,hanzi:"完成",pinyin:"wánchéng",meaning:"to complete",radical:"完 + 成",sentence:"我完成了工作。",sentenceEn:"I finished the work.",twin:"成"},
+{id:"h3_015",hsk:3,hanzi:"成功",pinyin:"chénggōng",meaning:"to succeed",radical:"成 + 工",sentence:"他成功了。",sentenceEn:"He succeeded.",twin:"成"},
+{id:"h3_016",hsk:3,hanzi:"失败",pinyin:"shībài",meaning:"to fail",radical:"失 + 败",sentence:"他失败了。",sentenceEn:"He failed.",twin:"败"},
+{id:"h3_017",hsk:3,hanzi:"努力",pinyin:"nǔlì",meaning:"to work hard",radical:"奴 + 力",sentence:"我要努力学习。",sentenceEn:"I'll study hard.",twin:"力"},
+{id:"h3_018",hsk:3,hanzi:"坚持",pinyin:"jiānchí",meaning:"to persist",radical:"坚 + 持",sentence:"坚持下去！",sentenceEn:"Keep going!",twin:"持"},
+{id:"h3_019",hsk:3,hanzi:"放弃",pinyin:"fàngqì",meaning:"to give up",radical:"放 + 弃",sentence:"不要放弃。",sentenceEn:"Don't give up.",twin:"弃"},
+{id:"h3_020",hsk:3,hanzi:"同意",pinyin:"tóngyì",meaning:"to agree",radical:"同 + 意",sentence:"我同意你的看法。",sentenceEn:"I agree with you.",twin:"意"},
+{id:"h3_021",hsk:3,hanzi:"反对",pinyin:"fǎnduì",meaning:"to oppose",radical:"反 + 对",sentence:"我反对这个想法。",sentenceEn:"I oppose this idea.",twin:"对"},
+{id:"h3_022",hsk:3,hanzi:"支持",pinyin:"zhīchí",meaning:"to support",radical:"扌+ 支",sentence:"我支持你。",sentenceEn:"I support you.",twin:"支"},
+{id:"h3_023",hsk:3,hanzi:"保护",pinyin:"bǎohù",meaning:"to protect",radical:"亻+ 呆 + 扌",sentence:"我们要保护环境。",sentenceEn:"We must protect the environment.",twin:"保"},
+{id:"h3_024",hsk:3,hanzi:"环境",pinyin:"huánjìng",meaning:"environment",radical:"王 + 不 + 立 + 竟",sentence:"环境很重要。",sentenceEn:"Environment is important.",twin:"境"},
+{id:"h3_025",hsk:3,hanzi:"社会",pinyin:"shèhuì",meaning:"society",radical:"礻+ 土 + 人 + 云",sentence:"社会在发展。",sentenceEn:"Society is developing.",twin:"会"},
+{id:"h3_026",hsk:3,hanzi:"经济",pinyin:"jīngjì",meaning:"economy",radical:"纟+ 巠 + 齐",sentence:"中国经济很好。",sentenceEn:"China's economy is good.",twin:"经"},
+{id:"h3_027",hsk:3,hanzi:"文化",pinyin:"wénhuà",meaning:"culture",radical:"文 + 化",sentence:"中国文化很丰富。",sentenceEn:"Chinese culture is rich.",twin:"化"},
+{id:"h3_028",hsk:3,hanzi:"历史",pinyin:"lìshǐ",meaning:"history",radical:"厂 + 力 + 史",sentence:"中国历史悠久。",sentenceEn:"China has long history.",twin:"史"},
+{id:"h3_029",hsk:3,hanzi:"科学",pinyin:"kēxué",meaning:"science",radical:"禾 + 斗 + 学",sentence:"科学很重要。",sentenceEn:"Science is important.",twin:"学"},
+{id:"h3_030",hsk:3,hanzi:"技术",pinyin:"jìshù",meaning:"technology",radical:"扌+ 支 + 木",sentence:"技术发展很快。",sentenceEn:"Technology develops fast.",twin:"术"},
+{id:"h3_031",hsk:3,hanzi:"教育",pinyin:"jiàoyù",meaning:"education",radical:"孝 + 文 + 月 + 攵",sentence:"教育很重要。",sentenceEn:"Education is important.",twin:"育"},
+{id:"h3_032",hsk:3,hanzi:"知识",pinyin:"zhīshi",meaning:"knowledge",radical:"矢 + 口 + 讠+ 只",sentence:"知识就是力量。",sentenceEn:"Knowledge is power.",twin:"识"},
+{id:"h3_033",hsk:3,hanzi:"信息",pinyin:"xìnxī",meaning:"information",radical:"亻+ 言 + 心",sentence:"我需要更多信息。",sentenceEn:"I need more info.",twin:"信"},
+{id:"h3_034",hsk:3,hanzi:"数据",pinyin:"shùjù",meaning:"data",radical:"木 + 数 + 扌",sentence:"这些数据很重要。",sentenceEn:"This data is important.",twin:"数"},
+{id:"h3_035",hsk:3,hanzi:"方法",pinyin:"fāngfǎ",meaning:"method",radical:"方 + 法",sentence:"这是个好方法。",sentenceEn:"This is a good method.",twin:"法"},
+{id:"h3_036",hsk:3,hanzi:"情况",pinyin:"qíngkuàng",meaning:"situation",radical:"忄+ 青 + 兄",sentence:"情况怎么样？",sentenceEn:"How's the situation?",twin:"况"},
+{id:"h3_037",hsk:3,hanzi:"结果",pinyin:"jiéguǒ",meaning:"result",radical:"纟+ 吉 + 果",sentence:"结果很好。",sentenceEn:"The result is good.",twin:"果"},
+{id:"h3_038",hsk:3,hanzi:"原因",pinyin:"yuányīn",meaning:"reason",radical:"原 + 因",sentence:"原因是什么？",sentenceEn:"What's the reason?",twin:"因"},
+{id:"h3_039",hsk:3,hanzi:"目的",pinyin:"mùdì",meaning:"purpose",radical:"目 + 的",sentence:"你的目的是什么？",sentenceEn:"What's your purpose?",twin:"的"},
+{id:"h3_040",hsk:3,hanzi:"意义",pinyin:"yìyì",meaning:"meaning",radical:"音 + 义",sentence:"这有什么意义？",sentenceEn:"What's the meaning?",twin:"意"},
+{id:"h3_041",hsk:3,hanzi:"关系",pinyin:"guānxi",meaning:"relationship",radical:"关 + 系",sentence:"我们的关系很好。",sentenceEn:"Our relationship is good.",twin:"系"},
+{id:"h3_042",hsk:3,hanzi:"感情",pinyin:"gǎnqíng",meaning:"emotion",radical:"感 + 心 + 青",sentence:"他感情很丰富。",sentenceEn:"He's very emotional.",twin:"情"},
+{id:"h3_043",hsk:3,hanzi:"心情",pinyin:"xīnqíng",meaning:"mood",radical:"心 + 青",sentence:"我今天心情很好。",sentenceEn:"I'm in a good mood.",twin:"情"},
+{id:"h3_044",hsk:3,hanzi:"性格",pinyin:"xìnggé",meaning:"personality",radical:"忄+ 生 + 各",sentence:"她性格开朗。",sentenceEn:"She has a cheerful personality.",twin:"格"},
+{id:"h3_045",hsk:3,hanzi:"兴趣",pinyin:"xìngqù",meaning:"interest",radical:"兴 + 取",sentence:"我对音乐有兴趣。",sentenceEn:"I'm interested in music.",twin:"趣"},
+{id:"h3_046",hsk:3,hanzi:"爱好",pinyin:"àihào",meaning:"hobby",radical:"爱 + 号",sentence:"我的爱好是读书。",sentenceEn:"My hobby is reading.",twin:"好"},
+{id:"h3_047",hsk:3,hanzi:"习惯",pinyin:"xíguàn",meaning:"habit",radical:"习 + 贯",sentence:"这是个好习惯。",sentenceEn:"This is a good habit.",twin:"惯"},
+{id:"h3_048",hsk:3,hanzi:"态度",pinyin:"tàidù",meaning:"attitude",radical:"忄+ 太 + 度",sentence:"他的态度很好。",sentenceEn:"His attitude is good.",twin:"度"},
+{id:"h3_049",hsk:3,hanzi:"责任",pinyin:"zérèn",meaning:"responsibility",radical:"责 + 任",sentence:"这是你的责任。",sentenceEn:"This is your responsibility.",twin:"任"},
+{id:"h3_050",hsk:3,hanzi:"能力",pinyin:"nénglì",meaning:"ability",radical:"能 + 力",sentence:"他有能力完成。",sentenceEn:"He has the ability.",twin:"力"},
+{id:"h3_051",hsk:3,hanzi:"水平",pinyin:"shuǐpíng",meaning:"level",radical:"水 + 平",sentence:"他的汉语水平很高。",sentenceEn:"His Chinese level is high.",twin:"平"},
+{id:"h3_052",hsk:3,hanzi:"质量",pinyin:"zhìliàng",meaning:"quality",radical:"质 + 量",sentence:"质量很好。",sentenceEn:"The quality is good.",twin:"量"},
+{id:"h3_053",hsk:3,hanzi:"数量",pinyin:"shùliàng",meaning:"quantity",radical:"数 + 量",sentence:"数量很多。",sentenceEn:"The quantity is large.",twin:"量"},
+{id:"h3_054",hsk:3,hanzi:"速度",pinyin:"sùdù",meaning:"speed",radical:"速 + 度",sentence:"速度很快。",sentenceEn:"The speed is fast.",twin:"度"},
+{id:"h3_055",hsk:3,hanzi:"温度",pinyin:"wēndù",meaning:"temperature",radical:"氵+ 昷 + 度",sentence:"今天温度很高。",sentenceEn:"Temperature is high today.",twin:"度"},
+{id:"h3_056",hsk:3,hanzi:"距离",pinyin:"jùlí",meaning:"distance",radical:"巨 + 离",sentence:"距离很远。",sentenceEn:"The distance is far.",twin:"离"},
+{id:"h3_057",hsk:3,hanzi:"方向",pinyin:"fāngxiàng",meaning:"direction",radical:"方 + 向",sentence:"方向错了。",sentenceEn:"Wrong direction.",twin:"向"},
+{id:"h3_058",hsk:3,hanzi:"位置",pinyin:"wèizhì",meaning:"position",radical:"亻+ 位 + 至",sentence:"位置很好。",sentenceEn:"Good position.",twin:"位"},
+{id:"h3_059",hsk:3,hanzi:"表面",pinyin:"biǎomiàn",meaning:"surface",radical:"表 + 面",sentence:"表面很光滑。",sentenceEn:"The surface is smooth.",twin:"面"},
+{id:"h3_060",hsk:3,hanzi:"内部",pinyin:"nèibù",meaning:"interior",radical:"内 + 步",sentence:"内部很干净。",sentenceEn:"The interior is clean.",twin:"内"},
+{id:"h3_061",hsk:3,hanzi:"主要",pinyin:"zhǔyào",meaning:"main",radical:"主 + 要",sentence:"这是主要问题。",sentenceEn:"This is the main problem.",twin:"要"},
+{id:"h3_062",hsk:3,hanzi:"基本",pinyin:"jīběn",meaning:"basic",radical:"基 + 本",sentence:"这是基本知识。",sentenceEn:"This is basic knowledge.",twin:"本"},
+{id:"h3_063",hsk:3,hanzi:"普通",pinyin:"pǔtōng",meaning:"ordinary",radical:"普 + 通",sentence:"他很普通。",sentenceEn:"He's ordinary.",twin:"通"},
+{id:"h3_064",hsk:3,hanzi:"特殊",pinyin:"tèshū",meaning:"special",radical:"牛 + 寺 + 朱",sentence:"这是特殊的日子。",sentenceEn:"This is a special day.",twin:"殊"},
+{id:"h3_065",hsk:3,hanzi:"一般",pinyin:"yībān",meaning:"general",radical:"一 + 般",sentence:"一般情况是这样。",sentenceEn:"Generally, it's like this.",twin:"般"},
+{id:"h3_066",hsk:3,hanzi:"具体",pinyin:"jùtǐ",meaning:"specific",radical:"具 + 体",sentence:"请具体说明。",sentenceEn:"Please be specific.",twin:"体"},
+{id:"h3_067",hsk:3,hanzi:"抽象",pinyin:"chōuxiàng",meaning:"abstract",radical:"扌+ 由 + 象",sentence:"这个概念很抽象。",sentenceEn:"This concept is abstract.",twin:"象"},
+{id:"h3_068",hsk:3,hanzi:"现实",pinyin:"xiànshí",meaning:"reality",radical:"现 + 实",sentence:"这是现实。",sentenceEn:"This is reality.",twin:"实"},
+{id:"h3_069",hsk:3,hanzi:"理想",pinyin:"lǐxiǎng",meaning:"ideal",radical:"理 + 想",sentence:"这是我的理想。",sentenceEn:"This is my ideal.",twin:"想"},
+{id:"h3_070",hsk:3,hanzi:"实际",pinyin:"shíjì",meaning:"actual",radical:"实 + 际",sentence:"实际情况是这样。",sentenceEn:"The actual situation is this.",twin:"际"},
+{id:"h3_071",hsk:3,hanzi:"可能",pinyin:"kěnéng",meaning:"possible",radical:"可 + 能",sentence:"这是可能的。",sentenceEn:"This is possible.",twin:"能"},
+{id:"h3_072",hsk:3,hanzi:"必然",pinyin:"bìrán",meaning:"inevitable",radical:"必 + 然",sentence:"这是必然的。",sentenceEn:"This is inevitable.",twin:"然"},
+{id:"h3_073",hsk:3,hanzi:"偶然",pinyin:"ǒurán",meaning:"accidental",radical:"亻+ 偶 + 然",sentence:"这是偶然的。",sentenceEn:"This is accidental.",twin:"然"},
+{id:"h3_074",hsk:3,hanzi:"经常",pinyin:"jīngcháng",meaning:"often",radical:"纟+ 巠 + 常",sentence:"我经常运动。",sentenceEn:"I often exercise.",twin:"常"},
+{id:"h3_075",hsk:3,hanzi:"通常",pinyin:"tōngcháng",meaning:"usually",radical:"通 + 常",sentence:"我通常七点起床。",sentenceEn:"I usually get up at 7.",twin:"常"},
+{id:"h3_076",hsk:3,hanzi:"偶尔",pinyin:"ǒu'ěr",meaning:"occasionally",radical:"亻+ 偶 + 耳",sentence:"我偶尔看电影。",sentenceEn:"I occasionally watch movies.",twin:"偶"},
+{id:"h3_077",hsk:3,hanzi:"永远",pinyin:"yǒngyuǎn",meaning:"forever",radical:"永 + 远",sentence:"我永远爱你。",sentenceEn:"I'll love you forever.",twin:"远"},
+{id:"h3_078",hsk:3,hanzi:"暂时",pinyin:"zànshí",meaning:"temporary",radical:"暂 + 时",sentence:"这是暂时的。",sentenceEn:"This is temporary.",twin:"时"},
+{id:"h3_079",hsk:3,hanzi:"立刻",pinyin:"lìkè",meaning:"immediately",radical:"立 + 刻",sentence:"请立刻来。",sentenceEn:"Please come immediately.",twin:"刻"},
+{id:"h3_080",hsk:3,hanzi:"逐渐",pinyin:"zhújiàn",meaning:"gradually",radical:"辶 + 豕 + 车 + 斤",sentence:"天气逐渐变冷。",sentenceEn:"Weather gradually cools.",twin:"渐"},
+{id:"h3_081",hsk:3,hanzi:"突然",pinyin:"tūrán",meaning:"suddenly",radical:"穴 + 犬 + 然",sentence:"他突然来了。",sentenceEn:"He suddenly came.",twin:"然"},
+{id:"h3_082",hsk:3,hanzi:"终于",pinyin:"zhōngyú",meaning:"finally",radical:"终 + 于",sentence:"我终于成功了。",sentenceEn:"I finally succeeded.",twin:"于"},
+{id:"h3_083",hsk:3,hanzi:"仍然",pinyin:"réngrán",meaning:"still",radical:"亻+ 仍 + 然",sentence:"他仍然在工作。",sentenceEn:"He's still working.",twin:"然"},
+{id:"h3_084",hsk:3,hanzi:"居然",pinyin:"jūrán",meaning:"unexpectedly",radical:"居 + 然",sentence:"他居然成功了。",sentenceEn:"He unexpectedly succeeded.",twin:"然"},
+{id:"h3_085",hsk:3,hanzi:"简直",pinyin:"jiǎnzhí",meaning:"simply",radical:"简 + 直",sentence:"这简直太好了！",sentenceEn:"This is simply great!",twin:"直"},
+{id:"h3_086",hsk:3,hanzi:"确实",pinyin:"quèshí",meaning:"indeed",radical:"确 + 实",sentence:"确实如此。",sentenceEn:"Indeed so.",twin:"实"},
+{id:"h3_087",hsk:3,hanzi:"显然",pinyin:"xiǎnrán",meaning:"obviously",radical:"显 + 然",sentence:"显然他错了。",sentenceEn:"Obviously he's wrong.",twin:"然"},
+{id:"h3_088",hsk:3,hanzi:"大概",pinyin:"dàgài",meaning:"probably",radical:"大 + 概",sentence:"大概十点到。",sentenceEn:"Probably arrives at 10.",twin:"概"},
+{id:"h3_089",hsk:3,hanzi:"几乎",pinyin:"jīhū",meaning:"almost",radical:"几 + 乎",sentence:"我几乎忘了。",sentenceEn:"I almost forgot.",twin:"乎"},
+{id:"h3_090",hsk:3,hanzi:"完全",pinyin:"wánquán",meaning:"completely",radical:"完 + 全",sentence:"我完全同意。",sentenceEn:"I completely agree.",twin:"全"},
+{id:"h3_091",hsk:3,hanzi:"根本",pinyin:"gēnběn",meaning:"fundamentally",radical:"根 + 本",sentence:"我根本不知道。",sentenceEn:"I don't know at all.",twin:"本"},
+{id:"h3_092",hsk:3,hanzi:"至少",pinyin:"zhìshǎo",meaning:"at least",radical:"至 + 少",sentence:"至少要三天。",sentenceEn:"At least 3 days.",twin:"少"},
+{id:"h3_093",hsk:3,hanzi:"至多",pinyin:"zhìduō",meaning:"at most",radical:"至 + 多",sentence:"至多两天。",sentenceEn:"At most 2 days.",twin:"多"},
+{id:"h3_094",hsk:3,hanzi:"超过",pinyin:"chāoguò",meaning:"to exceed",radical:"超 + 过",sentence:"超过一百人。",sentenceEn:"Over 100 people.",twin:"过"},
+{id:"h3_095",hsk:3,hanzi:"包括",pinyin:"bāokuò",meaning:"to include",radical:"包 + 扌+ 舌",sentence:"包括我在内。",sentenceEn:"Including me.",twin:"括"},
+{id:"h3_096",hsk:3,hanzi:"代表",pinyin:"dàibiǎo",meaning:"to represent",radical:"亻+ 代 + 表",sentence:"我代表公司。",sentenceEn:"I represent the company.",twin:"表"},
+{id:"h3_097",hsk:3,hanzi:"说明",pinyin:"shuōmíng",meaning:"to explain",radical:"讠+ 说 + 明",sentence:"请说明一下。",sentenceEn:"Please explain.",twin:"明"},
+{id:"h3_098",hsk:3,hanzi:"证明",pinyin:"zhèngmíng",meaning:"to prove",radical:"讠+ 正 + 明",sentence:"这证明了什么？",sentenceEn:"What does this prove?",twin:"明"},
+{id:"h3_099",hsk:3,hanzi:"表示",pinyin:"biǎoshì",meaning:"to express",radical:"表 + 示",sentence:"他表示同意。",sentenceEn:"He expressed agreement.",twin:"示"},
+{id:"h3_100",hsk:3,hanzi:"强调",pinyin:"qiángdiào",meaning:"to emphasize",radical:"弓 + 虽 + 讠+ 周",sentence:"他强调重点。",sentenceEn:"He emphasized the point.",twin:"调"},
+{id:"h3_101",hsk:3,hanzi:"建议",pinyin:"jiànyì",meaning:"to suggest",radical:"建 + 议",sentence:"我建议你去。",sentenceEn:"I suggest you go.",twin:"议"},
+{id:"h3_102",hsk:3,hanzi:"要求",pinyin:"yāoqiú",meaning:"to demand",radical:"要 + 求",sentence:"他要求帮助。",sentenceEn:"He demands help.",twin:"求"},
+{id:"h3_103",hsk:3,hanzi:"请求",pinyin:"qǐngqiú",meaning:"to request",radical:"请 + 求",sentence:"我请求帮助。",sentenceEn:"I request help.",twin:"求"},
+{id:"h3_104",hsk:3,hanzi:"命令",pinyin:"mìnglìng",meaning:"to order",radical:"命 + 令",sentence:"他命令我们走。",sentenceEn:"He ordered us to go.",twin:"令"},
+{id:"h3_105",hsk:3,hanzi:"允许",pinyin:"yǔnxǔ",meaning:"to permit",radical:"允 + 许",sentence:"请允许我。",sentenceEn:"Please permit me.",twin:"许"},
+{id:"h3_106",hsk:3,hanzi:"禁止",pinyin:"jìnzhǐ",meaning:"to forbid",radical:"禁 + 止",sentence:"这里禁止吸烟。",sentenceEn:"No smoking here.",twin:"止"},
+{id:"h3_107",hsk:3,hanzi:"鼓励",pinyin:"gǔlì",meaning:"to encourage",radical:"鼓 + 力",sentence:"他鼓励我。",sentenceEn:"He encourages me.",twin:"励"},
+{id:"h3_108",hsk:3,hanzi:"批评",pinyin:"pīpíng",meaning:"to criticize",radical:"扌+ 皮 + 讠+ 平",sentence:"不要批评他。",sentenceEn:"Don't criticize him.",twin:"评"},
+{id:"h3_109",hsk:3,hanzi:"表扬",pinyin:"biǎoyáng",meaning:"to praise",radical:"表 + 扬",sentence:"老师表扬了他。",sentenceEn:"The teacher praised him.",twin:"扬"},
+{id:"h3_110",hsk:3,hanzi:"感谢",pinyin:"gǎnxiè",meaning:"to thank",radical:"感 + 讠+ 射",sentence:"我感谢你。",sentenceEn:"I thank you.",twin:"谢"},
+{id:"h3_111",hsk:3,hanzi:"道歉",pinyin:"dàoqiàn",meaning:"to apologize",radical:"道 + 歉",sentence:"我向你道歉。",sentenceEn:"I apologize to you.",twin:"歉"},
+{id:"h3_112",hsk:3,hanzi:"原谅",pinyin:"yuánliàng",meaning:"to forgive",radical:"原 + 谅",sentence:"请原谅我。",sentenceEn:"Please forgive me.",twin:"谅"},
+{id:"h3_113",hsk:3,hanzi:"忘记",pinyin:"wàngjì",meaning:"to forget",radical:"忘 + 记",sentence:"我忘记了。",sentenceEn:"I forgot.",twin:"记"},
+{id:"h3_114",hsk:3,hanzi:"记住",pinyin:"jìzhù",meaning:"to remember",radical:"记 + 住",sentence:"请记住这个。",sentenceEn:"Please remember this.",twin:"记"},
+{id:"h3_115",hsk:3,hanzi:"回忆",pinyin:"huíyì",meaning:"to recall",radical:"回 + 意",sentence:"我回忆起过去。",sentenceEn:"I recall the past.",twin:"忆"},
+{id:"h3_116",hsk:3,hanzi:"思考",pinyin:"sīkǎo",meaning:"to think",radical:"思 + 考",sentence:"让我思考一下。",sentenceEn:"Let me think.",twin:"考"},
+{id:"h3_117",hsk:3,hanzi:"考虑",pinyin:"kǎolǜ",meaning:"to consider",radical:"考 + 虑",sentence:"我考虑一下。",sentenceEn:"I'll consider it.",twin:"虑"},
+{id:"h3_118",hsk:3,hanzi:"想象",pinyin:"xiǎngxiàng",meaning:"to imagine",radical:"想 + 象",sentence:"我想象未来。",sentenceEn:"I imagine the future.",twin:"象"},
+{id:"h3_119",hsk:3,hanzi:"怀疑",pinyin:"huáiyí",meaning:"to doubt",radical:"忄+ 不 + 疋",sentence:"我怀疑他。",sentenceEn:"I doubt him.",twin:"疑"},
+{id:"h3_120",hsk:3,hanzi:"猜测",pinyin:"cāicè",meaning:"to guess",radical:"猜 + 贝 + 刂",sentence:"我猜你不知道。",sentenceEn:"I guess you don't know.",twin:"测"},
+{id:"h3_121",hsk:3,hanzi:"判断",pinyin:"pànduàn",meaning:"to judge",radical:"判 + 断",sentence:"请判断一下。",sentenceEn:"Please judge.",twin:"断"},
+{id:"h3_122",hsk:3,hanzi:"分析",pinyin:"fēnxī",meaning:"to analyze",radical:"分 + 析",sentence:"让我分析一下。",sentenceEn:"Let me analyze.",twin:"析"},
+{id:"h3_123",hsk:3,hanzi:"总结",pinyin:"zǒngjié",meaning:"to summarize",radical:"总 + 结",sentence:"我来总结一下。",sentenceEn:"Let me summarize.",twin:"结"},
+{id:"h3_124",hsk:3,hanzi:"比较",pinyin:"bǐjiào",meaning:"to compare",radical:"比 + 较",sentence:"让我比较一下。",sentenceEn:"Let me compare.",twin:"较"},
+{id:"h3_125",hsk:3,hanzi:"区别",pinyin:"qūbié",meaning:"difference",radical:"区 + 别",sentence:"有什么区别？",sentenceEn:"What's the difference?",twin:"别"},
+{id:"h3_126",hsk:3,hanzi:"相同",pinyin:"xiāngtóng",meaning:"same",radical:"相 + 同",sentence:"我们想法相同。",sentenceEn:"We think the same.",twin:"同"},
+{id:"h3_127",hsk:3,hanzi:"相反",pinyin:"xiāngfǎn",meaning:"opposite",radical:"相 + 反",sentence:"结果相反。",sentenceEn:"The result is opposite.",twin:"反"},
+{id:"h3_128",hsk:3,hanzi:"类似",pinyin:"lèisì",meaning:"similar",radical:"类 + 似",sentence:"这两个类似。",sentenceEn:"These two are similar.",twin:"似"},
+{id:"h3_129",hsk:3,hanzi:"合适",pinyin:"héshì",meaning:"suitable",radical:"合 + 适",sentence:"这个合适吗？",sentenceEn:"Is this suitable?",twin:"适"},
+{id:"h3_130",hsk:3,hanzi:"适当",pinyin:"shìdàng",meaning:"appropriate",radical:"适 + 当",sentence:"请适当休息。",sentenceEn:"Please rest appropriately.",twin:"当"},
+{id:"h3_131",hsk:3,hanzi:"正确",pinyin:"zhèngquè",meaning:"correct",radical:"正 + 确",sentence:"答案是正确的。",sentenceEn:"The answer is correct.",twin:"确"},
+{id:"h3_132",hsk:3,hanzi:"错误",pinyin:"cuòwù",meaning:"mistake",radical:"错 + 误",sentence:"这是一个错误。",sentenceEn:"This is a mistake.",twin:"误"},
+{id:"h3_133",hsk:3,hanzi:"优点",pinyin:"yōudiǎn",meaning:"advantage",radical:"优 + 点",sentence:"他的优点是努力。",sentenceEn:"His advantage is hard work.",twin:"点"},
+{id:"h3_134",hsk:3,hanzi:"缺点",pinyin:"quēdiǎn",meaning:"disadvantage",radical:"缺 + 点",sentence:"他有什么缺点？",sentenceEn:"What are his flaws?",twin:"点"},
+{id:"h3_135",hsk:3,hanzi:"好处",pinyin:"hǎochu",meaning:"benefit",radical:"好 + 处",sentence:"这有好处。",sentenceEn:"This has benefits.",twin:"处"},
+{id:"h3_136",hsk:3,hanzi:"坏处",pinyin:"huàichu",meaning:"harm",radical:"坏 + 处",sentence:"这有坏处。",sentenceEn:"This has harm.",twin:"处"},
+{id:"h3_137",hsk:3,hanzi:"作用",pinyin:"zuòyòng",meaning:"function",radical:"作 + 用",sentence:"这有什么作用？",sentenceEn:"What's the function?",twin:"用"},
+{id:"h3_138",hsk:3,hanzi:"效果",pinyin:"xiàoguǒ",meaning:"effect",radical:"效 + 果",sentence:"效果很好。",sentenceEn:"The effect is good.",twin:"果"},
+{id:"h3_139",hsk:3,hanzi:"影响",pinyin:"yǐngxiǎng",meaning:"influence",radical:"景 + 向",sentence:"这有什么影响？",sentenceEn:"What's the influence?",twin:"响"},
+{id:"h3_140",hsk:3,hanzi:"反应",pinyin:"fǎnyìng",meaning:"reaction",radical:"反 + 应",sentence:"他的反应很快。",sentenceEn:"His reaction is fast.",twin:"应"},
+{id:"h3_141",hsk:3,hanzi:"态度",pinyin:"tàidù",meaning:"attitude",radical:"忄+ 太 + 度",sentence:"态度很重要。",sentenceEn:"Attitude matters.",twin:"度"},
+{id:"h3_142",hsk:3,hanzi:"观点",pinyin:"guāndiǎn",meaning:"viewpoint",radical:"观 + 点",sentence:"我的观点是这样。",sentenceEn:"My view is this.",twin:"点"},
+{id:"h3_143",hsk:3,hanzi:"意见",pinyin:"yìjiàn",meaning:"opinion",radical:"意 + 见",sentence:"我有个意见。",sentenceEn:"I have an opinion.",twin:"见"},
+{id:"h3_144",hsk:3,hanzi:"想法",pinyin:"xiǎngfǎ",meaning:"idea",radical:"想 + 法",sentence:"这是个好想法。",sentenceEn:"This is a good idea.",twin:"法"},
+{id:"h3_145",hsk:3,hanzi:"计划",pinyin:"jìhuà",meaning:"plan",radical:"讠+ 十 + 田 + 讠+ 画",sentence:"我有个计划。",sentenceEn:"I have a plan.",twin:"划"},
+{id:"h3_146",hsk:3,hanzi:"安排",pinyin:"ānpái",meaning:"to arrange",radical:"安 + 排",sentence:"我安排一下。",sentenceEn:"I'll arrange it.",twin:"排"},
+{id:"h3_147",hsk:3,hanzi:"组织",pinyin:"zǔzhī",meaning:"to organize",radical:"纟+ 且 + 只",sentence:"我们组织一下。",sentenceEn:"Let's organize.",twin:"织"},
+{id:"h3_148",hsk:3,hanzi:"管理",pinyin:"guǎnlǐ",meaning:"to manage",radical:"管 + 理",sentence:"他管理公司。",sentenceEn:"He manages the company.",twin:"理"},
+{id:"h3_149",hsk:3,hanzi:"领导",pinyin:"lǐngdǎo",meaning:"leader",radical:"领 + 道",sentence:"他是我们的领导。",sentenceEn:"He's our leader.",twin:"导"},
+{id:"h3_150",hsk:3,hanzi:"同事",pinyin:"tóngshì",meaning:"colleague",radical:"同 + 事",sentence:"他是我同事。",sentenceEn:"He's my colleague.",twin:"事"},
+{id:"h3_151",hsk:3,hanzi:"客户",pinyin:"kèhù",meaning:"customer",radical:"客 + 户",sentence:"客户很重要。",sentenceEn:"Customers matter.",twin:"户"},
+{id:"h3_152",hsk:3,hanzi:"会议",pinyin:"huìyì",meaning:"meeting",radical:"会 + 议",sentence:"我们开会吧。",sentenceEn:"Let's have a meeting.",twin:"议"},
+{id:"h3_153",hsk:3,hanzi:"报告",pinyin:"bàogào",meaning:"report",radical:"报 + 告",sentence:"我写报告。",sentenceEn:"I write reports.",twin:"告"},
+{id:"h3_154",hsk:3,hanzi:"文件",pinyin:"wénjiàn",meaning:"document",radical:"文 + 件",sentence:"请发文件。",sentenceEn:"Please send the document.",twin:"件"},
+{id:"h3_155",hsk:3,hanzi:"合同",pinyin:"hétong",meaning:"contract",radical:"合 + 同",sentence:"我们签合同吧。",sentenceEn:"Let's sign the contract.",twin:"同"},
+{id:"h3_156",hsk:3,hanzi:"工资",pinyin:"gōngzī",meaning:"salary",radical:"工 + 资",sentence:"工资很高。",sentenceEn:"The salary is high.",twin:"资"},
+{id:"h3_157",hsk:3,hanzi:"奖金",pinyin:"jiǎngjīn",meaning:"bonus",radical:"奖 + 金",sentence:"我得到奖金了。",sentenceEn:"I got a bonus.",twin:"金"},
+{id:"h3_158",hsk:3,hanzi:"职业",pinyin:"zhíyè",meaning:"profession",radical:"职 + 业",sentence:"你什么职业？",sentenceEn:"What's your profession?",twin:"业"},
+{id:"h3_159",hsk:3,hanzi:"专业",pinyin:"zhuānyè",meaning:"major / specialty",radical:"专 + 业",sentence:"我的专业是经济。",sentenceEn:"My major is economics.",twin:"业"},
+{id:"h3_160",hsk:3,hanzi:"行业",pinyin:"hángyè",meaning:"industry",radical:"行 + 业",sentence:"这个行业很好。",sentenceEn:"This industry is good.",twin:"业"},
+{id:"h3_161",hsk:3,hanzi:"市场",pinyin:"shìchǎng",meaning:"market",radical:"市 + 场",sentence:"市场很大。",sentenceEn:"The market is big.",twin:"场"},
+{id:"h3_162",hsk:3,hanzi:"产品",pinyin:"chǎnpǐn",meaning:"product",radical:"产 + 品",sentence:"产品质量好。",sentenceEn:"Product quality is good.",twin:"品"},
+{id:"h3_163",hsk:3,hanzi:"服务",pinyin:"fúwù",meaning:"service",radical:"服 + 务",sentence:"服务很好。",sentenceEn:"Service is good.",twin:"务"},
+{id:"h3_164",hsk:3,hanzi:"价格",pinyin:"jiàgé",meaning:"price",radical:"价 + 介",sentence:"价格很合理。",sentenceEn:"Price is reasonable.",twin:"格"},
+{id:"h3_165",hsk:3,hanzi:"成本",pinyin:"chéngběn",meaning:"cost",radical:"成 + 本",sentence:"成本很高。",sentenceEn:"Cost is high.",twin:"本"},
+{id:"h3_166",hsk:3,hanzi:"利润",pinyin:"lìrùn",meaning:"profit",radical:"利 + 润",sentence:"利润很好。",sentenceEn:"Profit is good.",twin:"润"},
+{id:"h3_167",hsk:3,hanzi:"投资",pinyin:"tóuzī",meaning:"investment",radical:"投 + 资",sentence:"这是个好投资。",sentenceEn:"This is a good investment.",twin:"资"},
+{id:"h3_168",hsk:3,hanzi:"风险",pinyin:"fēngxiǎn",meaning:"risk",radical:"风 + 险",sentence:"风险很大。",sentenceEn:"Risk is high.",twin:"险"},
+{id:"h3_169",hsk:3,hanzi:"竞争",pinyin:"jìngzhēng",meaning:"competition",radical:"竞 + 争",sentence:"竞争很激烈。",sentenceEn:"Competition is fierce.",twin:"争"},
+{id:"h3_170",hsk:3,hanzi:"合作",pinyin:"hézuò",meaning:"cooperation",radical:"合 + 作",sentence:"我们合作吧。",sentenceEn:"Let's cooperate.",twin:"作"},
+{id:"h3_171",hsk:3,hanzi:"交流",pinyin:"jiāoliú",meaning:"exchange",radical:"交 + 流",sentence:"我们交流一下。",sentenceEn:"Let's exchange ideas.",twin:"流"},
+{id:"h3_172",hsk:3,hanzi:"沟通",pinyin:"gōutōng",meaning:"communicate",radical:"沟 + 通",sentence:"我们需要沟通。",sentenceEn:"We need to communicate.",twin:"通"},
+{id:"h3_173",hsk:3,hanzi:"理解",pinyin:"lǐjiě",meaning:"to understand",radical:"理 + 解",sentence:"我理解你。",sentenceEn:"I understand you.",twin:"解"},
+{id:"h3_174",hsk:3,hanzi:"误解",pinyin:"wùjiě",meaning:"misunderstand",radical:"误 + 解",sentence:"你误解我了。",sentenceEn:"You misunderstood me.",twin:"解"},
+{id:"h3_175",hsk:3,hanzi:"表达",pinyin:"biǎodá",meaning:"to express",radical:"表 + 达",sentence:"请表达你的想法。",sentenceEn:"Express your thoughts.",twin:"达"},
+{id:"h3_176",hsk:3,hanzi:"描述",pinyin:"miáoshù",meaning:"to describe",radical:"讠+ 苗 + 术",sentence:"请描述一下。",sentenceEn:"Please describe.",twin:"述"},
+{id:"h3_177",hsk:3,hanzi:"解释",pinyin:"jiěshì",meaning:"to explain",radical:"解 + 释",sentence:"请解释一下。",sentenceEn:"Please explain.",twin:"释"},
+{id:"h3_178",hsk:3,hanzi:"翻译",pinyin:"fānyì",meaning:"to translate",radical:"翻 + 译",sentence:"请翻译一下。",sentenceEn:"Please translate.",twin:"译"},
+{id:"h3_179",hsk:3,hanzi:"语言",pinyin:"yǔyán",meaning:"language",radical:"讠+ 吾 + 言",sentence:"汉语很难。",sentenceEn:"Chinese is hard.",twin:"言"},
+{id:"h3_180",hsk:3,hanzi:"文字",pinyin:"wénzì",meaning:"writing",radical:"文 + 字",sentence:"中国文字很美。",sentenceEn:"Chinese writing is beautiful.",twin:"字"},
+{id:"h3_181",hsk:3,hanzi:"文章",pinyin:"wénzhāng",meaning:"article",radical:"文 + 章",sentence:"我写了一篇文章。",sentenceEn:"I wrote an article.",twin:"章"},
+{id:"h3_182",hsk:3,hanzi:"小说",pinyin:"xiǎoshuō",meaning:"novel",radical:"小 + 讠+ 兑",sentence:"我喜欢看小说。",sentenceEn:"I like novels.",twin:"说"},
+{id:"h3_183",hsk:3,hanzi:"诗歌",pinyin:"shīgē",meaning:"poetry",radical:"诗 + 歌",sentence:"我喜欢诗歌。",sentenceEn:"I like poetry.",twin:"歌"},
+{id:"h3_184",hsk:3,hanzi:"戏剧",pinyin:"xìjù",meaning:"drama",radical:"戏 + 剧",sentence:"我们去看戏剧。",sentenceEn:"Let's watch a play.",twin:"剧"},
+{id:"h3_185",hsk:3,hanzi:"表演",pinyin:"biǎoyǎn",meaning:"performance",radical:"表 + 演",sentence:"表演很精彩。",sentenceEn:"The performance was great.",twin:"演"},
+{id:"h3_186",hsk:3,hanzi:"导演",pinyin:"dǎoyǎn",meaning:"director",radical:"导 + 演",sentence:"他是导演。",sentenceEn:"He's the director.",twin:"演"},
+{id:"h3_187",hsk:3,hanzi:"演员",pinyin:"yǎnyuán",meaning:"actor",radical:"演 + 员",sentence:"她是演员。",sentenceEn:"She's an actor.",twin:"员"},
+{id:"h3_188",hsk:3,hanzi:"观众",pinyin:"guānzhòng",meaning:"audience",radical:"观 + 众",sentence:"观众很多。",sentenceEn:"Many in the audience.",twin:"众"},
+{id:"h3_189",hsk:3,hanzi:"比赛",pinyin:"bǐsài",meaning:"competition",radical:"比 + 赛",sentence:"我赢得比赛。",sentenceEn:"I won the match.",twin:"赛"},
+{id:"h3_190",hsk:3,hanzi:"冠军",pinyin:"guànjūn",meaning:"champion",radical:"冠 + 军",sentence:"他是冠军。",sentenceEn:"He's the champion.",twin:"军"},
+{id:"h3_191",hsk:3,hanzi:"胜利",pinyin:"shènglì",meaning:"victory",radical:"胜 + 利",sentence:"我们胜利了。",sentenceEn:"We won.",twin:"利"},
+{id:"h3_192",hsk:3,hanzi:"失败",pinyin:"shībài",meaning:"defeat",radical:"失 + 败",sentence:"我们失败了。",sentenceEn:"We lost.",twin:"败"},
+{id:"h3_193",hsk:3,hanzi:"锻炼",pinyin:"duànliàn",meaning:"to exercise",radical:"锻 + 炼",sentence:"我每天锻炼。",sentenceEn:"I exercise daily.",twin:"炼"},
+{id:"h3_194",hsk:3,hanzi:"健康",pinyin:"jiànkāng",meaning:"healthy",radical:"亻+ 建 + 康",sentence:"健康很重要。",sentenceEn:"Health is important.",twin:"康"},
+{id:"h3_195",hsk:3,hanzi:"疾病",pinyin:"jíbìng",meaning:"disease",radical:"疾 + 病",sentence:"他生病了。",sentenceEn:"He's sick.",twin:"病"},
+{id:"h3_196",hsk:3,hanzi:"治疗",pinyin:"zhìliáo",meaning:"treatment",radical:"治 + 疗",sentence:"他在治疗。",sentenceEn:"He's in treatment.",twin:"疗"},
+{id:"h3_197",hsk:3,hanzi:"手术",pinyin:"shǒushù",meaning:"surgery",radical:"手 + 术",sentence:"他做了手术。",sentenceEn:"He had surgery.",twin:"术"},
+{id:"h3_198",hsk:3,hanzi:"检查",pinyin:"jiǎnchá",meaning:"to examine",radical:"检 + 查",sentence:"请检查一下。",sentenceEn:"Please examine.",twin:"查"},
+{id:"h3_199",hsk:3,hanzi:"症状",pinyin:"zhèngzhuàng",meaning:"symptom",radical:"疒 + 正 + 壮",sentence:"你有什么症状？",sentenceEn:"What are your symptoms?",twin:"状"},
+{id:"h3_200",hsk:3,hanzi:"发烧",pinyin:"fāshāo",meaning:"fever",radical:"发 + 烧",sentence:"我发烧了。",sentenceEn:"I have a fever.",twin:"烧"},
+{id:"h3_201",hsk:3,hanzi:"感冒",pinyin:"gǎnmào",meaning:"cold (illness)",radical:"感 + 冒",sentence:"我感冒了。",sentenceEn:"I have a cold.",twin:"冒"},
+{id:"h3_202",hsk:3,hanzi:"咳嗽",pinyin:"késou",meaning:"cough",radical:"口 + 客 + 数",sentence:"我一直在咳嗽。",sentenceEn:"I've been coughing.",twin:"嗽"},
+{id:"h3_203",hsk:3,hanzi:"头疼",pinyin:"tóuténg",meaning:"headache",radical:"头 + 疼",sentence:"我头疼。",sentenceEn:"I have a headache.",twin:"疼"},
+{id:"h3_204",hsk:3,hanzi:"肚子",pinyin:"dùzi",meaning:"stomach",radical:"肚 + 子",sentence:"我肚子疼。",sentenceEn:"My stomach hurts.",twin:"肚"},
+{id:"h3_205",hsk:3,hanzi:"心脏",pinyin:"xīnzàng",meaning:"heart",radical:"心 + 脏",sentence:"心脏很重要。",sentenceEn:"Heart is important.",twin:"脏"},
+{id:"h3_206",hsk:3,hanzi:"血液",pinyin:"xuèyè",meaning:"blood",radical:"血 + 液",sentence:"他失血过多。",sentenceEn:"He lost too much blood.",twin:"血"},
+{id:"h3_207",hsk:3,hanzi:"骨头",pinyin:"gǔtou",meaning:"bone",radical:"骨 + 头",sentence:"他骨折了。",sentenceEn:"He broke a bone.",twin:"骨"},
+{id:"h3_208",hsk:3,hanzi:"肌肉",pinyin:"jīròu",meaning:"muscle",radical:"肌 + 肉",sentence:"他肌肉很多。",sentenceEn:"He has lots of muscle.",twin:"肉"},
+{id:"h3_209",hsk:3,hanzi:"皮肤",pinyin:"pífū",meaning:"skin",radical:"皮 + 夫",sentence:"她皮肤很好。",sentenceEn:"Her skin is good.",twin:"肤"},
+{id:"h3_210",hsk:3,hanzi:"头发",pinyin:"tóufa",meaning:"hair",radical:"头 + 发",sentence:"她头发很长。",sentenceEn:"Her hair is long.",twin:"发"},
+{id:"h3_211",hsk:3,hanzi:"鼻子",pinyin:"bízi",meaning:"nose",radical:"鼻 + 子",sentence:"他鼻子很大。",sentenceEn:"He has a big nose.",twin:"鼻"},
+{id:"h3_212",hsk:3,hanzi:"耳朵",pinyin:"ěrduo",meaning:"ear",radical:"耳 + 朵",sentence:"我耳朵疼。",sentenceEn:"My ear hurts.",twin:"耳"},
+{id:"h3_213",hsk:3,hanzi:"嘴巴",pinyin:"zuǐba",meaning:"mouth",radical:"口 + 嘴",sentence:"请闭嘴。",sentenceEn:"Please close your mouth.",twin:"嘴"},
+{id:"h3_214",hsk:3,hanzi:"牙齿",pinyin:"yáchǐ",meaning:"tooth",radical:"牙 + 齿",sentence:"我牙疼。",sentenceEn:"My tooth hurts.",twin:"牙"},
+{id:"h3_215",hsk:3,hanzi:"手指",pinyin:"shǒuzhǐ",meaning:"finger",radical:"手 + 指",sentence:"我手指受伤了。",sentenceEn:"My finger is hurt.",twin:"指"},
+{id:"h3_216",hsk:3,hanzi:"脚",pinyin:"jiǎo",meaning:"foot",radical:"月 + 交",sentence:"我脚疼。",sentenceEn:"My foot hurts.",twin:"腿"},
+{id:"h3_217",hsk:3,hanzi:"肩膀",pinyin:"jiānbǎng",meaning:"shoulder",radical:"肩 + 膀",sentence:"我肩膀疼。",sentenceEn:"My shoulder hurts.",twin:"膀"},
+{id:"h3_218",hsk:3,hanzi:"膝盖",pinyin:"xīgài",meaning:"knee",radical:"月 + 膝",sentence:"我膝盖受伤了。",sentenceEn:"My knee is hurt.",twin:"膝"},
+{id:"h3_219",hsk:3,hanzi:"背",pinyin:"bèi",meaning:"back",radical:"北 + 月",sentence:"我背疼。",sentenceEn:"My back hurts.",twin:"北"},
+{id:"h3_220",hsk:3,hanzi:"胸",pinyin:"xiōng",meaning:"chest",radical:"月 + 凶",sentence:"我胸口疼。",sentenceEn:"My chest hurts.",twin:"凶"},
+{id:"h3_221",hsk:3,hanzi:"呼吸",pinyin:"hūxī",meaning:"to breathe",radical:"口 + 乎 + 心",sentence:"我呼吸困难。",sentenceEn:"I have trouble breathing.",twin:"息"},
+{id:"h3_222",hsk:3,hanzi:"心跳",pinyin:"xīntiào",meaning:"heartbeat",radical:"心 + 跳",sentence:"我心跳很快。",sentenceEn:"My heartbeat is fast.",twin:"跳"},
+{id:"h3_223",hsk:3,hanzi:"血压",pinyin:"xuèyā",meaning:"blood pressure",radical:"血 + 压",sentence:"血压很高。",sentenceEn:"Blood pressure is high.",twin:"压"},
+{id:"h3_224",hsk:3,hanzi:"营养",pinyin:"yíngyǎng",meaning:"nutrition",radical:"营 + 养",sentence:"食物要有营养。",sentenceEn:"Food must be nutritious.",twin:"养"},
+{id:"h3_225",hsk:3,hanzi:"维生素",pinyin:"wéishēngsù",meaning:"vitamin",radical:"维 + 生 + 素",sentence:"多吃维生素。",sentenceEn:"Eat more vitamins.",twin:"素"},
+{id:"h3_226",hsk:3,hanzi:"蔬菜",pinyin:"shūcài",meaning:"vegetable",radical:"蔬 + 菜",sentence:"多吃蔬菜。",sentenceEn:"Eat more vegetables.",twin:"菜"},
+{id:"h3_227",hsk:3,hanzi:"水果",pinyin:"shuǐguǒ",meaning:"fruit",radical:"水 + 果",sentence:"我喜欢水果。",sentenceEn:"I like fruit.",twin:"果"},
+{id:"h3_228",hsk:3,hanzi:"香蕉",pinyin:"xiāngjiāo",meaning:"banana",radical:"香 + 蕉",sentence:"香蕉很甜。",sentenceEn:"Bananas are sweet.",twin:"蕉"},
+{id:"h3_229",hsk:3,hanzi:"橘子",pinyin:"júzi",meaning:"orange",radical:"橘 + 子",sentence:"橘子很酸。",sentenceEn:"Oranges are sour.",twin:"桔"},
+{id:"h3_230",hsk:3,hanzi:"西瓜",pinyin:"xīguā",meaning:"watermelon",radical:"西 + 瓜",sentence:"西瓜很甜。",sentenceEn:"Watermelon is sweet.",twin:"瓜"},
+{id:"h3_231",hsk:3,hanzi:"葡萄",pinyin:"pútáo",meaning:"grape",radical:"葡 + 萄",sentence:"葡萄很酸。",sentenceEn:"Grapes are sour.",twin:"萄"},
+{id:"h3_232",hsk:3,hanzi:"草莓",pinyin:"cǎoméi",meaning:"strawberry",radical:"草 + 莓",sentence:"草莓很甜。",sentenceEn:"Strawberries are sweet.",twin:"莓"},
+{id:"h3_233",hsk:3,hanzi:"西红柿",pinyin:"xīhóngshì",meaning:"tomato",radical:"西 + 红 + 柿",sentence:"西红柿很红。",sentenceEn:"Tomatoes are red.",twin:"柿"},
+{id:"h3_234",hsk:3,hanzi:"土豆",pinyin:"tǔdòu",meaning:"potato",radical:"土 + 豆",sentence:"我喜欢土豆。",sentenceEn:"I like potatoes.",twin:"豆"},
+{id:"h3_235",hsk:3,hanzi:"黄瓜",pinyin:"huángguā",meaning:"cucumber",radical:"黄 + 瓜",sentence:"黄瓜很新鲜。",sentenceEn:"Cucumbers are fresh.",twin:"瓜"},
+{id:"h3_236",hsk:3,hanzi:"白菜",pinyin:"báicài",meaning:"cabbage",radical:"白 + 菜",sentence:"白菜很便宜。",sentenceEn:"Cabbage is cheap.",twin:"菜"},
+{id:"h3_237",hsk:3,hanzi:"猪肉",pinyin:"zhūròu",meaning:"pork",radical:"猪 + 肉",sentence:"我喜欢猪肉。",sentenceEn:"I like pork.",twin:"猪"},
+{id:"h3_238",hsk:3,hanzi:"牛肉",pinyin:"niúròu",meaning:"beef",radical:"牛 + 肉",sentence:"我买牛肉。",sentenceEn:"I buy beef.",twin:"牛"},
+{id:"h3_239",hsk:3,hanzi:"鸡肉",pinyin:"jīròu",meaning:"chicken (meat)",radical:"鸡 + 肉",sentence:"我吃鸡肉。",sentenceEn:"I eat chicken.",twin:"鸡"},
+{id:"h3_240",hsk:3,hanzi:"鸭肉",pinyin:"yāròu",meaning:"duck",radical:"鸭 + 肉",sentence:"北京烤鸭很有名。",sentenceEn:"Beijing duck is famous.",twin:"鸭"},
+{id:"h3_241",hsk:3,hanzi:"海鲜",pinyin:"hǎixiān",meaning:"seafood",radical:"海 + 鲜",sentence:"我喜欢海鲜。",sentenceEn:"I like seafood.",twin:"鲜"},
+{id:"h3_242",hsk:3,hanzi:"米饭",pinyin:"mǐfàn",meaning:"rice",radical:"米 + 饭",sentence:"我吃米饭。",sentenceEn:"I eat rice.",twin:"饭"},
+{id:"h3_243",hsk:3,hanzi:"馒头",pinyin:"mántou",meaning:"steamed bun",radical:"馒 + 头",sentence:"我吃馒头。",sentenceEn:"I eat steamed buns.",twin:"馒"},
+{id:"h3_244",hsk:3,hanzi:"饺子",pinyin:"jiǎozi",meaning:"dumpling",radical:"饺 + 子",sentence:"我喜欢饺子。",sentenceEn:"I like dumplings.",twin:"饺"},
+{id:"h3_245",hsk:3,hanzi:"包子",pinyin:"bāozi",meaning:"steamed bun (filled)",radical:"包 + 子",sentence:"我买包子。",sentenceEn:"I buy steamed buns.",twin:"包"},
+{id:"h3_246",hsk:3,hanzi:"蛋糕",pinyin:"dàngāo",meaning:"cake",radical:"蛋 + 糕",sentence:"我买蛋糕。",sentenceEn:"I buy cake.",twin:"糕"},
+{id:"h3_247",hsk:3,hanzi:"饼干",pinyin:"bǐnggān",meaning:"cookie",radical:"饼 + 干",sentence:"我吃饼干。",sentenceEn:"I eat cookies.",twin:"饼"},
+{id:"h3_248",hsk:3,hanzi:"巧克力",pinyin:"qiǎokèlì",meaning:"chocolate",radical:"巧 + 克 + 力",sentence:"我喜欢巧克力。",sentenceEn:"I like chocolate.",twin:"巧"},
+{id:"h3_249",hsk:3,hanzi:"糖",pinyin:"táng",meaning:"sugar / candy",radical:"米 + 唐",sentence:"糖很甜。",sentenceEn:"Sugar is sweet.",twin:"唐"},
+{id:"h3_250",hsk:3,hanzi:"盐",pinyin:"yán",meaning:"salt",radical:"土 + 监",sentence:"请放点盐。",sentenceEn:"Please add salt.",twin:"监"},
+{id:"h3_251",hsk:3,hanzi:"油",pinyin:"yóu",meaning:"oil",radical:"氵+ 由",sentence:"请放点油。",sentenceEn:"Please add oil.",twin:"由"},
+{id:"h3_252",hsk:3,hanzi:"醋",pinyin:"cù",meaning:"vinegar",radical:"酉 + 昔",sentence:"请放点醋。",sentenceEn:"Please add vinegar.",twin:"昔"},
+{id:"h3_253",hsk:3,hanzi:"酱油",pinyin:"jiàngyóu",meaning:"soy sauce",radical:"酱 + 油",sentence:"请放酱油。",sentenceEn:"Please add soy sauce.",twin:"酱"},
+{id:"h3_254",hsk:3,hanzi:"味精",pinyin:"wèijīng",meaning:"MSG",radical:"味 + 精",sentence:"不要放味精。",sentenceEn:"Don't add MSG.",twin:"精"},
+{id:"h3_255",hsk:3,hanzi:"厨房",pinyin:"chúfáng",meaning:"kitchen",radical:"厨 + 房",sentence:"我在厨房。",sentenceEn:"I'm in the kitchen.",twin:"房"},
+{id:"h3_256",hsk:3,hanzi:"冰箱",pinyin:"bīngxiāng",meaning:"refrigerator",radical:"冰 + 箱",sentence:"食物在冰箱里。",sentenceEn:"Food is in the fridge.",twin:"箱"},
+{id:"h3_257",hsk:3,hanzi:"微波炉",pinyin:"wēibōlú",meaning:"microwave",radical:"微 + 波 + 炉",sentence:"我用微波炉。",sentenceEn:"I use the microwave.",twin:"炉"},
+{id:"h3_258",hsk:3,hanzi:"洗衣机",pinyin:"xǐyījī",meaning:"washing machine",radical:"洗 + 衣 + 机",sentence:"我用洗衣机。",sentenceEn:"I use the washer.",twin:"机"},
+{id:"h3_259",hsk:3,hanzi:"空调",pinyin:"kōngtiáo",meaning:"air conditioner",radical:"空 + 调",sentence:"请开空调。",sentenceEn:"Please turn on AC.",twin:"调"},
+{id:"h3_260",hsk:3,hanzi:"暖气",pinyin:"nuǎnqì",meaning:"heater",radical:"暖 + 气",sentence:"请开暖气。",sentenceEn:"Please turn on heat.",twin:"暖"},
+{id:"h3_261",hsk:3,hanzi:"电梯",pinyin:"diàntī",meaning:"elevator",radical:"电 + 梯",sentence:"我坐电梯。",sentenceEn:"I take the elevator.",twin:"梯"},
+{id:"h3_262",hsk:3,hanzi:"楼梯",pinyin:"lóutī",meaning:"stairs",radical:"楼 + 梯",sentence:"我爬楼梯。",sentenceEn:"I climb stairs.",twin:"梯"},
+{id:"h3_263",hsk:3,hanzi:"窗户",pinyin:"chuānghu",meaning:"window",radical:"窗 + 户",sentence:"请开窗。",sentenceEn:"Please open the window.",twin:"窗"},
+{id:"h3_264",hsk:3,hanzi:"门",pinyin:"mén",meaning:"door",radical:"门",sentence:"请关门。",sentenceEn:"Please close the door.",twin:"们"},
+{id:"h3_265",hsk:3,hanzi:"钥匙",pinyin:"yàoshi",meaning:"key",radical:"钥 + 匙",sentence:"我忘带钥匙了。",sentenceEn:"I forgot my keys.",twin:"匙"},
+{id:"h3_266",hsk:3,hanzi:"锁",pinyin:"suǒ",meaning:"lock",radical:"钅+ 锁",sentence:"请锁门。",sentenceEn:"Please lock the door.",twin:"所"},
+{id:"h3_267",hsk:3,hanzi:"床",pinyin:"chuáng",meaning:"bed",radical:"广 + 木",sentence:"我在床上。",sentenceEn:"I'm in bed.",twin:"庄"},
+{id:"h3_268",hsk:3,hanzi:"被子",pinyin:"bèizi",meaning:"quilt",radical:"被 + 子",sentence:"请盖被子。",sentenceEn:"Please use the quilt.",twin:"被"},
+{id:"h3_269",hsk:3,hanzi:"枕头",pinyin:"zhěntou",meaning:"pillow",radical:"枕 + 头",sentence:"我换个枕头。",sentenceEn:"I'll change the pillow.",twin:"枕"},
+{id:"h3_270",hsk:3,hanzi:"毛巾",pinyin:"máojīn",meaning:"towel",radical:"毛 + 巾",sentence:"请用毛巾。",sentenceEn:"Please use a towel.",twin:"巾"},
+{id:"h3_271",hsk:3,hanzi:"肥皂",pinyin:"féizào",meaning:"soap",radical:"肥 + 皂",sentence:"请用肥皂。",sentenceEn:"Please use soap.",twin:"皂"},
+{id:"h3_272",hsk:3,hanzi:"牙膏",pinyin:"yágāo",meaning:"toothpaste",radical:"牙 + 膏",sentence:"我买牙膏。",sentenceEn:"I buy toothpaste.",twin:"膏"},
+{id:"h3_273",hsk:3,hanzi:"牙刷",pinyin:"yáshuā",meaning:"toothbrush",radical:"牙 + 刷",sentence:"我买牙刷。",sentenceEn:"I buy a toothbrush.",twin:"刷"},
+{id:"h3_274",hsk:3,hanzi:"洗发水",pinyin:"xǐfàshuǐ",meaning:"shampoo",radical:"洗 + 发 + 水",sentence:"我买洗发水。",sentenceEn:"I buy shampoo.",twin:"洗"},
+{id:"h3_275",hsk:3,hanzi:"镜子",pinyin:"jìngzi",meaning:"mirror",radical:"镜 + 子",sentence:"我在照镜子。",sentenceEn:"I'm looking in the mirror.",twin:"镜"},
+{id:"h3_276",hsk:3,hanzi:"梳子",pinyin:"shūzi",meaning:"comb",radical:"梳 + 子",sentence:"我用梳子。",sentenceEn:"I use a comb.",twin:"梳"},
+{id:"h3_277",hsk:3,hanzi:"伞",pinyin:"sǎn",meaning:"umbrella",radical:"人 + 十",sentence:"请带伞。",sentenceEn:"Please bring an umbrella.",twin:"散"},
+{id:"h3_278",hsk:3,hanzi:"包",pinyin:"bāo",meaning:"bag",radical:"勹 + 巳",sentence:"我买包。",sentenceEn:"I buy a bag.",twin:"抱"},
+{id:"h3_279",hsk:3,hanzi:"钱包",pinyin:"qiánbāo",meaning:"wallet",radical:"钱 + 包",sentence:"我忘带钱包了。",sentenceEn:"I forgot my wallet.",twin:"包"},
+{id:"h3_280",hsk:3,hanzi:"信用卡",pinyin:"xìnyòngkǎ",meaning:"credit card",radical:"信 + 用 + 卡",sentence:"我用信用卡。",sentenceEn:"I use a credit card.",twin:"卡"},
+{id:"h3_281",hsk:3,hanzi:"护照",pinyin:"hùzhào",meaning:"passport",radical:"护 + 照",sentence:"我带护照。",sentenceEn:"I bring my passport.",twin:"照"},
+{id:"h3_282",hsk:3,hanzi:"签证",pinyin:"qiānzhèng",meaning:"visa",radical:"签 + 证",sentence:"我办签证。",sentenceEn:"I get a visa.",twin:"证"},
+{id:"h3_283",hsk:3,hanzi:"机票",pinyin:"jīpiào",meaning:"plane ticket",radical:"机 + 票",sentence:"我买机票。",sentenceEn:"I buy a plane ticket.",twin:"票"},
+{id:"h3_284",hsk:3,hanzi:"行李箱",pinyin:"xínglǐxiāng",meaning:"luggage",radical:"行 + 李 + 箱",sentence:"我带行李箱。",sentenceEn:"I bring luggage.",twin:"箱"},
+{id:"h3_285",hsk:3,hanzi:"地图",pinyin:"dìtú",meaning:"map",radical:"地 + 图",sentence:"我有地图。",sentenceEn:"I have a map.",twin:"图"},
+{id:"h3_286",hsk:3,hanzi:"指南",pinyin:"zhǐnán",meaning:"guide",radical:"指 + 南",sentence:"这是旅游指南。",sentenceEn:"This is a travel guide.",twin:"南"},
+{id:"h3_287",hsk:3,hanzi:"景点",pinyin:"jǐngdiǎn",meaning:"scenic spot",radical:"景 + 点",sentence:"这是著名景点。",sentenceEn:"This is a famous spot.",twin:"点"},
+{id:"h3_288",hsk:3,hanzi:"博物馆",pinyin:"bówùguǎn",meaning:"museum",radical:"博 + 物 + 馆",sentence:"我去博物馆。",sentenceEn:"I go to the museum.",twin:"馆"},
+{id:"h3_289",hsk:3,hanzi:"公园",pinyin:"gōngyuán",meaning:"park",radical:"公 + 园",sentence:"我去公园。",sentenceEn:"I go to the park.",twin:"园"},
+{id:"h3_290",hsk:3,hanzi:"动物园",pinyin:"dòngwùyuán",meaning:"zoo",radical:"动 + 物 + 园",sentence:"我去动物园。",sentenceEn:"I go to the zoo.",twin:"园"},
+{id:"h3_291",hsk:3,hanzi:"植物",pinyin:"zhíwù",meaning:"plant",radical:"植 + 物",sentence:"我喜欢植物。",sentenceEn:"I like plants.",twin:"物"},
+{id:"h3_292",hsk:3,hanzi:"动物",pinyin:"dòngwù",meaning:"animal",radical:"动 + 物",sentence:"我喜欢动物。",sentenceEn:"I like animals.",twin:"物"},
+{id:"h3_293",hsk:3,hanzi:"狮子",pinyin:"shīzi",meaning:"lion",radical:"狮 + 子",sentence:"狮子很厉害。",sentenceEn:"Lions are fierce.",twin:"师"},
+{id:"h3_294",hsk:3,hanzi:"老虎",pinyin:"lǎohǔ",meaning:"tiger",radical:"老 + 虎",sentence:"老虎很大。",sentenceEn:"Tigers are big.",twin:"虎"},
+{id:"h3_295",hsk:3,hanzi:"熊猫",pinyin:"xióngmāo",meaning:"panda",radical:"熊 + 猫",sentence:"熊猫很可爱。",sentenceEn:"Pandas are cute.",twin:"猫"},
+{id:"h3_296",hsk:3,hanzi:"大象",pinyin:"dàxiàng",meaning:"elephant",radical:"大 + 象",sentence:"大象很大。",sentenceEn:"Elephants are big.",twin:"象"},
+{id:"h3_297",hsk:3,hanzi:"鸟",pinyin:"niǎo",meaning:"bird",radical:"鸟",sentence:"鸟在飞。",sentenceEn:"Birds are flying.",twin:"乌"},
+{id:"h3_298",hsk:3,hanzi:"蝴蝶",pinyin:"húdié",meaning:"butterfly",radical:"虫 + 胡 + 虫 + 枼",sentence:"蝴蝶很美。",sentenceEn:"Butterflies are beautiful.",twin:"蝶"},
+{id:"h3_299",hsk:3,hanzi:"太阳",pinyin:"tàiyáng",meaning:"sun",radical:"太 + 阳",sentence:"太阳很大。",sentenceEn:"The sun is bright.",twin:"阳"},
+{id:"h3_300",hsk:3,hanzi:"月亮",pinyin:"yuèliang",meaning:"moon",radical:"月 + 亮",sentence:"月亮很圆。",sentenceEn:"The moon is round.",twin:"亮"}
 ];
 
-/* Tone drills (expanded) */
 const TONE_DRILLS = [
-  { audio:"买东西", options:["mǎi dōngxi (3+1) — buy things","mài dōngxi (4+1) — sell things","mái dōngxi (2+1)"], answer:0 },
-  { audio:"中国", options:["zhōngguó (1+2) — China","zhǒngguò (3+4)","zhòngguō (4+1)"], answer:0 },
-  { audio:"你好", options:["ní hǎo (2+3 sandhi) — Hello","nì hào (4+4)","nī hāo (1+1)"], answer:0 },
-  { audio:"天气", options:["tiānqì (1+4) — weather","tiánqǐ (2+3)","tiǎnqī (3+1)"], answer:0 },
-  { audio:"咖啡", options:["kāfēi (1+1) — coffee","kǎféi (3+2)","kàfèi (4+4)"], answer:0 },
-  { audio:"朋友", options:["péngyou (2+neutral) — friend","pěngyǒu (3+3)","pèngyòu (4+4)"], answer:0 },
-  { audio:"谢谢", options:["xièxie (4+neutral) — thanks","xiéxie (2+neutral)","xiěxiě (3+3)"], answer:0 },
-  { audio:"学生", options:["xuésheng (2+neutral) — student","xuěshēng (3+1)","xuéshèng (2+4)"], answer:0 },
-  { audio:"决定", options:["juédìng (2+4) — decide","juédīng (2+1)","juědìng (3+4)"], answer:0 },
-  { audio:"虽然", options:["suīrán (1+2) — although","suǐrǎn (3+3)","suìràn (4+4)"], answer:0 },
+{ audio:"买东西", options:["mǎi dōngxi (3+1) — buy things","mài dōngxi (4+1) — sell things","mái dōngxi (2+1)"], answer:0 },
+{ audio:"中国", options:["zhōngguó (1+2) — China","zhǒngguò (3+4)","zhòngguō (4+1)"], answer:0 },
+{ audio:"你好", options:["ní hǎo (2+3 sandhi) — Hello","nì hào (4+4)","nī hāo (1+1)"], answer:0 },
+{ audio:"天气", options:["tiānqì (1+4) — weather","tiánqǐ (2+3)","tiǎnqī (3+1)"], answer:0 },
+{ audio:"咖啡", options:["kāfēi (1+1) — coffee","kǎféi (3+2)","kàfèi (4+4)"], answer:0 },
+{ audio:"朋友", options:["péngyou (2+neutral) — friend","pěngyǒu (3+3)","pèngyòu (4+4)"], answer:0 },
+{ audio:"谢谢", options:["xièxie (4+neutral) — thanks","xiéxie (2+neutral)","xiěxiě (3+3)"], answer:0 },
+{ audio:"学生", options:["xuésheng (2+neutral) — student","xuěshēng (3+1)","xuéshèng (2+4)"], answer:0 },
+{ audio:"决定", options:["juédìng (2+4) — decide","juédīng (2+1)","juědìng (3+4)"], answer:0 },
+{ audio:"虽然", options:["suīrán (1+2) — although","suǐrǎn (3+3)","suìràn (4+4)"], answer:0 },
+{ audio:"复杂", options:["fùzá (4+2) — complicated","fǔzǎ (3+3)","fúzā (2+1)"], answer:0 },
+{ audio:"提高", options:["tígāo (2+1) — improve","tǐgǎo (3+3)","tìgào (4+4)"], answer:0 }
 ];
 
-/* Cloze drills (expanded) */
 const CLOZE_DRILLS = [
-  { hsk:1, prompt:"我明天 ___ 北京看朋友。", hint:"I'm going to Beijing tomorrow to see a friend.", full:"我明天去北京看朋友。", options:["去 (go)","在 (at)","是 (am)"], answer:0, explain:"Use 去 (qù) for movement toward a destination." },
-  { hsk:1, prompt:"他昨天 ___ 了一本汉语书。", hint:"He bought a Chinese book yesterday.", full:"他昨天买了一本汉语书。", options:["买 (buy)","卖 (sell)","喝 (drink)"], answer:0, explain:"买 (mǎi, 3rd tone) = buy; 卖 (mài, 4th tone, with 十 on top) = sell." },
-  { hsk:1, prompt:"今天工作 ___ 忙。", hint:"Work is very busy today.", full:"今天工作很忙。", options:["很 (very)","是 (to be)","有 (have)"], answer:0, explain:"Chinese adjectives like 忙 don't take 是; use 很 before them." },
-  { hsk:2, prompt:"她 ___ 说汉语，也会说英语。", hint:"She can speak Chinese, and also English.", full:"她会说汉语，也会说英语。", options:["会 (can)","正在 (-ing)","比 (than)"], answer:0, explain:"Use 会 (huì) for learned skills like speaking a language." },
-  { hsk:2, prompt:"飞机 ___ 火车快。", hint:"Airplanes are faster than trains.", full:"飞机比火车快。", options:["比 (than)","因为 (because)","在 (at)"], answer:0, explain:"A + 比 + B + Adj is the standard comparison structure." },
-  { hsk:3, prompt:"___ 下雨，所以我今天在家看书。", hint:"Because it's raining, I'm reading at home today.", full:"因为下雨，所以我今天在家看书。", options:["因为 (Because)","所以 (Therefore)","可以 (May)"], answer:0, explain:"因为 (because) pairs with 所以 (therefore)." },
-  { hsk:3, prompt:"___ 我很累，但是我还是去运动了。", hint:"Although I was tired, I still exercised.", full:"虽然我很累，但是我还是去运动了。", options:["虽然 (Although)","因为 (Because)","如果 (If)"], answer:0, explain:"虽然 (although) pairs with 但是 (but)." },
-  { hsk:3, prompt:"___ 明天下雨，我们就不去公园了。", hint:"If it rains tomorrow, we won't go to the park.", full:"如果明天下雨，我们就不去公园了。", options:["如果 (If)","虽然 (Although)","因为 (Because)"], answer:0, explain:"如果 (if) ... 就 (then) is the conditional structure." },
+{ hsk:1, prompt:"我明天 ___ 北京看朋友。", hint:"I'm going to Beijing tomorrow.", full:"我明天去北京看朋友。", options:["去 (go)","在 (at)","是 (am)"], answer:0, explain:"Use 去 for movement toward a destination." },
+{ hsk:1, prompt:"他昨天 ___ 了一本汉语书。", hint:"He bought a Chinese book yesterday.", full:"他昨天买了一本汉语书。", options:["买 (buy)","卖 (sell)","喝 (drink)"], answer:0, explain:"买 (mǎi, 3rd tone) = buy; 卖 (mài, 4th tone) = sell." },
+{ hsk:1, prompt:"今天工作 ___ 忙。", hint:"Work is very busy today.", full:"今天工作很忙。", options:["很 (very)","是 (to be)","有 (have)"], answer:0, explain:"Chinese adjectives don't take 是; use 很 before them." },
+{ hsk:2, prompt:"她 ___ 说汉语，也会说英语。", hint:"She can speak Chinese and English.", full:"她会说汉语，也会说英语。", options:["会 (can)","正在 (-ing)","比 (than)"], answer:0, explain:"Use 会 for learned skills." },
+{ hsk:2, prompt:"飞机 ___ 火车快。", hint:"Airplanes are faster than trains.", full:"飞机比火车快。", options:["比 (than)","因为 (because)","在 (at)"], answer:0, explain:"A + 比 + B + Adj = comparison." },
+{ hsk:3, prompt:"___ 下雨，所以我今天在家看书。", hint:"Because it's raining, I'm reading at home.", full:"因为下雨，所以我今天在家看书。", options:["因为 (Because)","所以 (Therefore)","可以 (May)"], answer:0, explain:"因为 pairs with 所以." },
+{ hsk:3, prompt:"___ 我很累，但是我还是去运动了。", hint:"Although tired, I still exercised.", full:"虽然我很累，但是我还是去运动了。", options:["虽然 (Although)","因为 (Because)","如果 (If)"], answer:0, explain:"虽然 pairs with 但是." },
+{ hsk:3, prompt:"___ 明天下雨，我们就不去公园了。", hint:"If it rains, we won't go.", full:"如果明天下雨，我们就不去公园了。", options:["如果 (If)","虽然 (Although)","因为 (Because)"], answer:0, explain:"如果 ... 就 = conditional." },
+{ hsk:3, prompt:"他___ 努力，所以成功了。", hint:"He worked hard, so he succeeded.", full:"他很努力，所以成功了。", options:["很 (very)","在 (at)","有 (have)"], answer:0, explain:"很 intensifies adjectives." },
+{ hsk:3, prompt:"我___ 你去中国旅游。", hint:"I hope you travel to China.", full:"我希望你去中国旅游。", options:["希望 (hope)","决定 (decide)","发现 (discover)"], answer:0, explain:"希望 expresses hope/wish." }
 ];
 
-/* Graded reader stories */
 const STORIES = [
-  {
-    title:"HSK 1: 在咖啡店 (At the Coffee Shop)",
-    tokens:[
-      {w:"今天",p:"jīntiān",m:"today",r:"人 + 大"},
-      {w:"我",p:"wǒ",m:"I",r:"手"},
-      {w:"很",p:"hěn",m:"very",r:"彳+ 艮"},
-      {w:"忙",p:"máng",m:"busy",r:"忄+ 亡"},
-      {w:"。",p:"",m:"",r:""},
-      {w:"下午",p:"xiàwǔ",m:"afternoon",r:"下 + 午"},
-      {w:"我",p:"wǒ",m:"I",r:"手"},
-      {w:"去",p:"qù",m:"go",r:"土 + 厶"},
-      {w:"商店",p:"shāngdiàn",m:"shop",r:"广 + 占"},
-      {w:"喝",p:"hē",m:"drink",r:"口 + 曷"},
-      {w:"茶",p:"chá",m:"tea",r:"艹 + 人 + 木"},
-      {w:"。",p:"",m:"",r:""}
-    ],
-    en:"Today I'm very busy. In the afternoon I go to the shop to drink tea."
-  },
-  {
-    title:"HSK 2: 买礼物 (Buying a Gift)",
-    tokens:[
-      {w:"昨天",p:"zuótiān",m:"yesterday",r:"日 + 乍"},
-      {w:"是",p:"shì",m:"was",r:"日"},
-      {w:"妈妈",p:"māma",m:"mom",r:"女 + 马"},
-      {w:"的",p:"de",m:"(possessive)",r:"白 + 勺"},
-      {w:"生日",p:"shēngrì",m:"birthday",r:"生 + 日"},
-      {w:"。",p:"",m:"",r:""},
-      {w:"我",p:"wǒ",m:"I",r:"手"},
-      {w:"买",p:"mǎi",m:"bought",r:"乛 + 头"},
-      {w:"了",p:"le",m:"(completed)",r:"乙"},
-      {w:"中国",p:"Zhōngguó",m:"China",r:"囗 + 玉"},
-      {w:"茶",p:"chá",m:"tea",r:"艹 + 人 + 木"},
-      {w:"，",p:"",m:"",r:""},
-      {w:"她",p:"tā",m:"she",r:"女 + 也"},
-      {w:"很",p:"hěn",m:"very",r:"彳+ 艮"},
-      {w:"高兴",p:"gāoxìng",m:"happy",r:"高 + 八"},
-      {w:"。",p:"",m:"",r:""}
-    ],
-    en:"Yesterday was Mom's birthday. I bought Chinese tea, and she was very happy."
-  },
-  {
-    title:"HSK 3: 周末计划 (Weekend Plans)",
-    tokens:[
-      {w:"因为",p:"yīnwèi",m:"because",r:"囗 + 大 + 女"},
-      {w:"今天",p:"jīntiān",m:"today",r:"人 + 大"},
-      {w:"天气",p:"tiānqì",m:"weather",r:"大 + 气"},
-      {w:"比",p:"bǐ",m:"than",r:"比"},
-      {w:"昨天",p:"zuótiān",m:"yesterday",r:"日 + 乍"},
-      {w:"冷",p:"lěng",m:"cold",r:"冫+ 令"},
-      {w:"，",p:"",m:"",r:""},
-      {w:"所以",p:"suǒyǐ",m:"therefore",r:"户 + 斤 + 人"},
-      {w:"我",p:"wǒ",m:"I",r:"手"},
-      {w:"决定",p:"juédìng",m:"decided",r:"冫+ 夬 + 宀"},
-      {w:"在",p:"zài",m:"at",r:"土"},
-      {w:"家",p:"jiā",m:"home",r:"宀 + 豕"},
-      {w:"听",p:"tīng",m:"listen",r:"口 + 斤"},
-      {w:"音乐",p:"yīnyuè",m:"music",r:"音 + 木"},
-      {w:"。",p:"",m:"",r:""}
-    ],
-    en:"Because today's weather is colder than yesterday's, I decided to stay home and listen to music."
-  }
+{ title:"HSK 1: 在咖啡店", tokens:[{w:"今天",p:"jīntiān",m:"today",r:"人+大"},{w:"我",p:"wǒ",m:"I",r:"手"},{w:"很",p:"hěn",m:"very",r:"彳+艮"},{w:"忙",p:"máng",m:"busy",r:"忄+亡"},{w:"。",p:"",m:"",r:""},{w:"下午",p:"xiàwǔ",m:"afternoon",r:"下+午"},{w:"我",p:"wǒ",m:"I",r:"手"},{w:"去",p:"qù",m:"go",r:"土+厶"},{w:"商店",p:"shāngdiàn",m:"shop",r:"广+占"},{w:"喝",p:"hē",m:"drink",r:"口+曷"},{w:"茶",p:"chá",m:"tea",r:"艹+人+木"},{w:"。",p:"",m:"",r:""}], en:"Today I'm very busy. In the afternoon I go to the shop to drink tea." },
+{ title:"HSK 2: 买礼物", tokens:[{w:"昨天",p:"zuótiān",m:"yesterday",r:"日+乍"},{w:"是",p:"shì",m:"was",r:"日"},{w:"妈妈",p:"māma",m:"mom",r:"女+马"},{w:"的",p:"de",m:"(possessive)",r:"白+勺"},{w:"生日",p:"shēngrì",m:"birthday",r:"生+日"},{w:"。",p:"",m:"",r:""},{w:"我",p:"wǒ",m:"I",r:"手"},{w:"买",p:"mǎi",m:"bought",r:"乛+头"},{w:"了",p:"le",m:"(completed)",r:"乙"},{w:"中国",p:"Zhōngguó",m:"China",r:"囗+玉"},{w:"茶",p:"chá",m:"tea",r:"艹+人+木"},{w:"，",p:"",m:"",r:""},{w:"她",p:"tā",m:"she",r:"女+也"},{w:"很",p:"hěn",m:"very",r:"彳+艮"},{w:"高兴",p:"gāoxìng",m:"happy",r:"高+八"},{w:"。",p:"",m:"",r:""}], en:"Yesterday was Mom's birthday. I bought Chinese tea, and she was very happy." },
+{ title:"HSK 3: 周末计划", tokens:[{w:"因为",p:"yīnwèi",m:"because",r:"囗+大+女"},{w:"今天",p:"jīntiān",m:"today",r:"人+大"},{w:"天气",p:"tiānqì",m:"weather",r:"大+气"},{w:"比",p:"bǐ",m:"than",r:"比"},{w:"昨天",p:"zuótiān",m:"yesterday",r:"日+乍"},{w:"冷",p:"lěng",m:"cold",r:"冫+令"},{w:"，",p:"",m:"",r:""},{w:"所以",p:"suǒyǐ",m:"therefore",r:"户+斤+人"},{w:"我",p:"wǒ",m:"I",r:"手"},{w:"决定",p:"juédìng",m:"decided",r:"冫+夬+宀"},{w:"在",p:"zài",m:"at",r:"土"},{w:"家",p:"jiā",m:"home",r:"宀+豕"},{w:"听",p:"tīng",m:"listen",r:"口+斤"},{w:"音乐",p:"yīnyuè",m:"music",r:"音+木"},{w:"。",p:"",m:"",r:""}], en:"Because today's weather is colder than yesterday, I decided to stay home and listen to music." },
+{ title:"HSK 3: 学习经验", tokens:[{w:"学习",p:"xuéxí",m:"study",r:"学+习"},{w:"汉语",p:"Hànyǔ",m:"Chinese",r:"汉+语"},{w:"需要",p:"xūyào",m:"need",r:"雨+而+要"},{w:"很多",p:"hěnduō",m:"a lot",r:"很+多"},{w:"时间",p:"shíjiān",m:"time",r:"日+寸+门+日"},{w:"和",p:"hé",m:"and",r:"禾+口"},{w:"努力",p:"nǔlì",m:"effort",r:"奴+力"},{w:"。",p:"",m:"",r:""},{w:"虽然",p:"suīrán",m:"although",r:"虫+肰"},{w:"很",p:"hěn",m:"very",r:"彳+艮"},{w:"难",p:"nán",m:"hard",r:"又+隹"},{w:"，",p:"",m:"",r:""},{w:"但是",p:"dànshì",m:"but",r:"旦+是"},{w:"我",p:"wǒ",m:"I",r:"手"},{w:"决定",p:"juédìng",m:"decided",r:"冫+夬+宀"},{w:"坚持",p:"jiānchí",m:"persist",r:"坚+持"},{w:"下去",p:"xiàqù",m:"continue",r:"下+去"},{w:"。",p:"",m:"",r:""}], en:"Studying Chinese needs a lot of time and effort. Although it's hard, I decided to keep going." }
 ];
 
-/* ============================================================
-   APP STATE & CORE LOGIC
-   ============================================================ */
-let state = JSON.parse(localStorage.getItem("hanziflow_v2")) || {
-  progress: {},
-  streak: 1,
-  lastDay: new Date().toDateString(),
-  secondsToday: 0,
-  correctCount: 0,
-  totalAttempts: 0
-};
-if (state.lastDay !== new Date().toDateString()) {
-  state.streak += 1;
-  state.secondsToday = 0;
-  state.lastDay = new Date().toDateString();
-}
-function saveState() {
-  localStorage.setItem("hanziflow_v2", JSON.stringify(state));
-  updateStatsUI();
-}
-setInterval(() => {
-  state.secondsToday += 1;
-  const mins = String(Math.floor(state.secondsToday/60)).padStart(2,"0");
-  const secs = String(state.secondsToday%60).padStart(2,"0");
-  document.getElementById("stat-timer").textContent = `${mins}:${secs}`;
-  if (state.secondsToday % 15 === 0) saveState();
-}, 1000);
+let state = JSON.parse(localStorage.getItem("hanziflow_v2")) || { progress:{}, streak:1, lastDay:new Date().toDateString(), secondsToday:0, correctCount:0, totalAttempts:0 };
+if (state.lastDay !== new Date().toDateString()) { state.streak += 1; state.secondsToday = 0; state.lastDay = new Date().toDateString(); }
+function saveState() { localStorage.setItem("hanziflow_v2", JSON.stringify(state)); updateStatsUI(); }
+setInterval(() => { state.secondsToday += 1; const m = String(Math.floor(state.secondsToday/60)).padStart(2,"0"); const s = String(state.secondsToday%60).padStart(2,"0"); document.getElementById("stat-timer").textContent = `${m}:${s}`; if (state.secondsToday % 15 === 0) saveState(); }, 1000);
 function updateStatsUI() {
   document.getElementById("stat-streak").textContent = state.streak + "d";
-  const mastered = Object.values(state.progress).filter(p => p.reps >= 2).length;
-  document.getElementById("stat-mastered").textContent = mastered;
+  document.getElementById("stat-mastered").textContent = Object.values(state.progress).filter(p => p.reps >= 2).length;
   const acc = state.totalAttempts === 0 ? 100 : Math.round((state.correctCount/state.totalAttempts)*100);
   document.getElementById("stat-accuracy").textContent = acc + "%";
 }
 function speakText(text, rate=0.9) {
   if (!("speechSynthesis" in window)) return;
   window.speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.lang = "zh-CN";
-  utter.rate = rate;
-  window.speechSynthesis.speak(utter);
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "zh-CN"; u.rate = rate;
+  window.speechSynthesis.speak(u);
 }
 
-/* Filtered deck */
 let filteredDeck = [...VOCAB];
 let currentIdx = 0;
 let isFlipped = false;
 let reverseMode = false;
-function getCardProg(id) {
-  if (!state.progress[id]) state.progress[id] = { reps:0, interval:0, misses:0, nextReview:0 };
-  return state.progress[id];
-}
+function getCardProg(id) { if (!state.progress[id]) state.progress[id] = { reps:0, interval:0, misses:0, nextReview:0 }; return state.progress[id]; }
 function applyFilter() {
   const phase = document.getElementById("phase-filter").value;
   const mode = document.getElementById("deck-mode").value;
@@ -575,114 +866,56 @@ function applyFilter() {
   if (filteredDeck.length === 0) filteredDeck = [...VOCAB];
   currentIdx = 0;
   renderCard();
-  renderLeechList();
 }
-function toggleReverse() {
-  reverseMode = !reverseMode;
-  document.getElementById("btn-reverse").textContent = reverseMode ? "Mode: EN → CN" : "Mode: CN → EN";
-  renderCard();
-}
-function hskBadge(hsk) {
-  return `<span class="badge hsk${hsk}">HSK ${hsk}</span>`;
-}
+function toggleReverse() { reverseMode = !reverseMode; document.getElementById("btn-reverse").textContent = reverseMode ? "Mode: EN → CN" : "Mode: CN → EN"; renderCard(); }
+function hskBadge(hsk) { return `<span class="badge hsk${hsk}">HSK ${hsk}</span>`; }
 function renderCard() {
   const card = filteredDeck[currentIdx];
   const prog = getCardProg(card.id);
   isFlipped = false;
   document.getElementById("card-back").classList.add("hidden");
   document.getElementById("card-counter").textContent = `Card ${currentIdx+1} of ${filteredDeck.length}`;
-  const leechBadge = prog.misses >= 2
-    ? `<span class="badge leech">⚠️ Trouble (${prog.misses} misses)</span>`
-    : hskBadge(card.hsk);
+  const leechBadge = prog.misses >= 2 ? `<span class="badge leech">⚠️ Trouble (${prog.misses} misses)</span>` : hskBadge(card.hsk);
   if (!reverseMode) {
-    document.getElementById("card-front").innerHTML = `
-      ${leechBadge}
-      <div class="hanzi-big">${card.hanzi}</div>
-      <button class="audio-btn" onclick="event.stopPropagation();speakText('${card.hanzi}')">🔊 Listen</button>
-      <p style="color:var(--muted);font-size:0.8rem;margin-top:14px;">Tap card to reveal</p>
-    `;
+    document.getElementById("card-front").innerHTML = `${leechBadge}<div class="hanzi-big">${card.hanzi}</div><button class="audio-btn" onclick="event.stopPropagation();speakText('${card.hanzi}')">🔊 Listen</button><p style="color:var(--muted);font-size:0.8rem;margin-top:14px;">Tap card to reveal</p>`;
   } else {
-    document.getElementById("card-front").innerHTML = `
-      ${leechBadge}
-      <div class="meaning" style="font-size:1.5rem;margin:20px 0;">${card.meaning}</div>
-      <button class="audio-btn" onclick="event.stopPropagation();speakText('${card.hanzi}')">🔊 Audio Hint</button>
-      <p style="color:var(--muted);font-size:0.8rem;margin-top:14px;">Recall the Mandarin</p>
-    `;
+    document.getElementById("card-front").innerHTML = `${leechBadge}<div class="meaning" style="font-size:1.5rem;margin:20px 0;">${card.meaning}</div><button class="audio-btn" onclick="event.stopPropagation();speakText('${card.hanzi}')">🔊 Audio Hint</button><p style="color:var(--muted);font-size:0.8rem;margin-top:14px;">Recall the Mandarin</p>`;
   }
-  document.getElementById("card-back").innerHTML = `
-    <hr style="border:none;border-top:1px solid var(--border);margin:14px 0;">
-    <div class="hanzi-big" style="font-size:2.4rem;">${card.hanzi}</div>
-    <div class="pinyin">${card.pinyin}</div>
-    <div class="meaning">${card.meaning}</div>
-    <div class="radical-box"><strong>Radicals:</strong> ${card.radical}</div>
-    <div style="margin-top:12px;text-align:left;background:#fef2f2;padding:10px;border-radius:10px;">
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-weight:700;font-size:1.05rem;">${card.sentence}</span>
-        <button class="audio-btn" onclick="event.stopPropagation();speakText('${card.sentence}',0.85)">🔊</button>
-      </div>
-      <div style="font-size:0.84rem;color:var(--muted);margin-top:4px;">${card.sentenceEn}</div>
-    </div>
-  `;
+  document.getElementById("card-back").innerHTML = `<hr style="border:none;border-top:1px solid var(--border);margin:14px 0;"><div class="hanzi-big" style="font-size:2.4rem;">${card.hanzi}</div><div class="pinyin">${card.pinyin}</div><div class="meaning">${card.meaning}</div><div class="radical-box"><strong>Radicals:</strong> ${card.radical}</div><div style="margin-top:12px;text-align:left;background:#fef2f2;padding:10px;border-radius:10px;"><div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-weight:700;font-size:1.05rem;">${card.sentence}</span><button class="audio-btn" onclick="event.stopPropagation();speakText('${card.sentence}',0.85)">🔊</button></div><div style="font-size:0.84rem;color:var(--muted);margin-top:4px;">${card.sentenceEn}</div></div>`;
 }
-function flipCard() {
-  if (isFlipped) return;
-  isFlipped = true;
-  document.getElementById("card-back").classList.remove("hidden");
-  speakText(filteredDeck[currentIdx].hanzi);
-}
+function flipCard() { if (isFlipped) return; isFlipped = true; document.getElementById("card-back").classList.remove("hidden"); speakText(filteredDeck[currentIdx].hanzi); }
 function rateCard(quality) {
   const card = filteredDeck[currentIdx];
   const prog = getCardProg(card.id);
   state.totalAttempts += 1;
-  if (quality === 1) {
-    prog.reps = 0; prog.misses += 1;
-    prog.nextReview = Date.now() + 60*1000;
-  } else {
-    state.correctCount += 1;
-    prog.reps += 1;
-    const days = quality === 2 ? 1 : Math.max(3, prog.reps*3);
-    prog.nextReview = Date.now() + days*24*60*60*1000;
-  }
+  if (quality === 1) { prog.reps = 0; prog.misses += 1; prog.nextReview = Date.now() + 60*1000; }
+  else { state.correctCount += 1; prog.reps += 1; const days = quality === 2 ? 1 : Math.max(3, prog.reps*3); prog.nextReview = Date.now() + days*24*60*60*1000; }
   saveState();
   currentIdx = (currentIdx+1) % filteredDeck.length;
   renderCard();
-  renderLeechList();
 }
 
-/* Tone drills */
 let toneIdx = 0;
 function renderToneDrill() {
   const d = TONE_DRILLS[toneIdx];
   document.getElementById("tone-feedback").textContent = "";
-  const container = document.getElementById("tone-options");
-  container.innerHTML = "";
+  const c = document.getElementById("tone-options");
+  c.innerHTML = "";
   d.options.forEach((opt,i) => {
     const btn = document.createElement("button");
-    btn.className = "quiz-option";
-    btn.textContent = opt;
+    btn.className = "quiz-option"; btn.textContent = opt;
     btn.onclick = () => {
       state.totalAttempts += 1;
-      if (i === d.answer) {
-        btn.classList.add("correct");
-        state.correctCount += 1;
-        document.getElementById("tone-feedback").innerHTML = `<span style="color:var(--success)">✓ Correct! (${d.audio})</span>`;
-      } else {
-        btn.classList.add("wrong");
-        document.getElementById("tone-feedback").innerHTML = `<span style="color:var(--primary)">✗ Listen again: ${d.audio} — ${d.options[d.answer]}</span>`;
-      }
+      if (i === d.answer) { btn.classList.add("correct"); state.correctCount += 1; document.getElementById("tone-feedback").innerHTML = `<span style="color:var(--success)">✓ Correct! (${d.audio})</span>`; }
+      else { btn.classList.add("wrong"); document.getElementById("tone-feedback").innerHTML = `<span style="color:var(--primary)">✗ Listen again: ${d.audio} — ${d.options[d.answer]}</span>`; }
       saveState();
     };
-    container.appendChild(btn);
+    c.appendChild(btn);
   });
 }
 function playToneDrill() { speakText(TONE_DRILLS[toneIdx].audio, 0.8); }
-function nextToneDrill() {
-  toneIdx = (toneIdx+1) % TONE_DRILLS.length;
-  renderToneDrill();
-  playToneDrill();
-}
+function nextToneDrill() { toneIdx = (toneIdx+1) % TONE_DRILLS.length; renderToneDrill(); playToneDrill(); }
 
-/* Cloze */
 let clozeIdx = 0;
 function renderCloze() {
   const c = CLOZE_DRILLS[clozeIdx];
@@ -694,39 +927,23 @@ function renderCloze() {
   box.innerHTML = "";
   c.options.forEach((opt,i) => {
     const btn = document.createElement("button");
-    btn.className = "quiz-option";
-    btn.textContent = opt;
+    btn.className = "quiz-option"; btn.textContent = opt;
     btn.onclick = () => {
       state.totalAttempts += 1;
-      if (i === c.answer) {
-        btn.classList.add("correct");
-        state.correctCount += 1;
-        document.getElementById("cloze-feedback").innerHTML = `<span style="color:var(--success)">✓ ${c.full}</span><br><span style="color:var(--muted)">${c.explain}</span>`;
-      } else {
-        btn.classList.add("wrong");
-        document.getElementById("cloze-feedback").innerHTML = `<span style="color:var(--primary)">✗ ${c.explain}</span>`;
-      }
-      speakText(c.full, 0.85);
-      saveState();
+      if (i === c.answer) { btn.classList.add("correct"); state.correctCount += 1; document.getElementById("cloze-feedback").innerHTML = `<span style="color:var(--success)">✓ ${c.full}</span><br><span style="color:var(--muted)">${c.explain}</span>`; }
+      else { btn.classList.add("wrong"); document.getElementById("cloze-feedback").innerHTML = `<span style="color:var(--primary)">✗ ${c.explain}</span>`; }
+      speakText(c.full, 0.85); saveState();
     };
     box.appendChild(btn);
   });
 }
 function playClozeAudio() { speakText(CLOZE_DRILLS[clozeIdx].full, 0.85); }
-function nextCloze() {
-  clozeIdx = (clozeIdx+1) % CLOZE_DRILLS.length;
-  renderCloze();
-}
+function nextCloze() { clozeIdx = (clozeIdx+1) % CLOZE_DRILLS.length; renderCloze(); }
 
-/* Reader */
 let inspectedToken = null;
 function initReader() {
   const sel = document.getElementById("story-select");
-  STORIES.forEach((s,i) => {
-    const opt = document.createElement("option");
-    opt.value = i; opt.textContent = s.title;
-    sel.appendChild(opt);
-  });
+  STORIES.forEach((s,i) => { const opt = document.createElement("option"); opt.value = i; opt.textContent = s.title; sel.appendChild(opt); });
   loadStory();
 }
 function loadStory() {
@@ -738,8 +955,7 @@ function loadStory() {
   s.tokens.forEach(tok => {
     if (!tok.p) { body.appendChild(document.createTextNode(tok.w)); return; }
     const span = document.createElement("span");
-    span.className = "word-token";
-    span.textContent = tok.w;
+    span.className = "word-token"; span.textContent = tok.w;
     span.onclick = () => {
       document.querySelectorAll(".word-token").forEach(el => el.classList.remove("active"));
       span.classList.add("active");
@@ -754,47 +970,14 @@ function loadStory() {
     body.appendChild(span);
   });
 }
-function readFullStory() {
-  const s = STORIES[document.getElementById("story-select").value];
-  speakText(s.tokens.map(t=>t.w).join(""), 0.85);
-}
+function readFullStory() { speakText(STORIES[document.getElementById("story-select").value].tokens.map(t=>t.w).join(""), 0.85); }
 function flagCurrentInspected() {
   if (!inspectedToken) return;
   const match = VOCAB.find(v => v.hanzi === inspectedToken.w);
-  if (match) {
-    getCardProg(match.id).misses += 2;
-    saveState();
-    renderLeechList();
-    alert(`Added "${inspectedToken.w}" to your Trouble Words deck!`);
-  } else {
-    alert(`"${inspectedToken.w}" (${inspectedToken.p} — ${inspectedToken.m}) noted!`);
-  }
+  if (match) { getCardProg(match.id).misses += 2; saveState(); alert(`Added "${inspectedToken.w}" to Trouble Words!`); }
+  else { alert(`"${inspectedToken.w}" noted!`); }
 }
 
-/* Leech list */
-function renderLeechList() {
-  const list = document.getElementById("leech-list");
-  const leeches = VOCAB.filter(v => getCardProg(v.id).misses >= 2);
-  if (leeches.length === 0) {
-    list.innerHTML = `<p style="color:var(--success);font-weight:600;">No trouble words yet! Miss a card twice to add it here.</p>`;
-    return;
-  }
-  list.innerHTML = leeches.map(v => `
-    <div style="border-top:1px solid var(--border);padding:12px 0;">
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <strong>${v.hanzi} (${v.pinyin}) — ${v.meaning}</strong>
-        <button class="audio-btn" onclick="speakText('${v.hanzi}')">🔊</button>
-      </div>
-      <div style="font-size:0.84rem;color:var(--muted);margin-top:4px;">Radicals: ${v.radical}</div>
-      <div class="twin-compare">
-        <div class="twin-card"><div style="font-size:1.6rem;font-weight:700;">${v.hanzi}</div><div style="font-size:0.75rem;">Target</div></div>
-        <div class="twin-card"><div style="font-size:1.6rem;font-weight:700;">${v.twin||"—"}</div><div style="font-size:0.75rem;">Look-alike</div></div>
-      </div>
-    </div>
-  `).join("");
-}
-
-/* NEW: Vocabulary browser */
 function renderVocabBrowser() {
   const q = (document.getElementById("vocab-search").value || "").toLowerCase();
   const phase = document.getElementById("phase-filter").value;
@@ -804,35 +987,39 @@ function renderVocabBrowser() {
     return v.hanzi.includes(q) || v.pinyin.toLowerCase().includes(q) || v.meaning.toLowerCase().includes(q);
   });
   document.getElementById("vocab-count").textContent = `${filtered.length} words`;
-  const grid = document.getElementById("vocab-grid");
-  grid.innerHTML = filtered.map(v => `
-    <div class="vocab-tile" onclick="speakText('${v.hanzi}');alert('${v.hanzi} ${v.pinyin}\\n${v.meaning}')">
-      <div class="hz">${v.hanzi}</div>
-      <div class="py">${v.pinyin}</div>
-      <div class="mn">${v.meaning}</div>
-    </div>
-  `).join("");
+  document.getElementById("vocab-grid").innerHTML = filtered.map(v => `<div class="vocab-tile" onclick="speakText('${v.hanzi}');alert('${v.hanzi} ${v.pinyin}\\n${v.meaning}')"><div class="hz">${v.hanzi}</div><div class="py">${v.pinyin}</div><div class="mn">${v.meaning}</div></div>`).join("");
 }
 
-/* Tab switching */
 function switchTab(tab, btn) {
-  ["srs","tones","cloze","reader","leeches","browse"].forEach(t => {
-    document.getElementById("tab-"+t).classList.add("hidden");
-  });
+  ["srs","tones","cloze","reader","browse"].forEach(t => document.getElementById("tab-"+t).classList.add("hidden"));
   document.getElementById("tab-"+tab).classList.remove("hidden");
   document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
   btn.classList.add("active");
   if (tab === "browse") renderVocabBrowser();
 }
 
-function resetProgress() {
-  if (confirm("Reset all saved data?")) {
-    localStorage.removeItem("hanziflow_v2");
-    location.reload();
-  }
+function exportProgress() {
+  const data = JSON.stringify(state, null, 2);
+  const blob = new Blob([data], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = `hanziflow-backup-${new Date().toISOString().slice(0,10)}.json`;
+  a.click(); URL.revokeObjectURL(url);
 }
+function importProgress(event) {
+  const file = event.target.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const imported = JSON.parse(e.target.result);
+      if (imported.progress) { localStorage.setItem("hanziflow_v2", JSON.stringify(imported)); alert("✅ Restored!"); location.reload(); }
+      else alert("❌ Invalid file.");
+    } catch (err) { alert("❌ " + err.message); }
+  };
+  reader.readAsText(file);
+}
+function resetProgress() { if (confirm("Reset all data?")) { localStorage.removeItem("hanziflow_v2"); location.reload(); } }
 
-/* Init */
 updateStatsUI();
 applyFilter();
 renderToneDrill();
