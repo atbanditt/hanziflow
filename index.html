@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="theme-color" content="#b91c1c" />
+<title>HanziFlow — HSK 1–3 Mandarin Mastery</title>
+<style>
+:root {
+  --primary: #b91c1c;
+  --primary-dark: #991b1b;
+  --primary-light: #fef2f2;
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --success: #15803d;
+  --warning: #b45309;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding-bottom: 84px;
+}
+header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  padding: 16px;
+  position: sticky; top: 0; z-index: 20;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+}
+.header-top { display: flex; justify-content: space-between; align-items: center; max-width: 820px; margin: 0 auto; }
+.brand { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; }
+.stats-bar {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+  max-width: 820px; margin: 12px auto 0;
+  background: rgba(255,255,255,0.14); padding: 10px; border-radius: 12px; text-align: center;
+}
+.stat-val { font-size: 1.05rem; font-weight: 700; }
+.stat-lbl { font-size: 0.7rem; opacity: 0.9; text-transform: uppercase; }
+main { max-width: 820px; margin: 16px auto; padding: 0 14px; }
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 18px; margin-bottom: 14px;
+  box-shadow: 0 2px 6px rgba(15,23,42,0.03);
+}
+.controls-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
+select, button {
+  font-family: inherit; font-size: 0.9rem; border-radius: 10px;
+  border: 1px solid var(--border); padding: 8px 12px; background: white;
+  color: var(--text); cursor: pointer;
+}
+button.primary { background: var(--primary); color: white; border-color: var(--primary); font-weight: 600; }
+button.primary:active { transform: scale(0.98); }
+button.audio-btn {
+  background: var(--primary-light); color: var(--primary);
+  border-color: #fecaca; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.flashcard {
+  min-height: 270px; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; text-align: center;
+  cursor: pointer; position: relative; transition: transform 0.15s;
+}
+.hanzi-big { font-size: 3.6rem; font-weight: 700; line-height: 1.2; margin: 10px 0; }
+.pinyin { font-size: 1.25rem; color: var(--primary); font-weight: 600; }
+.meaning { font-size: 1.15rem; font-weight: 600; margin: 6px 0; }
+.badge {
+  display: inline-block; font-size: 0.72rem; font-weight: 700;
+  padding: 3px 8px; border-radius: 999px; background: #f1f5f9; color: var(--muted);
+}
+.badge.leech { background: #fef3c7; color: var(--warning); }
+.badge.hsk1 { background: #dbeafe; color: #1e40af; }
+.badge.hsk2 { background: #fef3c7; color: #92400e; }
+.badge.hsk3 { background: #fce7f3; color: #9f1239; }
+.radical-box {
+  background: #f8fafc; border: 1px dashed #cbd5e1;
+  border-radius: 10px; padding: 10px; margin-top: 10px;
+  font-size: 0.88rem; width: 100%;
+}
+.srs-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+.btn-again { background: #fee2e2; color: #b91c1c; border-color: #fecaca; font-weight: 700; }
+.btn-hard { background: #fef3c7; color: #b45309; border-color: #fde68a; font-weight: 700; }
+.btn-good { background: #dcfce7; color: #15803d; border-color: #bbf7d0; font-weight: 700; }
+.quiz-option {
+  width: 100%; text-align: left; padding: 12px 14px; margin-bottom: 8px;
+  font-size: 1rem; font-weight: 500;
+}
+.quiz-option.correct { background: #dcfce7; border-color: #16a34a; color: #14532d; }
+.quiz-option.wrong { background: #fee2e2; border-color: #dc2626; color: #7f1d1d; }
+.reader-text { font-size: 1.45rem; line-height: 2.2; letter-spacing: 0.04em; }
+.word-token {
+  display: inline-block; padding: 2px 4px; margin: 0 2px;
+  border-radius: 6px; cursor: pointer; border-bottom: 1.5px dotted #94a3b8;
+}
+.word-token:hover, .word-token.active {
+  background: #fef2f2; color: var(--primary); border-bottom-color: var(--primary);
+}
+.inspector-drawer {
+  background: #0f172a; color: white; border-radius: 14px;
+  padding: 14px; margin-top: 14px;
+}
+nav {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: white; border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  padding: 6px 4px; z-index: 30;
+}
+nav button {
+  border: none; background: none;
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  font-size: 0.72rem; color: var(--muted); padding: 6px 2px;
+}
+nav button.active { color: var(--primary); font-weight: 700; }
+.nav-icon { font-size: 1.25rem; }
+.hidden { display: none !important; }
+.twin-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+.twin-card {
+  border: 1px solid var(--border); border-radius: 10px;
+  padding: 10px; text-align: center; background: #fffbeb;
+}
+.search-box {
+  width: 100%; padding: 10px 12px; border: 1px solid var(--border);
+  border-radius: 10px; font-size: 0.95rem; margin-bottom: 10px;
+}
+.vocab-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 8px;
+}
+.vocab-tile {
+  border: 1px solid var(--border); border-radius: 10px;
+  padding: 10px; text-align: center; background: white;
+  cursor: pointer; transition: all 0.15s;
+}
+.vocab-tile:hover { border-color: var(--primary); background: var(--primary-light); }
+.vocab-tile .hz { font-size: 1.4rem; font-weight: 700; }
+.vocab-tile .py { font-size: 0.78rem; color: var(--primary); }
+.vocab-tile .mn { font-size: 0.75rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-top">
+    <div class="brand">汉 HanziFlow <span style="font-weight:400;font-size:0.85rem;opacity:0.85;">HSK 1–3</span></div>
+    <button onclick="resetProgress()" style="background:rgba(255,255,255,0.18);color:white;border:none;font-size:0.75rem;">Reset Data</button>
+  </div>
+  <div class="stats-bar">
+    <div><div class="stat-val" id="stat-streak">1d</div><div class="stat-lbl">Streak</div></div>
+    <div><div class="stat-val" id="stat-timer">00:00</div><div class="stat-lbl">Today</div></div>
+    <div><div class="stat-val" id="stat-mastered">0</div><div class="stat-lbl">Mastered</div></div>
+    <div><div class="stat-val" id="stat-accuracy">100%</div><div class="stat-lbl">Accuracy</div></div>
+  </div>
+</header>
+
+<main>
+  <div class="controls-row">
+    <select id="phase-filter" onchange="applyFilter()">
+      <option value="all">All HSK Levels (1–3)</option>
+      <option value="1">HSK 1 — Survival (~150 words)</option>
+      <option value="2">HSK 2 — Daily Life (~150 words)</option>
+      <option value="3">HSK 3 — Fluency (~300 words)</option>
+    </select>
+    <select id="deck-mode" onchange="applyFilter()">
+      <option value="due">Due & New Cards</option>
+      <option value="leech">Trouble Words (Leeches)</option>
+      <option value="all">All Filtered Cards</option>
+    </select>
+  </div>
+
+  <!-- TAB 1: SRS FLASHCARDS -->
+  <section id="tab-srs">
+    <div class="controls-row" style="justify-content:space-between;">
+      <span class="badge" id="card-counter">Card 1 of 10</span>
+      <button onclick="toggleReverse()" id="btn-reverse">Mode: CN → EN</button>
+    </div>
+    <div class="card flashcard" id="flashcard" onclick="flipCard()">
+      <div id="card-front"></div>
+      <div id="card-back" class="hidden" style="width:100%;"></div>
+    </div>
+    <div class="srs-actions" id="srs-buttons">
+      <button class="btn-again" onclick="rateCard(1)">Again (1m)</button>
+      <button class="btn-hard" onclick="rateCard(2)">Hard (1d)</button>
+      <button class="btn-good" onclick="rateCard(3)">Good (3d+)</button>
+    </div>
+  </section>
+
+  <!-- TAB 2: TONE & LISTENING DRILLS -->
+  <section id="tab-tones" class="hidden">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span class="badge">Tone-Pair Ear Training</span>
+        <button class="audio-btn" onclick="playToneDrill()">🔊 Listen</button>
+      </div>
+      <p style="color:var(--muted);font-size:0.9rem;margin:10px 0;">Listen and select the matching pinyin + tone pattern:</p>
+      <div id="tone-options"></div>
+      <div id="tone-feedback" style="margin-top:10px;font-weight:600;"></div>
+      <button class="primary" style="width:100%;margin-top:12px;" onclick="nextToneDrill()">Next →</button>
+    </div>
+  </section>
+
+  <!-- TAB 3: CLOZE CONTEXT RECALL -->
+  <section id="tab-cloze" class="hidden">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span class="badge" id="cloze-phase-badge">Context Recall</span>
+        <button class="audio-btn" onclick="playClozeAudio()">🔊 Hear Sentence</button>
+      </div>
+      <h2 id="cloze-prompt" style="font-size:1.5rem;margin:16px 0 6px;"></h2>
+      <p id="cloze-hint" style="color:var(--muted);margin:0 0 14px;"></p>
+      <div id="cloze-options"></div>
+      <div id="cloze-feedback" style="margin-top:10px;font-size:0.92rem;"></div>
+      <button class="primary" style="width:100%;margin-top:12px;" onclick="nextCloze()">Next →</button>
+    </div>
+  </section>
+
+  <!-- TAB 4: INTERACTIVE GRADED READER -->
+  <section id="tab-reader" class="hidden">
+    <div class="card">
+      <div class="controls-row" style="justify-content:space-between;">
+        <select id="story-select" onchange="loadStory()"></select>
+        <button class="audio-btn" onclick="readFullStory()">🔊 Read Story</button>
+      </div>
+      <p style="font-size:0.82rem;color:var(--muted);margin-top:0;">Tap any word to inspect it.</p>
+      <div id="reader-body" class="reader-text"></div>
+      <div id="word-inspector" class="inspector-drawer hidden">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <span id="insp-hanzi" style="font-size:1.6rem;font-weight:700;"></span>
+            <span id="insp-pinyin" style="color:#fca5a5;margin-left:8px;font-weight:600;"></span>
+          </div>
+          <button class="audio-btn" onclick="speakText(document.getElementById('insp-hanzi').textContent)">🔊</button>
+        </div>
+        <div id="insp-meaning" style="margin:6px 0;font-weight:600;"></div>
+        <div id="insp-radical" style="font-size:0.82rem;color:#cbd5e1;"></div>
+        <button onclick="flagCurrentInspected()" style="margin-top:10px;background:#b91c1c;color:white;border:none;font-size:0.8rem;">+ Add to Trouble Queue</button>
+      </div>
+      <div style="margin-top:14px;">
+        <button onclick="document.getElementById('story-en').classList.toggle('hidden')" style="font-size:0.82rem;">Toggle English Translation</button>
+        <p id="story-en" class="hidden" style="color:var(--muted);font-size:0.92rem;line-height:1.6;margin-top:8px;"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 5: LEECH / TROUBLE WORDS -->
+  <section id="tab-leeches" class="hidden">
+    <div class="card">
+      <h3 style="margin-top:0;">Trouble Words</h3>
+      <p style="color:var(--muted);font-size:0.88rem;">Cards missed 2+ times appear here with look-alike comparisons.</p>
+      <div id="leech-list"></div>
+    </div>
+  </section>
+
+  <!-- TAB 6: VOCAB BROWSER (NEW) -->
+  <section id="tab-browse" class="hidden">
+    <div class="card">
+      <h3 style="margin-top:0;">Vocabulary Browser</h3>
+      <input type="text" class="search-box" id="vocab-search" placeholder="Search by hanzi, pinyin, or English..." oninput="renderVocabBrowser()">
+      <div style="font-size:0.82rem;color:var(--muted);margin-bottom:10px;" id="vocab-count"></div>
+      <div class="vocab-grid" id="vocab-grid"></div>
+    </div>
+  </section>
+</main>
+
+<nav>
+  <button class="active" onclick="switchTab('srs', this)"><span class="nav-icon">🗂️</span>Cards</button>
+  <button onclick="switchTab('tones', this)"><span class="nav-icon">🎧</span>Tones</button>
+  <button onclick="switchTab('cloze', this)"><span class="nav-icon">✍️</span>Context</button>
+  <button onclick="switchTab('reader', this)"><span class="nav-icon">📖</span>Reader</button>
+  <button onclick="switchTab('browse', this)"><span class="nav-icon">📚</span>Browse</button>
+</nav>
+
+<script>
+/* ============================================================
+   HSK VOCABULARY DATABASE
+   Structure: { id, hsk (1|2|3), topic, hanzi, pinyin, meaning,
+                radical, sentence, sentenceEn, twin }
+   ============================================================ */
+const VOCAB = [
+  // ====== HSK 1 — GREETINGS & PRONOUNS ======
+  { id:"h1_001", hsk:1, topic:"greetings", hanzi:"你好", pinyin:"nǐ hǎo", meaning:"hello", radical:"亻+ 尔 | 女 + 子", sentence:"你好！你叫什么名字？", sentenceEn:"Hello! What's your name?", twin:"您好" },
+  { id:"h1_002", hsk:1, topic:"greetings", hanzi:"谢谢", pinyin:"xièxie", meaning:"thank you", radical:"讠+ 射 | 心 (heart)", sentence:"谢谢你的帮助。", sentenceEn:"Thank you for your help.", twin:"不" },
+  { id:"h1_003", hsk:1, topic:"greetings", hanzi:"再见", pinyin:"zàijiàn", meaning:"goodbye", radical:"一 + 冉 + 见", sentence:"明天再见！", sentenceEn:"See you tomorrow!", twin:"再" },
+  { id:"h1_004", hsk:1, topic:"pronouns", hanzi:"我", pinyin:"wǒ", meaning:"I / me", radical:"手 (hand)", sentence:"我是学生。", sentenceEn:"I am a student.", twin:"找" },
+  { id:"h1_005", hsk:1, topic:"pronouns", hanzi:"你", pinyin:"nǐ", meaning:"you", radical:"亻( person) + 尔", sentence:"你是老师吗？", sentenceEn:"Are you a teacher?", twin:"您" },
+  { id:"h1_006", hsk:1, topic:"pronouns", hanzi:"他", pinyin:"tā", meaning:"he / him", radical:"亻+ 也", sentence:"他是我的朋友。", sentenceEn:"He is my friend.", twin:"她" },
+  { id:"h1_007", hsk:1, topic:"pronouns", hanzi:"她", pinyin:"tā", meaning:"she / her", radical:"女 (woman) + 也", sentence:"她是医生。", sentenceEn:"She is a doctor.", twin:"他" },
+  { id:"h1_008", hsk:1, topic:"pronouns", hanzi:"们", pinyin:"men", meaning:"plural marker", radical:"亻+ 门", sentence:"我们是中国人。", sentenceEn:"We are Chinese.", twin:"门" },
+
+  // ====== HSK 1 — NUMBERS ======
+  { id:"h1_009", hsk:1, topic:"numbers", hanzi:"一", pinyin:"yī", meaning:"one", radical:"一", sentence:"我有一个苹果。", sentenceEn:"I have one apple.", twin:"二" },
+  { id:"h1_010", hsk:1, topic:"numbers", hanzi:"二", pinyin:"èr", meaning:"two", radical:"二", sentence:"我有二本书。", sentenceEn:"I have two books.", twin:"一" },
+  { id:"h1_011", hsk:1, topic:"numbers", hanzi:"三", pinyin:"sān", meaning:"three", radical:"三", sentence:"三个人来了。", sentenceEn:"Three people came.", twin:"王" },
+  { id:"h1_012", hsk:1, topic:"numbers", hanzi:"四", pinyin:"sì", meaning:"four", radical:"囗 + 儿", sentence:"今天星期四。", sentenceEn:"Today is Thursday.", twin:"西" },
+  { id:"h1_013", hsk:1, topic:"numbers", hanzi:"五", pinyin:"wǔ", meaning:"five", radical:"五", sentence:"我五点钟起床。", sentenceEn:"I get up at 5 o'clock.", twin:"午" },
+  { id:"h1_014", hsk:1, topic:"numbers", hanzi:"六", pinyin:"liù", meaning:"six", radical:"亠 + 八", sentence:"星期六我很忙。", sentenceEn:"I'm busy on Saturday.", twin:"大" },
+  { id:"h1_015", hsk:1, topic:"numbers", hanzi:"七", pinyin:"qī", meaning:"seven", radical:"七", sentence:"七月很热。", sentenceEn:"July is hot.", twin:"匕" },
+  { id:"h1_016", hsk:1, topic:"numbers", hanzi:"八", pinyin:"bā", meaning:"eight", radical:"八", sentence:"八点上课。", sentenceEn:"Class starts at 8.", twin:"人" },
+  { id:"h1_017", hsk:1, topic:"numbers", hanzi:"九", pinyin:"jiǔ", meaning:"nine", radical:"丿 + 乙", sentence:"九月是秋天。", sentenceEn:"September is autumn.", twin:"久" },
+  { id:"h1_018", hsk:1, topic:"numbers", hanzi:"十", pinyin:"shí", meaning:"ten", radical:"十", sentence:"我十岁。", sentenceEn:"I am ten years old.", twin:"人" },
+  { id:"h1_019", hsk:1, topic:"numbers", hanzi:"零", pinyin:"líng", meaning:"zero", radical:"雨 + 令", sentence:"现在零下五度。", sentenceEn:"It's minus five now.", twin:"今" },
+
+  // ====== HSK 1 — FAMILY ======
+  { id:"h1_020", hsk:1, topic:"family", hanzi:"爸爸", pinyin:"bàba", meaning:"father", radical:"父 + 巴", sentence:"我爸爸是老师。", sentenceEn:"My dad is a teacher.", twin:"爸" },
+  { id:"h1_021", hsk:1, topic:"family", hanzi:"妈妈", pinyin:"māma", meaning:"mother", radical:"女 + 马", sentence:"妈妈在做饭。", sentenceEn:"Mom is cooking.", twin:"妈" },
+  { id:"h1_022", hsk:1, topic:"family", hanzi:"儿子", pinyin:"érzi", meaning:"son", radical:"儿 + 子", sentence:"他是我的儿子。", sentenceEn:"He is my son.", twin:"女儿" },
+  { id:"h1_023", hsk:1, topic:"family", hanzi:"女儿", pinyin:"nǚ'ér", meaning:"daughter", radical:"女 + 儿", sentence:"她有一个女儿。", sentenceEn:"She has a daughter.", twin:"儿子" },
+  { id:"h1_024", hsk:1, topic:"family", hanzi:"朋友", pinyin:"péngyou", meaning:"friend", radical:"月 + 月 | 又 + 又", sentence:"他是我最好的朋友。", sentenceEn:"He is my best friend.", twin:"有" },
+
+  // ====== HSK 1 — TIME ======
+  { id:"h1_025", hsk:1, topic:"time", hanzi:"今天", pinyin:"jīntiān", meaning:"today", radical:"人 + 大", sentence:"今天很冷。", sentenceEn:"Today is cold.", twin:"明天" },
+  { id:"h1_026", hsk:1, topic:"time", hanzi:"明天", pinyin:"míngtiān", meaning:"tomorrow", radical:"日 + 月", sentence:"明天见！", sentenceEn:"See you tomorrow!", twin:"今天" },
+  { id:"h1_027", hsk:1, topic:"time", hanzi:"昨天", pinyin:"zuótiān", meaning:"yesterday", radical:"日 + 乍", sentence:"昨天下雨了。", sentenceEn:"It rained yesterday.", twin:"今天" },
+  { id:"h1_028", hsk:1, topic:"time", hanzi:"现在", pinyin:"xiànzài", meaning:"now", radical:"王 + 见 | 土", sentence:"现在几点？", sentenceEn:"What time is it now?", twin:"再见" },
+  { id:"h1_029", hsk:1, topic:"time", hanzi:"时候", pinyin:"shíhou", meaning:"time / moment", radical:"日 + 寸 | 亻+ 侯", sentence:"你什么时候来？", sentenceEn:"When are you coming?", twin:"时" },
+  { id:"h1_030", hsk:1, topic:"time", hanzi:"点", pinyin:"diǎn", meaning:"o'clock / dot", radical:"灬 (fire) + 占", sentence:"现在三点半。", sentenceEn:"It's 3:30 now.", twin:"店" },
+
+  // ====== HSK 1 — FOOD & DRINK ======
+  { id:"h1_031", hsk:1, topic:"food", hanzi:"吃", pinyin:"chī", meaning:"to eat", radical:"口 + 乞", sentence:"我想吃米饭。", sentenceEn:"I want to eat rice.", twin:"喝" },
+  { id:"h1_032", hsk:1, topic:"food", hanzi:"喝", pinyin:"hē", meaning:"to drink", radical:"口 + 曷", sentence:"你喝茶吗？", sentenceEn:"Do you drink tea?", twin:"吃" },
+  { id:"h1_033", hsk:1, topic:"food", hanzi:"水", pinyin:"shuǐ", meaning:"water", radical:"水", sentence:"请给我一杯水。", sentenceEn:"Please give me a glass of water.", twin:"冰" },
+  { id:"h1_034", hsk:1, topic:"food", hanzi:"茶", pinyin:"chá", meaning:"tea", radical:"艹 + 人 + 木", sentence:"中国茶很好喝。", sentenceEn:"Chinese tea is delicious.", twin:"菜" },
+  { id:"h1_035", hsk:1, topic:"food", hanzi:"米饭", pinyin:"mǐfàn", meaning:"cooked rice", radical:"米 + 反", sentence:"我喜欢吃米饭。", sentenceEn:"I like eating rice.", twin:"面" },
+  { id:"h1_036", hsk:1, topic:"food", hanzi:"菜", pinyin:"cài", meaning:"dish / vegetable", radical:"艹 + 采", sentence:"这个菜很好吃。", sentenceEn:"This dish is delicious.", twin:"茶" },
+  { id:"h1_037", hsk:1, topic:"food", hanzi:"水果", pinyin:"shuǐguǒ", meaning:"fruit", radical:"水 + 果", sentence:"多吃水果对身体好。", sentenceEn:"Eating fruit is good for you.", twin:"水" },
+  { id:"h1_038", hsk:1, topic:"food", hanzi:"苹果", pinyin:"píngguǒ", meaning:"apple", radical:"艹 + 平 + 果", sentence:"苹果又红又甜。", sentenceEn:"The apple is red and sweet.", twin:"果" },
+
+  // ====== HSK 1 — BASIC VERBS ======
+  { id:"h1_039", hsk:1, topic:"verbs", hanzi:"是", pinyin:"shì", meaning:"to be (am/is/are)", radical:"日 (sun)", sentence:"我是学生。", sentenceEn:"I am a student.", twin:"事" },
+  { id:"h1_040", hsk:1, topic:"verbs", hanzi:"有", pinyin:"yǒu", meaning:"to have", radical:"月 + 又 (hand)", sentence:"我有一个妹妹。", sentenceEn:"I have a younger sister.", twin:"友" },
+  { id:"h1_041", hsk:1, topic:"verbs", hanzi:"看", pinyin:"kàn", meaning:"to look / watch / read", radical:"手 (hand) + 目 (eye)", sentence:"我在看书。", sentenceEn:"I'm reading a book.", twin:"着" },
+  { id:"h1_042", hsk:1, topic:"verbs", hanzi:"听", pinyin:"tīng", meaning:"to listen", radical:"口 + 斤", sentence:"我喜欢听音乐。", sentenceEn:"I like listening to music.", twin:"说" },
+  { id:"h1_043", hsk:1, topic:"verbs", hanzi:"说", pinyin:"shuō", meaning:"to speak", radical:"讠+ 兑", sentence:"他说汉语。", sentenceEn:"He speaks Chinese.", twin:"说" },
+  { id:"h1_044", hsk:1, topic:"verbs", hanzi:"读", pinyin:"dú", meaning:"to read", radical:"讠+ 卖", sentence:"我每天读汉语书。", sentenceEn:"I read Chinese books every day.", twin:"卖" },
+  { id:"h1_045", hsk:1, topic:"verbs", hanzi:"写", pinyin:"xiě", meaning:"to write", radical:"宀 + 与", sentence:"请写你的名字。", sentenceEn:"Please write your name.", twin:"与" },
+  { id:"h1_046", hsk:1, topic:"verbs", hanzi:"叫", pinyin:"jiào", meaning:"to be called", radical:"口 + 丩", sentence:"我叫大卫。", sentenceEn:"My name is David.", twin:"吃" },
+  { id:"h1_047", hsk:1, topic:"verbs", hanzi:"来", pinyin:"lái", meaning:"to come", radical:"木 + 二人", sentence:"请来我家。", sentenceEn:"Please come to my home.", twin:"去" },
+  { id:"h1_048", hsk:1, topic:"verbs", hanzi:"去", pinyin:"qù", meaning:"to go", radical:"土 + 厶", sentence:"我去学校。", sentenceEn:"I go to school.", twin:"来" },
+  { id:"h1_049", hsk:1, topic:"verbs", hanzi:"做", pinyin:"zuò", meaning:"to do / make", radical:"亻+ 故", sentence:"你在做什么？", sentenceEn:"What are you doing?", twin:"作" },
+  { id:"h1_050", hsk:1, topic:"verbs", hanzi:"买", pinyin:"mǎi", meaning:"to buy", radical:"乛 + 头", sentence:"我去买东西。", sentenceEn:"I go shopping.", twin:"卖" },
+  { id:"h1_051", hsk:1, topic:"verbs", hanzi:"开", pinyin:"kāi", meaning:"to open / drive", radical:"一 + 廾", sentence:"他开车去上班。", sentenceEn:"He drives to work.", twin:"关" },
+  { id:"h1_052", hsk:1, topic:"verbs", hanzi:"住", pinyin:"zhù", meaning:"to live", radical:"亻+ 主", sentence:"我住在北京。", sentenceEn:"I live in Beijing.", twin:"主" },
+  { id:"h1_053", hsk:1, topic:"verbs", hanzi:"学", pinyin:"xué", meaning:"to study / learn", radical:"子 + 冖 + 爻", sentence:"我学汉语。", sentenceEn:"I study Chinese.", twin:"字" },
+  { id:"h1_054", hsk:1, topic:"verbs", hanzi:"工作", pinyin:"gōngzuò", meaning:"to work / work", radical:"工 + 乍", sentence:"他每天工作八小时。", sentenceEn:"He works 8 hours a day.", twin:"做" },
+
+  // ====== HSK 1 — PLACES ======
+  { id:"h1_055", hsk:1, topic:"places", hanzi:"中国", pinyin:"Zhōngguó", meaning:"China", radical:"囗 + 玉", sentence:"中国很大。", sentenceEn:"China is very big.", twin:"中" },
+  { id:"h1_056", hsk:1, topic:"places", hanzi:"北京", pinyin:"Běijīng", meaning:"Beijing", radical:"北 + 京", sentence:"北京是中国的首都。", sentenceEn:"Beijing is China's capital.", twin:"南京" },
+  { id:"h1_057", hsk:1, topic:"places", hanzi:"学校", pinyin:"xuéxiào", meaning:"school", radical:"子 + 交", sentence:"我在学校学习。", sentenceEn:"I study at school.", twin:"学" },
+  { id:"h1_058", hsk:1, topic:"places", hanzi:"家", pinyin:"jiā", meaning:"home / family", radical:"宀 + 豕", sentence:"我回家了。", sentenceEn:"I went home.", twin:"住" },
+  { id:"h1_059", hsk:1, topic:"places", hanzi:"饭店", pinyin:"fàndiàn", meaning:"restaurant / hotel", radical:"饣+ 反 + 广 + 占", sentence:"我们去饭店吃饭。", sentenceEn:"Let's go eat at the restaurant.", twin:"店" },
+  { id:"h1_060", hsk:1, topic:"places", hanzi:"商店", pinyin:"shāngdiàn", meaning:"shop", radical:"亠+ 八 + 口 + 广 + 占", sentence:"商店里有苹果。", sentenceEn:"The shop has apples.", twin:"店" },
+  { id:"h1_061", hsk:1, topic:"places", hanzi:"医院", pinyin:"yīyuàn", meaning:"hospital", radical:"匚 + 矢 + 阝", sentence:"妈妈在医院工作。", sentenceEn:"Mom works at the hospital.", twin:"医" },
+
+  // ====== HSK 1 — ADJECTIVES ======
+  { id:"h1_062", hsk:1, topic:"adjectives", hanzi:"好", pinyin:"hǎo", meaning:"good", radical:"女 + 子", sentence:"今天天气很好。", sentenceEn:"The weather is good today.", twin:"女" },
+  { id:"h1_063", hsk:1, topic:"adjectives", hanzi:"大", pinyin:"dà", meaning:"big", radical:"大", sentence:"这个苹果很大。", sentenceEn:"This apple is big.", twin:"太" },
+  { id:"h1_064", hsk:1, topic:"adjectives", hanzi:"小", pinyin:"xiǎo", meaning:"small", radical:"小", sentence:"我有一只小猫。", sentenceEn:"I have a small cat.", twin:"少" },
+  { id:"h1_065", hsk:1, topic:"adjectives", hanzi:"多", pinyin:"duō", meaning:"many / much", radical:"夕 + 夕", sentence:"这里人很多。", sentenceEn:"There are many people here.", twin:"少" },
+  { id:"h1_066", hsk:1, topic:"adjectives", hanzi:"少", pinyin:"shǎo", meaning:"few / little", radical:"小 + 丿", sentence:"今天人很少。", sentenceEn:"Few people today.", twin:"小" },
+  { id:"h1_067", hsk:1, topic:"adjectives", hanzi:"冷", pinyin:"lěng", meaning:"cold", radical:"冫+ 令", sentence:"今天很冷。", sentenceEn:"It's cold today.", twin:"热" },
+  { id:"h1_068", hsk:1, topic:"adjectives", hanzi:"热", pinyin:"rè", meaning:"hot", radical:"灬 + 执", sentence:"夏天很热。", sentenceEn:"Summer is hot.", twin:"冷" },
+  { id:"h1_069", hsk:1, topic:"adjectives", hanzi:"高兴", pinyin:"gāoxìng", meaning:"happy", radical:"高 + 八", sentence:"见到你我很高兴。", sentenceEn:"I'm happy to meet you.", twin:"兴" },
+
+  // ====== HSK 1 — QUESTION WORDS & PARTICLES ======
+  { id:"h1_070", hsk:1, topic:"questions", hanzi:"什么", pinyin:"shénme", meaning:"what", radical:"礻+ 申 + 人", sentence:"这是什么？", sentenceEn:"What is this?", twin:"么" },
+  { id:"h1_071", hsk:1, topic:"questions", hanzi:"哪", pinyin:"nǎ", meaning:"which", radical:"口 + 那", sentence:"你是哪国人？", sentenceEn:"Which country are you from?", twin:"那" },
+  { id:"h1_072", hsk:1, topic:"questions", hanzi:"怎么", pinyin:"zěnme", meaning:"how", radical:"心 + 乍 + 人", sentence:"你怎么去学校？", sentenceEn:"How do you go to school?", twin:"怎" },
+  { id:"h1_073", hsk:1, topic:"questions", hanzi:"谁", pinyin:"shéi", meaning:"who", radical:"讠+ 隹", sentence:"他是谁？", sentenceEn:"Who is he?", twin:"推" },
+  { id:"h1_074", hsk:1, topic:"particles", hanzi:"的", pinyin:"de", meaning:"possessive particle", radical:"白 + 勺", sentence:"这是我的书。", sentenceEn:"This is my book.", twin:"得" },
+  { id:"h1_075", hsk:1, topic:"particles", hanzi:"了", pinyin:"le", meaning:"completed action", radical:"乙", sentence:"我吃饭了。", sentenceEn:"I ate.", twin:"子" },
+  { id:"h1_076", hsk:1, topic:"particles", hanzi:"在", pinyin:"zài", meaning:"at / in", radical:"土 + 才", sentence:"我在家。", sentenceEn:"I'm at home.", twin:"再" },
+  { id:"h1_077", hsk:1, topic:"particles", hanzi:"不", pinyin:"bù", meaning:"not", radical:"一 + 小", sentence:"我不忙。", sentenceEn:"I'm not busy.", twin:"布" },
+  { id:"h1_078", hsk:1, topic:"particles", hanzi:"很", pinyin:"hěn", meaning:"very", radical:"彳+ 艮", sentence:"我很高兴。", sentenceEn:"I'm very happy.", twin:"跟" },
+  { id:"h1_079", hsk:1, topic:"particles", hanzi:"吗", pinyin:"ma", meaning:"question particle", radical:"口 + 马", sentence:"你是学生吗？", sentenceEn:"Are you a student?", twin:"妈" },
+  { id:"h1_080", hsk:1, topic:"particles", hanzi:"和", pinyin:"hé", meaning:"and", radical:"禾 + 口", sentence:"我和他是朋友。", sentenceEn:"He and I are friends.", twin:"合" },
+
+  // ====== HSK 2 — SAMPLE (key words) ======
+  { id:"h2_001", hsk:2, topic:"verbs", hanzi:"觉得", pinyin:"juéde", meaning:"to feel / think", radical:"见 + 角", sentence:"我觉得汉语很有意思。", sentenceEn:"I think Chinese is interesting.", twin:"决" },
+  { id:"h2_002", hsk:2, topic:"verbs", hanzi:"知道", pinyin:"zhīdào", meaning:"to know", radical:"矢 + 口 + 辶", sentence:"我不知道他的名字。", sentenceEn:"I don't know his name.", twin:"到" },
+  { id:"h2_003", hsk:2, topic:"verbs", hanzi:"认识", pinyin:"rènshi", meaning:"to know (a person)", radical:"讠+ 刃 + 戈 + 言", sentence:"我认识他。", sentenceEn:"I know him.", twin:"认" },
+  { id:"h2_004", hsk:2, topic:"verbs", hanzi:"希望", pinyin:"xīwàng", meaning:"to hope", radical:"乂 + 月 + 王", sentence:"我希望去中国。", sentenceEn:"I hope to go to China.", twin:"忘" },
+  { id:"h2_005", hsk:2, topic:"verbs", hanzi:"准备", pinyin:"zhǔnbèi", meaning:"to prepare", radical:"冫+ 隼 | 夂 + 田", sentence:"我在准备考试。", sentenceEn:"I'm preparing for the exam.", twin:"准" },
+  { id:"h2_006", hsk:2, topic:"verbs", hanzi:"开始", pinyin:"kāishǐ", meaning:"to begin", radical:"开 + 女 + 口", sentence:"我们开始上课吧。", sentenceEn:"Let's start class.", twin:"开" },
+  { id:"h2_007", hsk:2, topic:"verbs", hanzi:"帮助", pinyin:"bāngzhù", meaning:"to help", radical:"邦 + 且", sentence:"谢谢你帮助我。", sentenceEn:"Thanks for helping me.", twin:"帮" },
+  { id:"h2_008", hsk:2, topic:"verbs", hanzi:"运动", pinyin:"yùndòng", meaning:"exercise / sports", radical:"辶 + 云 + 力", sentence:"我每天运动。", sentenceEn:"I exercise every day.", twin:"运" },
+  { id:"h2_009", hsk:2, topic:"adjectives", hanzi:"漂亮", pinyin:"piàoliang", meaning:"pretty", radical:"氵+ 票 + 亮", sentence:"她很漂亮。", sentenceEn:"She is pretty.", twin:"票" },
+  { id:"h2_010", hsk:2, topic:"adjectives", hanzi:"快", pinyin:"kuài", meaning:"fast", radical:"忄+ 夬", sentence:"他跑得很快。", sentenceEn:"He runs fast.", twin:"慢" },
+  { id:"h2_011", hsk:2, topic:"adjectives", hanzi:"慢", pinyin:"màn", meaning:"slow", radical:"忄+ 曼", sentence:"请说慢一点。", sentenceEn:"Please speak slower.", twin:"快" },
+  { id:"h2_012", hsk:2, topic:"adjectives", hanzi:"新", pinyin:"xīn", meaning:"new", radical:"斤 + 木", sentence:"我买了一件新衣服。", sentenceEn:"I bought new clothes.", twin:"心" },
+  { id:"h2_013", hsk:2, topic:"adjectives", hanzi:"旧", pinyin:"jiù", meaning:"old (things)", radical:"丨 + 日", sentence:"这本书很旧。", sentenceEn:"This book is old.", twin:"就" },
+  { id:"h2_014", hsk:2, topic:"time", hanzi:"已经", pinyin:"yǐjīng", meaning:"already", radical:"乛 + 人 | 纟+ 巠", sentence:"我已经吃饭了。", sentenceEn:"I already ate.", twin:"已" },
+  { id:"h2_015", hsk:2, topic:"time", hanzi:"刚才", pinyin:"gāngcái", meaning:"just now", radical:"冈 + 才", sentence:"刚才谁来了？", sentenceEn:"Who came just now?", twin:"刚" },
+  { id:"h2_016", hsk:2, topic:"nouns", hanzi:"眼睛", pinyin:"yǎnjing", meaning:"eye", radical:"目 + 艮 + 青", sentence:"她的眼睛很大。", sentenceEn:"Her eyes are big.", twin:"眼" },
+  { id:"h2_017", hsk:2, topic:"nouns", hanzi:"衣服", pinyin:"yīfu", meaning:"clothing", radical:"衤+ 服", sentence:"这件衣服很漂亮。", sentenceEn:"This clothing is pretty.", twin:"衣" },
+  { id:"h2_018", hsk:2, topic:"nouns", hanzi:"手机", pinyin:"shǒujī", meaning:"mobile phone", radical:"手 + 几", sentence:"我的手机坏了。", sentenceEn:"My phone is broken.", twin:"手" },
+  { id:"h2_019", hsk:2, topic:"nouns", hanzi:"电脑", pinyin:"diànnǎo", meaning:"computer", radical:"电 + 脑", sentence:"我用电脑工作。", sentenceEn:"I use a computer to work.", twin:"电" },
+  { id:"h2_020", hsk:2, topic:"nouns", hanzi:"天气", pinyin:"tiānqì", meaning:"weather", radical:"大 + 气", sentence:"今天天气很好。", sentenceEn:"The weather is good today.", twin:"汽" },
+
+  // ====== HSK 3 — SAMPLE (key words) ======
+  { id:"h3_001", hsk:3, topic:"verbs", hanzi:"担心", pinyin:"dānxīn", meaning:"to worry", radical:"旦 + 心", sentence:"妈妈担心我的健康。", sentenceEn:"Mom worries about my health.", twin:"但" },
+  { id:"h3_002", hsk:3, topic:"verbs", hanzi:"决定", pinyin:"juédìng", meaning:"to decide", radical:"冫+ 夬 + 宀 + 一", sentence:"我决定学汉语。", sentenceEn:"I decided to study Chinese.", twin:"决" },
+  { id:"h3_003", hsk:3, topic:"verbs", hanzi:"发现", pinyin:"fāxiàn", meaning:"to discover", radical:"发 + 见", sentence:"我发现了一个问题。", sentenceEn:"I discovered a problem.", twin:"现" },
+  { id:"h3_004", hsk:3, topic:"verbs", hanzi:"影响", pinyin:"yǐngxiǎng", meaning:"to influence", radical:"景 + 向", sentence:"天气影响我的心情。", sentenceEn:"Weather affects my mood.", twin:"应" },
+  { id:"h3_005", hsk:3, topic:"verbs", hanzi:"讨论", pinyin:"tǎolùn", meaning:"to discuss", radical:"讠+ 寿 + 仑", sentence:"我们讨论一下这个问题。", sentenceEn:"Let's discuss this problem.", twin:"论" },
+  { id:"h3_006", hsk:3, topic:"adjectives", hanzi:"简单", pinyin:"jiǎndān", meaning:"simple", radical:"简 + 单", sentence:"这个问题很简单。", sentenceEn:"This problem is simple.", twin:"简" },
+  { id:"h3_007", hsk:3, topic:"adjectives", hanzi:"复杂", pinyin:"fùzá", meaning:"complicated", radical:"复 + 杂", sentence:"这个问题很复杂。", sentenceEn:"This problem is complicated.", twin:"复" },
+  { id:"h3_008", hsk:3, topic:"adjectives", hanzi:"重要", pinyin:"zhòngyào", meaning:"important", radical:"千 + 里 + 女", sentence:"健康很重要。", sentenceEn:"Health is important.", twin:"要" },
+  { id:"h3_009", hsk:3, topic:"nouns", hanzi:"经验", pinyin:"jīngyàn", meaning:"experience", radical:"纟+ 巠 + 马", sentence:"他有教学经验。", sentenceEn:"He has teaching experience.", twin:"经" },
+  { id:"h3_010", hsk:3, topic:"nouns", hanzi:"机会", pinyin:"jīhuì", meaning:"opportunity", radical:"木 + 几 + 云", sentence:"这是一个好机会。", sentenceEn:"This is a good opportunity.", twin:"会" },
+  { id:"h3_011", hsk:3, topic:"grammar", hanzi:"虽然", pinyin:"suīrán", meaning:"although", radical:"虫 + 肰", sentence:"虽然下雨，我还是去了。", sentenceEn:"Although it rained, I still went.", twin:"然" },
+  { id:"h3_012", hsk:3, topic:"grammar", hanzi:"但是", pinyin:"dànshì", meaning:"but / however", radical:"旦 + 是", sentence:"我想去，但是没时间。", sentenceEn:"I want to go, but I have no time.", twin:"但" },
+  { id:"h3_013", hsk:3, topic:"grammar", hanzi:"因为", pinyin:"yīnwèi", meaning:"because", radical:"囗 + 大 + 女", sentence:"因为下雨，我没出去。", sentenceEn:"Because of rain, I didn't go out.", twin:"因" },
+  { id:"h3_014", hsk:3, topic:"grammar", hanzi:"所以", pinyin:"suǒyǐ", meaning:"therefore", radical:"户 + 斤 + 人", sentence:"下雨了，所以我没去。", sentenceEn:"It rained, so I didn't go.", twin:"以" },
+  { id:"h3_015", hsk:3, topic:"grammar", hanzi:"如果", pinyin:"rúguǒ", meaning:"if", radical:"女 + 口 + 果", sentence:"如果明天下雨，我就不去。", sentenceEn:"If it rains tomorrow, I won't go.", twin:"如" },
+];
+
+/* Tone drills (expanded) */
+const TONE_DRILLS = [
+  { audio:"买东西", options:["mǎi dōngxi (3+1) — buy things","mài dōngxi (4+1) — sell things","mái dōngxi (2+1)"], answer:0 },
+  { audio:"中国", options:["zhōngguó (1+2) — China","zhǒngguò (3+4)","zhòngguō (4+1)"], answer:0 },
+  { audio:"你好", options:["ní hǎo (2+3 sandhi) — Hello","nì hào (4+4)","nī hāo (1+1)"], answer:0 },
+  { audio:"天气", options:["tiānqì (1+4) — weather","tiánqǐ (2+3)","tiǎnqī (3+1)"], answer:0 },
+  { audio:"咖啡", options:["kāfēi (1+1) — coffee","kǎféi (3+2)","kàfèi (4+4)"], answer:0 },
+  { audio:"朋友", options:["péngyou (2+neutral) — friend","pěngyǒu (3+3)","pèngyòu (4+4)"], answer:0 },
+  { audio:"谢谢", options:["xièxie (4+neutral) — thanks","xiéxie (2+neutral)","xiěxiě (3+3)"], answer:0 },
+  { audio:"学生", options:["xuésheng (2+neutral) — student","xuěshēng (3+1)","xuéshèng (2+4)"], answer:0 },
+  { audio:"决定", options:["juédìng (2+4) — decide","juédīng (2+1)","juědìng (3+4)"], answer:0 },
+  { audio:"虽然", options:["suīrán (1+2) — although","suǐrǎn (3+3)","suìràn (4+4)"], answer:0 },
+];
+
+/* Cloze drills (expanded) */
+const CLOZE_DRILLS = [
+  { hsk:1, prompt:"我明天 ___ 北京看朋友。", hint:"I'm going to Beijing tomorrow to see a friend.", full:"我明天去北京看朋友。", options:["去 (go)","在 (at)","是 (am)"], answer:0, explain:"Use 去 (qù) for movement toward a destination." },
+  { hsk:1, prompt:"他昨天 ___ 了一本汉语书。", hint:"He bought a Chinese book yesterday.", full:"他昨天买了一本汉语书。", options:["买 (buy)","卖 (sell)","喝 (drink)"], answer:0, explain:"买 (mǎi, 3rd tone) = buy; 卖 (mài, 4th tone, with 十 on top) = sell." },
+  { hsk:1, prompt:"今天工作 ___ 忙。", hint:"Work is very busy today.", full:"今天工作很忙。", options:["很 (very)","是 (to be)","有 (have)"], answer:0, explain:"Chinese adjectives like 忙 don't take 是; use 很 before them." },
+  { hsk:2, prompt:"她 ___ 说汉语，也会说英语。", hint:"She can speak Chinese, and also English.", full:"她会说汉语，也会说英语。", options:["会 (can)","正在 (-ing)","比 (than)"], answer:0, explain:"Use 会 (huì) for learned skills like speaking a language." },
+  { hsk:2, prompt:"飞机 ___ 火车快。", hint:"Airplanes are faster than trains.", full:"飞机比火车快。", options:["比 (than)","因为 (because)","在 (at)"], answer:0, explain:"A + 比 + B + Adj is the standard comparison structure." },
+  { hsk:3, prompt:"___ 下雨，所以我今天在家看书。", hint:"Because it's raining, I'm reading at home today.", full:"因为下雨，所以我今天在家看书。", options:["因为 (Because)","所以 (Therefore)","可以 (May)"], answer:0, explain:"因为 (because) pairs with 所以 (therefore)." },
+  { hsk:3, prompt:"___ 我很累，但是我还是去运动了。", hint:"Although I was tired, I still exercised.", full:"虽然我很累，但是我还是去运动了。", options:["虽然 (Although)","因为 (Because)","如果 (If)"], answer:0, explain:"虽然 (although) pairs with 但是 (but)." },
+  { hsk:3, prompt:"___ 明天下雨，我们就不去公园了。", hint:"If it rains tomorrow, we won't go to the park.", full:"如果明天下雨，我们就不去公园了。", options:["如果 (If)","虽然 (Although)","因为 (Because)"], answer:0, explain:"如果 (if) ... 就 (then) is the conditional structure." },
+];
+
+/* Graded reader stories */
+const STORIES = [
+  {
+    title:"HSK 1: 在咖啡店 (At the Coffee Shop)",
+    tokens:[
+      {w:"今天",p:"jīntiān",m:"today",r:"人 + 大"},
+      {w:"我",p:"wǒ",m:"I",r:"手"},
+      {w:"很",p:"hěn",m:"very",r:"彳+ 艮"},
+      {w:"忙",p:"máng",m:"busy",r:"忄+ 亡"},
+      {w:"。",p:"",m:"",r:""},
+      {w:"下午",p:"xiàwǔ",m:"afternoon",r:"下 + 午"},
+      {w:"我",p:"wǒ",m:"I",r:"手"},
+      {w:"去",p:"qù",m:"go",r:"土 + 厶"},
+      {w:"商店",p:"shāngdiàn",m:"shop",r:"广 + 占"},
+      {w:"喝",p:"hē",m:"drink",r:"口 + 曷"},
+      {w:"茶",p:"chá",m:"tea",r:"艹 + 人 + 木"},
+      {w:"。",p:"",m:"",r:""}
+    ],
+    en:"Today I'm very busy. In the afternoon I go to the shop to drink tea."
+  },
+  {
+    title:"HSK 2: 买礼物 (Buying a Gift)",
+    tokens:[
+      {w:"昨天",p:"zuótiān",m:"yesterday",r:"日 + 乍"},
+      {w:"是",p:"shì",m:"was",r:"日"},
+      {w:"妈妈",p:"māma",m:"mom",r:"女 + 马"},
+      {w:"的",p:"de",m:"(possessive)",r:"白 + 勺"},
+      {w:"生日",p:"shēngrì",m:"birthday",r:"生 + 日"},
+      {w:"。",p:"",m:"",r:""},
+      {w:"我",p:"wǒ",m:"I",r:"手"},
+      {w:"买",p:"mǎi",m:"bought",r:"乛 + 头"},
+      {w:"了",p:"le",m:"(completed)",r:"乙"},
+      {w:"中国",p:"Zhōngguó",m:"China",r:"囗 + 玉"},
+      {w:"茶",p:"chá",m:"tea",r:"艹 + 人 + 木"},
+      {w:"，",p:"",m:"",r:""},
+      {w:"她",p:"tā",m:"she",r:"女 + 也"},
+      {w:"很",p:"hěn",m:"very",r:"彳+ 艮"},
+      {w:"高兴",p:"gāoxìng",m:"happy",r:"高 + 八"},
+      {w:"。",p:"",m:"",r:""}
+    ],
+    en:"Yesterday was Mom's birthday. I bought Chinese tea, and she was very happy."
+  },
+  {
+    title:"HSK 3: 周末计划 (Weekend Plans)",
+    tokens:[
+      {w:"因为",p:"yīnwèi",m:"because",r:"囗 + 大 + 女"},
+      {w:"今天",p:"jīntiān",m:"today",r:"人 + 大"},
+      {w:"天气",p:"tiānqì",m:"weather",r:"大 + 气"},
+      {w:"比",p:"bǐ",m:"than",r:"比"},
+      {w:"昨天",p:"zuótiān",m:"yesterday",r:"日 + 乍"},
+      {w:"冷",p:"lěng",m:"cold",r:"冫+ 令"},
+      {w:"，",p:"",m:"",r:""},
+      {w:"所以",p:"suǒyǐ",m:"therefore",r:"户 + 斤 + 人"},
+      {w:"我",p:"wǒ",m:"I",r:"手"},
+      {w:"决定",p:"juédìng",m:"decided",r:"冫+ 夬 + 宀"},
+      {w:"在",p:"zài",m:"at",r:"土"},
+      {w:"家",p:"jiā",m:"home",r:"宀 + 豕"},
+      {w:"听",p:"tīng",m:"listen",r:"口 + 斤"},
+      {w:"音乐",p:"yīnyuè",m:"music",r:"音 + 木"},
+      {w:"。",p:"",m:"",r:""}
+    ],
+    en:"Because today's weather is colder than yesterday's, I decided to stay home and listen to music."
+  }
+];
+
+/* ============================================================
+   APP STATE & CORE LOGIC
+   ============================================================ */
+let state = JSON.parse(localStorage.getItem("hanziflow_v2")) || {
+  progress: {},
+  streak: 1,
+  lastDay: new Date().toDateString(),
+  secondsToday: 0,
+  correctCount: 0,
+  totalAttempts: 0
+};
+if (state.lastDay !== new Date().toDateString()) {
+  state.streak += 1;
+  state.secondsToday = 0;
+  state.lastDay = new Date().toDateString();
+}
+function saveState() {
+  localStorage.setItem("hanziflow_v2", JSON.stringify(state));
+  updateStatsUI();
+}
+setInterval(() => {
+  state.secondsToday += 1;
+  const mins = String(Math.floor(state.secondsToday/60)).padStart(2,"0");
+  const secs = String(state.secondsToday%60).padStart(2,"0");
+  document.getElementById("stat-timer").textContent = `${mins}:${secs}`;
+  if (state.secondsToday % 15 === 0) saveState();
+}, 1000);
+function updateStatsUI() {
+  document.getElementById("stat-streak").textContent = state.streak + "d";
+  const mastered = Object.values(state.progress).filter(p => p.reps >= 2).length;
+  document.getElementById("stat-mastered").textContent = mastered;
+  const acc = state.totalAttempts === 0 ? 100 : Math.round((state.correctCount/state.totalAttempts)*100);
+  document.getElementById("stat-accuracy").textContent = acc + "%";
+}
+function speakText(text, rate=0.9) {
+  if (!("speechSynthesis" in window)) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = "zh-CN";
+  utter.rate = rate;
+  window.speechSynthesis.speak(utter);
+}
+
+/* Filtered deck */
+let filteredDeck = [...VOCAB];
+let currentIdx = 0;
+let isFlipped = false;
+let reverseMode = false;
+function getCardProg(id) {
+  if (!state.progress[id]) state.progress[id] = { reps:0, interval:0, misses:0, nextReview:0 };
+  return state.progress[id];
+}
+function applyFilter() {
+  const phase = document.getElementById("phase-filter").value;
+  const mode = document.getElementById("deck-mode").value;
+  const now = Date.now();
+  filteredDeck = VOCAB.filter(v => {
+    const p = getCardProg(v.id);
+    if (phase !== "all" && String(v.hsk) !== phase) return false;
+    if (mode === "leech") return p.misses >= 2;
+    if (mode === "due") return p.nextReview <= now;
+    return true;
+  });
+  if (filteredDeck.length === 0) filteredDeck = [...VOCAB];
+  currentIdx = 0;
+  renderCard();
+  renderLeechList();
+}
+function toggleReverse() {
+  reverseMode = !reverseMode;
+  document.getElementById("btn-reverse").textContent = reverseMode ? "Mode: EN → CN" : "Mode: CN → EN";
+  renderCard();
+}
+function hskBadge(hsk) {
+  return `<span class="badge hsk${hsk}">HSK ${hsk}</span>`;
+}
+function renderCard() {
+  const card = filteredDeck[currentIdx];
+  const prog = getCardProg(card.id);
+  isFlipped = false;
+  document.getElementById("card-back").classList.add("hidden");
+  document.getElementById("card-counter").textContent = `Card ${currentIdx+1} of ${filteredDeck.length}`;
+  const leechBadge = prog.misses >= 2
+    ? `<span class="badge leech">⚠️ Trouble (${prog.misses} misses)</span>`
+    : hskBadge(card.hsk);
+  if (!reverseMode) {
+    document.getElementById("card-front").innerHTML = `
+      ${leechBadge}
+      <div class="hanzi-big">${card.hanzi}</div>
+      <button class="audio-btn" onclick="event.stopPropagation();speakText('${card.hanzi}')">🔊 Listen</button>
+      <p style="color:var(--muted);font-size:0.8rem;margin-top:14px;">Tap card to reveal</p>
+    `;
+  } else {
+    document.getElementById("card-front").innerHTML = `
+      ${leechBadge}
+      <div class="meaning" style="font-size:1.5rem;margin:20px 0;">${card.meaning}</div>
+      <button class="audio-btn" onclick="event.stopPropagation();speakText('${card.hanzi}')">🔊 Audio Hint</button>
+      <p style="color:var(--muted);font-size:0.8rem;margin-top:14px;">Recall the Mandarin</p>
+    `;
+  }
+  document.getElementById("card-back").innerHTML = `
+    <hr style="border:none;border-top:1px solid var(--border);margin:14px 0;">
+    <div class="hanzi-big" style="font-size:2.4rem;">${card.hanzi}</div>
+    <div class="pinyin">${card.pinyin}</div>
+    <div class="meaning">${card.meaning}</div>
+    <div class="radical-box"><strong>Radicals:</strong> ${card.radical}</div>
+    <div style="margin-top:12px;text-align:left;background:#fef2f2;padding:10px;border-radius:10px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-weight:700;font-size:1.05rem;">${card.sentence}</span>
+        <button class="audio-btn" onclick="event.stopPropagation();speakText('${card.sentence}',0.85)">🔊</button>
+      </div>
+      <div style="font-size:0.84rem;color:var(--muted);margin-top:4px;">${card.sentenceEn}</div>
+    </div>
+  `;
+}
+function flipCard() {
+  if (isFlipped) return;
+  isFlipped = true;
+  document.getElementById("card-back").classList.remove("hidden");
+  speakText(filteredDeck[currentIdx].hanzi);
+}
+function rateCard(quality) {
+  const card = filteredDeck[currentIdx];
+  const prog = getCardProg(card.id);
+  state.totalAttempts += 1;
+  if (quality === 1) {
+    prog.reps = 0; prog.misses += 1;
+    prog.nextReview = Date.now() + 60*1000;
+  } else {
+    state.correctCount += 1;
+    prog.reps += 1;
+    const days = quality === 2 ? 1 : Math.max(3, prog.reps*3);
+    prog.nextReview = Date.now() + days*24*60*60*1000;
+  }
+  saveState();
+  currentIdx = (currentIdx+1) % filteredDeck.length;
+  renderCard();
+  renderLeechList();
+}
+
+/* Tone drills */
+let toneIdx = 0;
+function renderToneDrill() {
+  const d = TONE_DRILLS[toneIdx];
+  document.getElementById("tone-feedback").textContent = "";
+  const container = document.getElementById("tone-options");
+  container.innerHTML = "";
+  d.options.forEach((opt,i) => {
+    const btn = document.createElement("button");
+    btn.className = "quiz-option";
+    btn.textContent = opt;
+    btn.onclick = () => {
+      state.totalAttempts += 1;
+      if (i === d.answer) {
+        btn.classList.add("correct");
+        state.correctCount += 1;
+        document.getElementById("tone-feedback").innerHTML = `<span style="color:var(--success)">✓ Correct! (${d.audio})</span>`;
+      } else {
+        btn.classList.add("wrong");
+        document.getElementById("tone-feedback").innerHTML = `<span style="color:var(--primary)">✗ Listen again: ${d.audio} — ${d.options[d.answer]}</span>`;
+      }
+      saveState();
+    };
+    container.appendChild(btn);
+  });
+}
+function playToneDrill() { speakText(TONE_DRILLS[toneIdx].audio, 0.8); }
+function nextToneDrill() {
+  toneIdx = (toneIdx+1) % TONE_DRILLS.length;
+  renderToneDrill();
+  playToneDrill();
+}
+
+/* Cloze */
+let clozeIdx = 0;
+function renderCloze() {
+  const c = CLOZE_DRILLS[clozeIdx];
+  document.getElementById("cloze-phase-badge").textContent = `HSK ${c.hsk} Context Recall`;
+  document.getElementById("cloze-prompt").textContent = c.prompt;
+  document.getElementById("cloze-hint").textContent = c.hint;
+  document.getElementById("cloze-feedback").textContent = "";
+  const box = document.getElementById("cloze-options");
+  box.innerHTML = "";
+  c.options.forEach((opt,i) => {
+    const btn = document.createElement("button");
+    btn.className = "quiz-option";
+    btn.textContent = opt;
+    btn.onclick = () => {
+      state.totalAttempts += 1;
+      if (i === c.answer) {
+        btn.classList.add("correct");
+        state.correctCount += 1;
+        document.getElementById("cloze-feedback").innerHTML = `<span style="color:var(--success)">✓ ${c.full}</span><br><span style="color:var(--muted)">${c.explain}</span>`;
+      } else {
+        btn.classList.add("wrong");
+        document.getElementById("cloze-feedback").innerHTML = `<span style="color:var(--primary)">✗ ${c.explain}</span>`;
+      }
+      speakText(c.full, 0.85);
+      saveState();
+    };
+    box.appendChild(btn);
+  });
+}
+function playClozeAudio() { speakText(CLOZE_DRILLS[clozeIdx].full, 0.85); }
+function nextCloze() {
+  clozeIdx = (clozeIdx+1) % CLOZE_DRILLS.length;
+  renderCloze();
+}
+
+/* Reader */
+let inspectedToken = null;
+function initReader() {
+  const sel = document.getElementById("story-select");
+  STORIES.forEach((s,i) => {
+    const opt = document.createElement("option");
+    opt.value = i; opt.textContent = s.title;
+    sel.appendChild(opt);
+  });
+  loadStory();
+}
+function loadStory() {
+  const s = STORIES[document.getElementById("story-select").value];
+  const body = document.getElementById("reader-body");
+  body.innerHTML = "";
+  document.getElementById("word-inspector").classList.add("hidden");
+  document.getElementById("story-en").textContent = s.en;
+  s.tokens.forEach(tok => {
+    if (!tok.p) { body.appendChild(document.createTextNode(tok.w)); return; }
+    const span = document.createElement("span");
+    span.className = "word-token";
+    span.textContent = tok.w;
+    span.onclick = () => {
+      document.querySelectorAll(".word-token").forEach(el => el.classList.remove("active"));
+      span.classList.add("active");
+      inspectedToken = tok;
+      document.getElementById("insp-hanzi").textContent = tok.w;
+      document.getElementById("insp-pinyin").textContent = tok.p;
+      document.getElementById("insp-meaning").textContent = tok.m;
+      document.getElementById("insp-radical").textContent = "Components: " + tok.r;
+      document.getElementById("word-inspector").classList.remove("hidden");
+      speakText(tok.w);
+    };
+    body.appendChild(span);
+  });
+}
+function readFullStory() {
+  const s = STORIES[document.getElementById("story-select").value];
+  speakText(s.tokens.map(t=>t.w).join(""), 0.85);
+}
+function flagCurrentInspected() {
+  if (!inspectedToken) return;
+  const match = VOCAB.find(v => v.hanzi === inspectedToken.w);
+  if (match) {
+    getCardProg(match.id).misses += 2;
+    saveState();
+    renderLeechList();
+    alert(`Added "${inspectedToken.w}" to your Trouble Words deck!`);
+  } else {
+    alert(`"${inspectedToken.w}" (${inspectedToken.p} — ${inspectedToken.m}) noted!`);
+  }
+}
+
+/* Leech list */
+function renderLeechList() {
+  const list = document.getElementById("leech-list");
+  const leeches = VOCAB.filter(v => getCardProg(v.id).misses >= 2);
+  if (leeches.length === 0) {
+    list.innerHTML = `<p style="color:var(--success);font-weight:600;">No trouble words yet! Miss a card twice to add it here.</p>`;
+    return;
+  }
+  list.innerHTML = leeches.map(v => `
+    <div style="border-top:1px solid var(--border);padding:12px 0;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <strong>${v.hanzi} (${v.pinyin}) — ${v.meaning}</strong>
+        <button class="audio-btn" onclick="speakText('${v.hanzi}')">🔊</button>
+      </div>
+      <div style="font-size:0.84rem;color:var(--muted);margin-top:4px;">Radicals: ${v.radical}</div>
+      <div class="twin-compare">
+        <div class="twin-card"><div style="font-size:1.6rem;font-weight:700;">${v.hanzi}</div><div style="font-size:0.75rem;">Target</div></div>
+        <div class="twin-card"><div style="font-size:1.6rem;font-weight:700;">${v.twin||"—"}</div><div style="font-size:0.75rem;">Look-alike</div></div>
+      </div>
+    </div>
+  `).join("");
+}
+
+/* NEW: Vocabulary browser */
+function renderVocabBrowser() {
+  const q = (document.getElementById("vocab-search").value || "").toLowerCase();
+  const phase = document.getElementById("phase-filter").value;
+  const filtered = VOCAB.filter(v => {
+    if (phase !== "all" && String(v.hsk) !== phase) return false;
+    if (!q) return true;
+    return v.hanzi.includes(q) || v.pinyin.toLowerCase().includes(q) || v.meaning.toLowerCase().includes(q);
+  });
+  document.getElementById("vocab-count").textContent = `${filtered.length} words`;
+  const grid = document.getElementById("vocab-grid");
+  grid.innerHTML = filtered.map(v => `
+    <div class="vocab-tile" onclick="speakText('${v.hanzi}');alert('${v.hanzi} ${v.pinyin}\\n${v.meaning}')">
+      <div class="hz">${v.hanzi}</div>
+      <div class="py">${v.pinyin}</div>
+      <div class="mn">${v.meaning}</div>
+    </div>
+  `).join("");
+}
+
+/* Tab switching */
+function switchTab(tab, btn) {
+  ["srs","tones","cloze","reader","leeches","browse"].forEach(t => {
+    document.getElementById("tab-"+t).classList.add("hidden");
+  });
+  document.getElementById("tab-"+tab).classList.remove("hidden");
+  document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  if (tab === "browse") renderVocabBrowser();
+}
+
+function resetProgress() {
+  if (confirm("Reset all saved data?")) {
+    localStorage.removeItem("hanziflow_v2");
+    location.reload();
+  }
+}
+
+/* Init */
+updateStatsUI();
+applyFilter();
+renderToneDrill();
+renderCloze();
+initReader();
+</script>
+</body>
+</html>
